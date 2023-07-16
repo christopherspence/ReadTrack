@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ReadTrack.Services;
 
-namespace ReadTrack.Controllers;
+namespace ReadTrack.API.Controllers;
 
 [ApiController]
 public abstract class BaseController<C, S> : ControllerBase
