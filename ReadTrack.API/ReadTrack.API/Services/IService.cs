@@ -1,3 +1,3 @@
-namespace ReadTrack.Services;
+namespace ReadTrack.API.Services;
 
 public interface IService { }

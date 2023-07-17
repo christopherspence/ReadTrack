@@ -1,6 +1,4 @@
 using System;
-using AutoMapper;
-using Castle.Core.Logging;
 using FluentAssertions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +19,7 @@ public class AuthControllerTests : BaseTests
     [Fact]
     public async void Test1()
     {
+        // Arrange
         var user = RandomGenerator.GenerateRandomUser();        
         var hasher = new PasswordHasher<User>();
         var tokenType = "Bearer";
@@ -32,7 +31,10 @@ public class AuthControllerTests : BaseTests
         await Context.Users.AddAsync(user);
         await Context.SaveChangesAsync();
 
-        var userService = new UserService(new Mock<ILogger<UserService>>().Object, Context, Mapper);
+        var userService = new UserService(new Mock<ILogger<UserService>>().Object,
+            Context,
+            new Mock<IAuthService>().Object,
+            Mapper);
 
         var tokenServiceMock = new Mock<ITokenService>();
         tokenServiceMock.Setup(m => m.GenerateToken(It.IsAny<User>())).Returns(new TokenResponse
@@ -53,12 +55,14 @@ public class AuthControllerTests : BaseTests
 
         var controller = new AuthController(new Mock<ILogger<AuthController>>().Object, authService);
 
+        // Act
         var response = await controller.LoginAsync(new AuthRequest
         {
             Email = expectedUser.Email,
             Password = expectedUser.Password
         });
 
+        // Assert
         var result = (TokenResponse)response.Should().BeOfType<CreatedResult>().Subject.Value;
 
         result.Should().NotBeNull();

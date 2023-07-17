@@ -3,8 +3,8 @@ using ReadTrack.API.Models;
 
 namespace ReadTrack.API.Services;
 
-public interface IUserService
+public interface IUserService : IService
 {    
     Task<User> GetUserByEmailAsync(string email);
-    Task<User> CreateUserAsync();   
+    Task<TokenResponse> CreateUserAsync(CreateUserRequest request);   
 }
