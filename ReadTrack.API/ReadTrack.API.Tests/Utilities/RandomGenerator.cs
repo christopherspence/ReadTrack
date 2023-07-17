@@ -12,11 +12,14 @@ public static class RandomGenerator
     private static PersonNameGenerator PersonNameGenerator { get; } = new PersonNameGenerator();
     private static PlaceNameGenerator PlaceNameGenerator { get; } = new PlaceNameGenerator();
 
-    private static Random Random { get; } = new Random();
+    public static Random Random { get; } = new Random();
 
-    private static string CreateFirstName() => PersonNameGenerator.GenerateRandomFirstName();
-    private static string CreateLastName() => PersonNameGenerator.GenerateRandomLastName();
-    private static string CreatePlaceName() => PlaceNameGenerator.GenerateRandomPlaceName();
+    public static int CreateNumber(int start, int end) => Random.Next(start, end);
+
+    public static string CreateFirstName() => PersonNameGenerator.GenerateRandomFirstName();
+    public static string CreateLastName() => PersonNameGenerator.GenerateRandomLastName();
+    public static string CreatePlaceName() => PlaceNameGenerator.GenerateRandomPlaceName();
+    public static string CreateAuthorName() => $"{CreateLastName()}, {CreateFirstName()}";
 
     private static string CreatePhoneNumber()
     {
@@ -48,9 +51,11 @@ public static class RandomGenerator
     public static BookEntity GenerateRandomBook(int id = 1, int userId = 1)
         => new BookEntity
         {
+            Id = id,
             Name = CreatePlaceName(),
-            Author = $"{CreateLastName}, {CreateFirstName()}",
+            Author = CreateAuthorName(),
             Category = (BookCategory)Random.Next(1, 12),
+            Published = DateTime.UtcNow.AddYears(CreateNumber(1, 30)),
             UserId = userId,
             Created = DateTime.UtcNow,
             Modified = DateTime.UtcNow

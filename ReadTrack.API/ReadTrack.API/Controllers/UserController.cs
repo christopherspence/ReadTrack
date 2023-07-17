@@ -13,7 +13,7 @@ public class UserController : BaseController<UserController, IUserService>
     public UserController(ILogger<UserController> logger, IUserService service) : base(logger, service) { }
 
     [HttpPost]
-    [Route("/user/register")]
+    [Route("/api/user/register")]
     [SwaggerOperation("RegisterAsync")]
     [SwaggerResponse(statusCode: 201, type: typeof(TokenResponse), description: "Created")]
     public async Task<IActionResult> RegisterAsync(CreateUserRequest request)

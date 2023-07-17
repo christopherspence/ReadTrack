@@ -33,7 +33,7 @@ public class AuthControllerTests : BaseTests
 
         var userService = new UserService(new Mock<ILogger<UserService>>().Object,
             Context,
-            new Mock<IAuthService>().Object,
+            new Mock<ITokenService>().Object,
             Mapper);
 
         var tokenServiceMock = new Mock<ITokenService>();
