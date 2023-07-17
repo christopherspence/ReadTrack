@@ -15,4 +15,7 @@ public class BookEntity : BaseEntity
 
     // FKs 
     public IEnumerable<SessionEntity> Sessions { get; set; }
+
+    public int UserId { get; set; }
+    public UserEntity User { get; set; }
 }

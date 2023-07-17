@@ -28,7 +28,7 @@ public class ReadTrackContext : DbContext
 
             entity.Property(e => e.Category).HasConversion(c => c.ToString(), c => (BookCategory)Enum.Parse(typeof(BookCategory), c));
 
-            entity.HasMany<SessionEntity>()
+            entity.HasMany(e => e.Sessions)
                 .WithOne(e => e.Book)
                 .HasForeignKey(s => s.BookId);
         });
@@ -49,6 +49,10 @@ public class ReadTrackContext : DbContext
 
             entity.Property(e => e.Created).HasColumnType("datetime");
             entity.Property(e => e.Modified).HasColumnType("datetime");
+
+            entity.HasMany(e => e.Books)
+                .WithOne(e => e.User)
+                .HasForeignKey(e => e.UserId);
         });
     }
 }
