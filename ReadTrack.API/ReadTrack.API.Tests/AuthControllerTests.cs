@@ -21,11 +21,13 @@ public class AuthControllerTests : BaseTests
     [Fact]
     public async void Test1()
     {
-        var user = RandomGenerator.GenerateRandomUser();
-        var hasher = new PasswordHasher<UserEntity>();
+        var user = RandomGenerator.GenerateRandomUser();        
+        var hasher = new PasswordHasher<User>();
         var tokenType = "Bearer";
         var expectedToken = Guid.NewGuid().ToString();
         var expectedUser = Mapper.Map<UserEntity, User>(user);
+        
+        user.Password = hasher.HashPassword(expectedUser, expectedUser.Password);
 
         await Context.Users.AddAsync(user);
         await Context.SaveChangesAsync();
@@ -44,6 +46,7 @@ public class AuthControllerTests : BaseTests
 
         var authService = new AuthService(new Mock<ILogger<AuthService>>().Object,
             Context,
+            hasher,
             tokenServiceMock.Object,
             userService,
             Mapper);
@@ -52,8 +55,8 @@ public class AuthControllerTests : BaseTests
 
         var response = await controller.LoginAsync(new AuthRequest
         {
-            Email = user.Email,
-            Password = "abc123"
+            Email = expectedUser.Email,
+            Password = expectedUser.Password
         });
 
         var result = (TokenResponse)response.Should().BeOfType<CreatedResult>().Subject.Value;
@@ -63,11 +66,13 @@ public class AuthControllerTests : BaseTests
         result.Should().BeEquivalentTo(new TokenResponse
         {
             Type = "Bearer",
+            Token = expectedToken,
             User = Mapper.Map<UserEntity, User>(user)
         }, o => o.Excluding(n => 
             n.Path.EndsWith("Issued") ||
-            n.Path.EndsWith("Expires")));
+            n.Path.EndsWith("Expires") ||
+            n.Path.EndsWith("User.Password")));
 
-        tokenServiceMock.Verify(m => m.DecodeToken(It.IsAny<string>()), Times.Once);
+        tokenServiceMock.Verify(m => m.GenerateToken(It.IsAny<User>()), Times.Once);
     }
 }

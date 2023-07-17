@@ -44,6 +44,8 @@ public class TokenService : BaseService<TokenService>, ITokenService
         };
         var token = handler.CreateToken(descriptor);
 
+        user.Password = null;
+
         return new TokenResponse
         {
             Expires = token.ValidTo,

@@ -1,0 +1,6 @@
+To run db:
+
+sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=r3@dtr@ck1" \
+   -p 1433:1433 --name readtrack --hostname readtrack \
+   -d \
+   mcr.microsoft.com/mssql/server:2022-latest
