@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using RandomNameGeneratorLibrary;
 using ReadTrack.API.Data.Entities;
 using ReadTrack.API.Models;
@@ -42,4 +44,27 @@ public static class RandomGenerator
             Modified = DateTime.UtcNow,
             SortOrder = 0
         };
+
+    public static BookEntity GenerateRandomBook(int id = 1, int userId = 1)
+        => new BookEntity
+        {
+            Name = CreatePlaceName(),
+            Author = $"{CreateLastName}, {CreateFirstName()}",
+            Category = (BookCategory)Random.Next(1, 12),
+            UserId = userId,
+            Created = DateTime.UtcNow,
+            Modified = DateTime.UtcNow
+        };
+
+    public static IEnumerable<BookEntity> GenerateOneHundredRandomBooks(int userId = 1)
+    {
+        var books = new List<BookEntity>();
+
+        for (var i = 1; i <= 100; i++)
+        {
+            books.Add(GenerateRandomBook(i, userId));
+        }
+
+        return books;
+    }        
 }

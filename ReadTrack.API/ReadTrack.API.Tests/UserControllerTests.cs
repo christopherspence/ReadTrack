@@ -28,8 +28,8 @@ public class UserControllerTests : BaseTests
         var expectedUser = Mapper.Map<UserEntity, User>(user);
         var tokenType = "Bearer";
 
-        var authApiMock = new Mock<IAuthService>();
-        authApiMock.Setup(m => m.LoginAsync(It.IsAny<AuthRequest>())).ReturnsAsync(new TokenResponse
+        var authServiceMock = new Mock<IAuthService>();
+        authServiceMock.Setup(m => m.LoginAsync(It.IsAny<AuthRequest>())).ReturnsAsync(new TokenResponse
         {
             Token = expectedToken,
             Expires = DateTime.UtcNow.AddDays(1),
@@ -41,7 +41,7 @@ public class UserControllerTests : BaseTests
         var userService = new UserService(
             new Mock<ILogger<UserService>>().Object, 
             Context, 
-            authApiMock.Object,
+            authServiceMock.Object,
             Mapper);
 
         var controller = new UserController(new Mock<ILogger<UserController>>().Object, userService);
@@ -72,5 +72,7 @@ public class UserControllerTests : BaseTests
                  n.Path.EndsWith("ProfilePicture") ||
                  n.Path.EndsWith("Created") ||
                  n.Path.EndsWith("Modified")));
+
+        authServiceMock.Verify(m => m.LoginAsync(It.IsAny<AuthRequest>()), Times.Once);
     }
 }

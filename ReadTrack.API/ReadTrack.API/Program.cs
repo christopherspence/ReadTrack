@@ -33,6 +33,7 @@ builder.Services.AddTransient<IPasswordHasher<User>, PasswordHasher<User>>();
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IUserService, UserService>();
 
