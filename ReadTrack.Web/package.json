@@ -21,7 +21,6 @@
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
     "@swimlane/ngx-datatable": "^20.1.0",
-    "flex-layout": "^1.0.1",
     "ngx-webstorage-service": "^5.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

@@ -11,8 +11,8 @@ export class LoginComponent {
     form: FormGroup;
     loading = false;
 
-    get username() {
-        return this.form.get('username');
+    get email() {
+        return this.form.get('email');
     }
 
     get password() {
@@ -21,7 +21,7 @@ export class LoginComponent {
 
     constructor(private fb: FormBuilder, private authService: AuthService) {
         this.form = fb.group({
-            username: ['', Validators.required],
+            email: ['', Validators.required],
             password: ['', Validators.required]
         });
     }
@@ -34,7 +34,7 @@ export class LoginComponent {
         this.loading = true;
 
         try {
-            await this.authService.login(this.username?.value, this.password?.value).toPromise();
+            await this.authService.login(this.email?.value, this.password?.value).toPromise();
         } catch (e) {
             alert('An error occurred while logging in');            
         }
