@@ -1,0 +1,36 @@
+<form [formGroup]="form" (submit)="login()">
+    <div fxLayout="row" fxLayoutAlign="center center" class="login-main">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Please Login</mat-card-title>
+            </mat-card-header>
+            <mat-card-content fxLayout="column">
+                <mat-form-field>
+                    <input formControlName="username" matInput placeholder="Email" />
+                    <mat-error *ngIf="hasError('username', 'required')">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="hasError('username', 'email')">
+                        Email is invalid
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="password" type="password" matInput placeholder="Password" />
+                    <mat-error *ngIf="hasError('password', 'required')">
+                        Password is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-error *ngIf="form.hasError('loginFailed')">
+                    Username or password is invalid
+                </mat-error>
+                <a href="#" onclick="alert('Coming soon');">Forgot your password?</a>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <button mat-raised-button color="primary" [disabled]="!form.valid">
+                    Login
+                    <img *ngIf="loading" src="assets/img/spinner.gif" />
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</form>

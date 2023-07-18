@@ -1,4 +1,4 @@
-# .NEt
+# .NET
 
 *.swp
 *.*~
@@ -45,6 +45,8 @@ msbuild.err
 msbuild.wrn
 
 # Angular
+.angular/
+
 /dist/
 /bazel-out
 /integration/bazel/bazel-*
