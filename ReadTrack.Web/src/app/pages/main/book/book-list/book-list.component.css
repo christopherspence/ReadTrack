@@ -1,0 +1,10 @@
+ul.pager li{
+    background: white;
+    width: 20px;
+    display: inline-block;
+}
+
+.test-check {
+    width:100%; 
+    display: block;
+}

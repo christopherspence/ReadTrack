@@ -5,8 +5,6 @@ import { RouterModule } from '@angular/router';
 const routes = [{ path: '', component: DashboardComponent }];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes)
-    ]
+    imports: [RouterModule.forChild(routes)]
 })
 export class DashboardModule { }

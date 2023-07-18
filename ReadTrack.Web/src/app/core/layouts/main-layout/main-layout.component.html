@@ -11,7 +11,7 @@
         </div>
     </header>
     <mat-sidenav-container class="sidenav-container">
-        <mat-sidenav #sidenav autoFocus="false" mode="over" [(opened)]="isMenuOpen" class="sidenav">
+        <mat-sidenav #sidenav autoFocus="false" mode="over" [(opened)]="isMenuOpen" class="sidenav" (click)="sideNavClicked()">
             <a mat-button routerLink="/dashboard">Dashboard</a>
             <a mat-button routerLink="/books">Books</a>
             <a mat-button routerLink="/profile">Profile</a>

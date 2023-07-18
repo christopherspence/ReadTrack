@@ -16,6 +16,10 @@ export class MainLayoutComponent {
 
     }
 
+    sideNavClicked(): void {
+        this.isMenuOpen = false;
+    }
+
     logout(): void {
         this.authService.logout();
 

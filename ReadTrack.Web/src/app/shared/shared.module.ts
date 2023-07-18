@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchBoxComponent } from './components/search-box';
 
 const modules = [
     CommonModule,
@@ -14,7 +15,11 @@ const modules = [
         ...modules
     ],
     exports: [
-        ...modules
+        ...modules,
+        SearchBoxComponent
+    ],
+    declarations: [
+        SearchBoxComponent
     ]
 })
 export class SharedModule { }
