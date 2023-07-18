@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 import { Observable, tap } from 'rxjs';
-import { TokenResponse } from 'src/app/shared';
+import { LoginRequest, TokenResponse } from 'src/app/shared';
 
 const USER_ID = 'user_id';
 const USER_EMAIL = 'user_email';
@@ -17,13 +17,11 @@ export class AuthService {
         private http: HttpClient,
         @Inject(LOCAL_STORAGE) private storage: StorageService) { }
 
-    login(username: string, password: string): Observable<object> {
-        return this.http.post('auth/login', {
-            username,
-            password
-        }).pipe(tap(res => {
-            this.setUserInfo(res as TokenResponse);
-        }));
+    login(email: string, password: string): Observable<object> {
+        return this.http.post('auth/login', new LoginRequest(email, password))
+            .pipe(tap(res => {
+                this.setUserInfo(res as TokenResponse);
+            }));
     }
 
     getToken(): string {

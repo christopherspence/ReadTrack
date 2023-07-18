@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from './pages/auth';
 import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from './core';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    CoreModule.forRoot(),
     NgxDatatableModule,    
     ReactiveFormsModule
   ],

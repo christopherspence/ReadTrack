@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services'
 
 @Component({
@@ -19,7 +20,10 @@ export class LoginComponent {
         return this.form.get('password');
     }
 
-    constructor(private fb: FormBuilder, private authService: AuthService) {
+    constructor(
+        private fb: FormBuilder, 
+        private authService: AuthService,
+        private router: Router) {
         this.form = fb.group({
             email: ['', Validators.required],
             password: ['', Validators.required]
@@ -35,6 +39,8 @@ export class LoginComponent {
 
         try {
             await this.authService.login(this.email?.value, this.password?.value).toPromise();
+
+            this.router.navigate(['']);
         } catch (e) {
             alert('An error occurred while logging in');            
         }
