@@ -21,7 +21,7 @@ public class BookService : BaseService<BookService>, IBookService
     private IQueryable<BookEntity> GetInitialQuery(int userId)
         => Context.Books.Where(b => b.UserId == userId && !b.IsDeleted);
 
-    private IQueryable<BookEntity> AddSearchQuery(IQueryable<BookEntity> query, string searchText)
+    private static IQueryable<BookEntity> AddSearchQuery(IQueryable<BookEntity> query, string searchText)
         => query.Where(b => b.Name.Contains(searchText) ||b.Author.Contains(searchText));
 
     public async Task<int> GetBookCountAsync(int userId, string searchText = "")
@@ -46,6 +46,13 @@ public class BookService : BaseService<BookService>, IBookService
         }
 
         return Mapper.Map<IEnumerable<BookEntity>, IEnumerable<Book>>(await query.Skip(offset).Take(count).ToListAsync());
+    }
+
+    public async Task<Book> GetBookAsync(int userId, int bookId)
+    {
+        var query = GetInitialQuery(userId);
+
+        return Mapper.Map<BookEntity, Book>(await query.SingleOrDefaultAsync(b => b.Id == bookId));
     }
 
     public async Task<Book> CreateBookAsync(int userId, CreateBookRequest request)

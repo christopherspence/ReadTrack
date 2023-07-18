@@ -21,17 +21,6 @@ public static class RandomGenerator
     public static string CreatePlaceName() => PlaceNameGenerator.GenerateRandomPlaceName();
     public static string CreateAuthorName() => $"{CreateLastName()}, {CreateFirstName()}";
 
-    private static string CreatePhoneNumber()
-    {
-        var str = string.Empty;
-        for (int i = 0; i < 10; i++)
-        {
-            str = string.Concat(str, Random.Next(10).ToString());
-        }
-
-        return str;
-    }
-
     private static string CreateEmailAddress() => $"{CreateFirstName().ToLower()}.{CreateLastName().ToLower()}@gmail.com";
 
     public static UserEntity GenerateRandomUser(int id = 1)
@@ -71,5 +60,28 @@ public static class RandomGenerator
         }
 
         return books;
-    }        
+    } 
+
+    public static SessionEntity GenerateRandomSession(int id = 1, int bookId = 1)       
+        => new SessionEntity
+        {
+            Id = id,
+            BookId = bookId,
+            StartPage = CreateNumber(1, 1000),
+            EndPage = CreateNumber(1, 1000),
+            Time = TimeSpan.FromTicks(CreateNumber(1, 100000)),
+            NumberOfPages = CreateNumber(1, 100)            
+        };
+
+    public static IEnumerable<SessionEntity> GenerateOneHundredRandomSessions(int bookId = 1)
+    {
+        var sessions = new List<SessionEntity>();
+
+        for (var i = 1; i <= 100; i++)
+        {
+            sessions.Add(GenerateRandomSession(i, bookId));
+        }
+
+        return sessions;
+    } 
 }
