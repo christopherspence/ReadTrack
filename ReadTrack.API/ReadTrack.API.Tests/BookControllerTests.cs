@@ -118,6 +118,38 @@ public class BookControllerTests : BaseTests
     }
 
     [Fact]
+    public async Task CanGetBook()
+    {
+        // Arrange
+        var user = RandomGenerator.GenerateRandomUser();
+
+        var book = RandomGenerator.GenerateRandomBook();
+        await Context.Books.AddAsync(book);
+        await Context.SaveChangesAsync();
+        
+        var userServiceMock = new Mock<IUserService>();
+        userServiceMock.Setup(m => m.GetUserByEmailAsync(It.IsAny<string>()))
+            .ReturnsAsync(Mapper.Map<UserEntity, User>(user));
+
+        var bookService = new BookService(new Mock<ILogger<BookService>>().Object, Context, Mapper);
+
+        var controller = new BookController(new Mock<ILogger<BookController>>().Object, userServiceMock.Object, bookService)
+        {
+            ControllerContext = CreateControllerContext(user.Email)
+        };
+
+        // Act
+        var response = await controller.GetBookAsync(book.Id);
+
+        // Assert
+        var result = (Book)response.Should().BeOfType<OkObjectResult>().Subject.Value;
+
+        var expected = Mapper.Map<BookEntity, Book>(book);
+
+        userServiceMock.Verify(m => m.GetUserByEmailAsync(It.IsAny<string>()), Times.Once);
+    }
+
+    [Fact]
     public async Task CanCreateBook()
     {
         // Arrange

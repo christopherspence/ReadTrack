@@ -61,6 +61,25 @@ public class BookController : BaseController<BookController, IBookService>
         }
     }
 
+    [HttpGet]
+    [Route("/api/book/{id}")]
+    [SwaggerOperation("GetBooksAsync")]
+    [SwaggerResponse(statusCode: 200, type: typeof(Book), description: "Succeeded")]
+    public async Task<IActionResult> GetBookAsync(int id)
+    {
+        try
+        {
+            var user = await GetCurrentUserAsync();
+
+            return Ok(await Service.GetBookAsync(user.Id, id));
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, e.Message);
+            throw;
+        }
+    }
+
     [HttpPost]
     [Route("/api/book")]
     [SwaggerOperation("CreateBookAsync")]

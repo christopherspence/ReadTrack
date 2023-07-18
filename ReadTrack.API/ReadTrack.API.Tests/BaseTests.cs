@@ -47,7 +47,7 @@ public abstract class BaseTests : IAsyncLifetime
              {
                  User = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
                  {
-                     new Claim(ClaimTypes.Name, email)
+                     new Claim(ClaimTypes.Email, email)
                  }, "mock"))
              }
          };

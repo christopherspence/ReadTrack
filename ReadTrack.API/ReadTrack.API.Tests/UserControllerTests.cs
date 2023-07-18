@@ -75,4 +75,41 @@ public class UserControllerTests : BaseTests
 
         tokenServiceMock.Verify(m => m.GenerateToken(It.IsAny<User>()), Times.Once);
     }
+
+    [Fact]
+    public async Task CanUpdateUser()
+    {
+        // Arrange
+        var user = RandomGenerator.GenerateRandomUser();
+        
+        await Context.Users.AddAsync(user);
+        await Context.SaveChangesAsync();
+        
+        var userService = new UserService(new Mock<ILogger<UserService>>().Object, Context, new Mock<ITokenService>().Object, Mapper);
+
+        var controller = new UserController(new Mock<ILogger<UserController>>().Object, userService)
+        {
+            ControllerContext = CreateControllerContext(user.Email)
+        };
+
+        // Act
+        var updatedUser = Mapper.Map<UserEntity, User>(user);
+        updatedUser.FirstName = RandomGenerator.CreateFirstName();
+        updatedUser.LastName = RandomGenerator.CreateLastName();
+        updatedUser.ProfilePicture = $"{Guid.NewGuid()}.jpg";
+        updatedUser.Email  = RandomGenerator.CreateEmailAddress();
+        
+        var response = await controller.UpdateUserAsync(updatedUser.Id, updatedUser);
+
+        // Assert
+        response.Should().BeOfType<NoContentResult>();
+
+        var expected = Mapper.Map<User, UserEntity>(updatedUser);
+        
+        (await Context.Users.FirstAsync()).Should().BeEquivalentTo(expected,
+            o => o.Excluding(n => n.Path.Equals("Books") ||
+                                  n.Path.EndsWith("Created") ||
+                                  n.Path.EndsWith("Modified")));
+        
+    }
 }

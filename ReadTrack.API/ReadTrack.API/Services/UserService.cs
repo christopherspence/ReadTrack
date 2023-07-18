@@ -62,4 +62,30 @@ public class UserService : BaseService<UserService>, IUserService
 
         return tokenService.GenerateToken(Mapper.Map<UserEntity, User>(entity));
     }
+
+    public async Task<bool> UpdateUserAsync(int userId, User user)
+    {
+        // Make sure the user that's being updated belongs to the user id defined in the token
+        if (userId != user.Id)
+        {
+            return false;
+        }
+
+        var existingEntity = await Context.Users.SingleOrDefaultAsync(u => u.Id == user.Id && !u.IsDeleted);
+
+        if (existingEntity == null)
+        {
+            return false;
+        }
+
+        existingEntity.FirstName = user.FirstName;
+        existingEntity.LastName = user.LastName;
+        existingEntity.Email = user.Email;        
+        existingEntity.ProfilePicture = user.ProfilePicture;
+        
+        Context.Entry(existingEntity).State = EntityState.Modified;
+        await Context.SaveChangesAsync();
+
+        return true;
+    }
 }

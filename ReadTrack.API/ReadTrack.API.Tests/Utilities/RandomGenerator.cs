@@ -15,13 +15,11 @@ public static class RandomGenerator
     public static Random Random { get; } = new Random();
 
     public static int CreateNumber(int start, int end) => Random.Next(start, end);
-
     public static string CreateFirstName() => PersonNameGenerator.GenerateRandomFirstName();
     public static string CreateLastName() => PersonNameGenerator.GenerateRandomLastName();
     public static string CreatePlaceName() => PlaceNameGenerator.GenerateRandomPlaceName();
     public static string CreateAuthorName() => $"{CreateLastName()}, {CreateFirstName()}";
-
-    private static string CreateEmailAddress() => $"{CreateFirstName().ToLower()}.{CreateLastName().ToLower()}@gmail.com";
+    public static string CreateEmailAddress() => $"{CreateFirstName().ToLower()}.{CreateLastName().ToLower()}@gmail.com";
 
     public static UserEntity GenerateRandomUser(int id = 1)
         => new UserEntity
