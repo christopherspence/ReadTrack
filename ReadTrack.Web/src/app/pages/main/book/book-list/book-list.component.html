@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12">
-        <button mat-raised-button color="accent" (click)="addBook()">Add Book</button>
+        <button mat-raised-button color="accent" (click)="createBook()">New Book</button>
         
         <app-search-box (filter)="updateFilter($event)"></app-search-box>
         
@@ -11,7 +11,7 @@
             <ngx-datatable-column name="ID" prop="id" [width]="80"></ngx-datatable-column>
             <ngx-datatable-column name="Actions" [sortable]="false" prop="id" [width]="325">
                 <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                    <a class="success p-0" data-original-title="Edit" title="Edit" [routerLink]="['edit', row.id]">
+                    <a class="success p-0" data-original-title="Edit" title="Edit" (click)="editBook(row.id)">
                         <i class="fa fa-edit"></i>
                     </a>
                     |

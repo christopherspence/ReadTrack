@@ -1,6 +1,35 @@
-To run db:
+Docker containers for the app are coming soon. For now, to run the project:
 
-sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=r3@dtr@ck1" \
+Prerequisites:
+* Docker - https://hub.docker.com/search/?type=edition&offering=community
+* .NET Core SDK 2.2 - https://dotnet.microsoft.com/download/dotnet-core/2.2
+* NPM - https://www.npmjs.com/get-npm
+
+1. Run the docker command to create a container for the database
+
+```
+$ docker pull microsoft/mssql-server-linux
+
+$ sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=r3@dtr@ck1" \
    -p 1433:1433 --name readtrack --hostname readtrack \
    -d \
    mcr.microsoft.com/mssql/server:2022-latest
+
+```
+
+2. Run the backend service
+
+```
+cd ReadTrack.API
+dotnet ef database update
+dotnet restore
+dotnet run
+```
+
+3. Run the Angular app
+
+```
+cd ReadTrack.Web
+npm install
+ng serve
+```

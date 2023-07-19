@@ -25,6 +25,10 @@ export class BookService extends BaseHttpService {
         return this.http.get<Array<Book>>(`${BOOK_URL}/${offset}/${count}/${searchText}`);
     }
 
+    createBook(book: Book): Observable<Book> {
+        return this.http.post<Book>(BOOK_URL, book);
+    }
+
     updateBook(book: Book): Observable<object> {
         return this.http.put(`${BOOK_URL}/${book.id}`, `${JSON.stringify(book)}`, this.httpOptions);
     }

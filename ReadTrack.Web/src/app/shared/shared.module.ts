@@ -11,7 +11,6 @@ const modules = [
     ReactiveFormsModule
 ];
 
-
 @NgModule({
     imports: [
         ...modules,

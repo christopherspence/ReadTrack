@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
-import { Book, ConfirmDialogComponent, SimpleDialogComponent } from '../../../../shared';
+import { Book, ConfirmDialogComponent, DialogMode, SimpleDialogComponent } from '../../../../shared';
 import { BookService } from '../../../../core/services';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { AddEditBookDialogComponent } from '../add-edit-book-dialog-component';
 
 
 @Component({
@@ -38,8 +39,34 @@ export class BookListComponent implements OnInit {
             this.searchValue).toPromise() ?? [];
     }
 
-    addBook(): void {
+    async createBook(): Promise<void> {
+        const dialogRef = this.dialog.open(AddEditBookDialogComponent, {
+            width: '50%',
+            data: {
+                mode: DialogMode.add
+            }
+        });
+        const result = await dialogRef.afterClosed().toPromise();
 
+        if (result) {
+            await this.getBooks();
+        } 
+    }
+
+    async editBook(row: any): Promise<void> {
+        const book = this.books.find(b => b.id === row);
+        const dialogRef = this.dialog.open(AddEditBookDialogComponent, {
+            width: '50%',
+            data: {                
+                mode: DialogMode.edit,
+                book: book
+            }
+        });
+        const result = await dialogRef.afterClosed().toPromise();
+
+        if (result) {
+            await this.getBooks();
+        }
     }
 
     async deleteBook(row: any): Promise<void> {
