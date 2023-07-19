@@ -2,7 +2,7 @@ Docker containers for the app are coming soon. For now, to run the project:
 
 Prerequisites:
 * Docker - https://hub.docker.com/search/?type=edition&offering=community
-* .NET Core SDK 2.2 - https://dotnet.microsoft.com/download/dotnet-core/2.2
+* .NET Core -  https://dotnet.microsoft.com/en-us/download/dotnet/7.0
 * NPM - https://www.npmjs.com/get-npm
 
 1. Run the docker command to create a container for the database
