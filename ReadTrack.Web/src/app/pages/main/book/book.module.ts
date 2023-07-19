@@ -29,7 +29,8 @@ const routes: Routes = [{ path: '', component: BookListComponent}];
         MatSnackBarModule,
         NgxDatatableModule,
         RouterModule.forChild(routes),
-        SharedModule],
+        SharedModule
+    ],
     declarations: [
         AddEditBookDialogComponent,
         BookListComponent

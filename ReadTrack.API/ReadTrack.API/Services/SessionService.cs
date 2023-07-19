@@ -25,7 +25,7 @@ public class SessionService : BaseService<SessionService>, ISessionService
     public async Task<int> GetSessionCountAsync(int userId, int bookId)
     {
         // Make sure the book exists and belongs to the user
-        var book = bookService.GetBookAsync(userId, bookId);
+        var book = await bookService.GetBookAsync(userId, bookId);
 
         if (book == null)
         {
@@ -38,7 +38,7 @@ public class SessionService : BaseService<SessionService>, ISessionService
     public async Task<IEnumerable<Session>> GetSessionsAsync(int userId, int bookId, int offset, int count)
     {
         // Make sure the book exists and belongs to the user
-        var book = bookService.GetBookAsync(userId, bookId);
+        var book = await bookService.GetBookAsync(userId, bookId);
 
         if (book == null)
         {
@@ -53,7 +53,7 @@ public class SessionService : BaseService<SessionService>, ISessionService
     public async Task<Session> CreateSessionAsync(int userId, CreateSessionRequest request)
     {
         // Make sure the book exists and belongs to the user
-        var book = bookService.GetBookAsync(userId, request.BookId);
+        var book = await bookService.GetBookAsync(userId, request.BookId);
 
         if (book == null)
         {
@@ -82,7 +82,7 @@ public class SessionService : BaseService<SessionService>, ISessionService
         var existingEntity = await GetInitialQuery(userId).SingleOrDefaultAsync(b => b.Id == session.Id);
 
         // make sure the book belongs to the user
-        var book = bookService.GetBookAsync(userId, existingEntity.BookId);
+        var book = await bookService.GetBookAsync(userId, existingEntity.BookId);
 
         if (book == null)
         {
@@ -113,7 +113,7 @@ public class SessionService : BaseService<SessionService>, ISessionService
         var existingEntity = await GetInitialQuery(userId).SingleOrDefaultAsync(b => b.Id == sessionId);
 
         // make sure the book belongs to the user
-        var book = bookService.GetBookAsync(userId, existingEntity.BookId);
+        var book = await bookService.GetBookAsync(userId, existingEntity.BookId);
 
         if (book == null)
         {

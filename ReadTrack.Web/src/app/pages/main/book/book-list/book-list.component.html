@@ -4,7 +4,6 @@
         
         <app-search-box (filter)="updateFilter($event)"></app-search-box>
         
-        
         <ngx-datatable class="material test-check" [rows]="books" [externalPaging]="true" [externalSorting]="false"
         [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
         [count]="count" [offset]="offset" [limit]="limit" (page)='onPage($event)' >
@@ -19,7 +18,7 @@
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                     |
-                    <a class="success p-0" data-original-title="Sessions" title="Sessions" [routerLink]="['sessions', row.id]">
+                    <a class="success p-0" data-original-title="Sessions" title="Sessions" [routerLink]="['/sessions', row.id]">
                         <i class="fa fa-hourglass" aria-hidden="true"></i>
                     </a>
                 </ng-template>

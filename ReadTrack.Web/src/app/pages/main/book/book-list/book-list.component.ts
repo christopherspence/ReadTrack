@@ -7,7 +7,6 @@ import { BookService } from '../../../../core/services';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { AddEditBookDialogComponent } from '../add-edit-book-dialog-component';
 
-
 @Component({
     selector: 'app-book-list',
     templateUrl: './book-list.component.html',

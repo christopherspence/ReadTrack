@@ -13,7 +13,11 @@ const routes: Routes = [
     },
     {
         path: 'books',
-        loadChildren: () => import ('../../../pages/main/book/book.module').then(m => m.BookModule)
+        loadChildren: () => import('../../../pages/main/book/book.module').then(m => m.BookModule)
+    },
+    {
+        path: 'sessions/:id',
+        loadChildren: () => import('../../../pages/main/session/session.module').then(m => m.SessionModule)
     }
 ];
 
