@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SearchBoxComponent } from './components/search-box';
+import { ConfirmDialogComponent, SearchBoxComponent, SimpleDialogComponent } from './components';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 const modules = [
     CommonModule,
@@ -12,14 +14,20 @@ const modules = [
 
 @NgModule({
     imports: [
-        ...modules
+        ...modules,
+        MatButtonModule,
+        MatDialogModule
     ],
     exports: [
         ...modules,
-        SearchBoxComponent
+        ConfirmDialogComponent,
+        SearchBoxComponent,
+        SimpleDialogComponent
     ],
     declarations: [
-        SearchBoxComponent
+        ConfirmDialogComponent,
+        SearchBoxComponent,
+        SimpleDialogComponent
     ]
 })
 export class SharedModule { }

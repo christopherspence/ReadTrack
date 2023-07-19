@@ -24,4 +24,12 @@ export class BookService extends BaseHttpService {
         searchText = searchText || '';
         return this.http.get<Array<Book>>(`${BOOK_URL}/${offset}/${count}/${searchText}`);
     }
+
+    updateBook(book: Book): Observable<object> {
+        return this.http.put(`${BOOK_URL}/${book.id}`, `${JSON.stringify(book)}`, this.httpOptions);
+    }
+
+    deleteBook(id: number): Observable<object> {
+        return this.http.delete(`${BOOK_URL}/${id}`);
+    }
 }

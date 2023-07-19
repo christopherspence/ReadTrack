@@ -27,7 +27,7 @@
                     Username or password is invalid
                 </mat-error>
                 <br />
-                <a href="#" onclick="alert('Coming soon');">Forgot your password?</a>
+                <a (click)="forgotPassword();">Forgot your password?</a>
             </mat-card-content>
             <mat-card-actions align="end">
                 <button mat-raised-button color="primary" [disabled]="!form.valid">

@@ -14,8 +14,9 @@ export class SearchBoxComponent implements OnInit {
 
     async ngOnInit(): Promise<void> {
         this.value = this.value || '';
-        const searchTerm = await this.subject.pipe(debounceTime(300)).toPromise();
-        this.filter.emit(searchTerm);
+        this.subject.pipe(debounceTime(300)).subscribe(value => {
+            this.filter.emit(value);
+        });
     }
 
     onKeyup(event: Event): void {

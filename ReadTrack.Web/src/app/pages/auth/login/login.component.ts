@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services'
+import { SimpleDialogComponent } from '../../../shared';
+
 
 @Component({
     selector: 'app-login',
@@ -23,7 +26,8 @@ export class LoginComponent {
     constructor(
         private fb: FormBuilder, 
         private authService: AuthService,
-        private router: Router) {
+        private router: Router,
+        public dialog: MatDialog) {
         this.form = fb.group({
             email: ['', Validators.required],
             password: ['', Validators.required]
@@ -42,9 +46,25 @@ export class LoginComponent {
 
             this.router.navigate(['']);
         } catch (e) {
-            alert('An error occurred while logging in');            
+            this.dialog.open(SimpleDialogComponent, {
+                width: '250px',
+                data: {
+                    title: 'Error',
+                    message: 'An error occurred while logging in'
+                }
+            });
         }
         
         this.loading = false;                    
+    }
+
+    forgotPassword(): void {
+        this.dialog.open(SimpleDialogComponent, {
+            width: '250px',
+            data: {
+                title: 'Coming Soon',
+                message: 'Not available yet'
+            }
+        });
     }
 }

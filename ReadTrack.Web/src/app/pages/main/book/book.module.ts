@@ -6,6 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SharedModule } from '../../../shared';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const routes: Routes = [{ path: '', component: BookListComponent}];
 
@@ -14,6 +15,7 @@ const routes: Routes = [{ path: '', component: BookListComponent}];
         MatButtonModule,
         MatCheckboxModule,
         MatFormFieldModule,
+        MatSnackBarModule,
         NgxDatatableModule,
         RouterModule.forChild(routes),
         SharedModule],
