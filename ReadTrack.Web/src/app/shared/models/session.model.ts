@@ -1,9 +1,11 @@
-import { BaseModel } from "./base.model";
+import { BaseModel } from './base.model';
+import { TimeSpan } from './time-span.model';
 
 export class Session extends BaseModel {
     constructor(
         id: number,
-        public time: string,
+        public date: Date,
+        public duration: TimeSpan,
         public numberOfPages?: number,        
         public startPage?: number,
         public endPage?: number) {
