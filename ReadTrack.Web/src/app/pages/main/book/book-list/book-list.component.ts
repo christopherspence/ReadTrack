@@ -5,7 +5,7 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Book, ConfirmDialogComponent, DialogMode, SimpleDialogComponent } from '../../../../shared';
 import { BookService } from '../../../../core/services';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { AddEditBookDialogComponent } from '../add-edit-book-dialog-component';
+import { AddEditBookDialogComponent } from '../add-edit-book-dialog';
 
 @Component({
     selector: 'app-book-list',

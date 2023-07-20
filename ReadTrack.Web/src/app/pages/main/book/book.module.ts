@@ -10,7 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { SharedModule } from '../../../shared';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { AddEditBookDialogComponent } from './add-edit-book-dialog-component';
+import { AddEditBookDialogComponent } from './add-edit-book-dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 

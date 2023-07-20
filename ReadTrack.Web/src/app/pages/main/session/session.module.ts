@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SessionListComponent } from './session-list';
+import { AddEditSessionDialogComponent } from './add-edit-session-dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -27,7 +28,8 @@ const routes: Routes = [{ path: '', component: SessionListComponent}]
         SharedModule
     ],
     declarations: [
-        SessionListComponent
+        SessionListComponent,
+        AddEditSessionDialogComponent
     ]
 })
 export class SessionModule { }

@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
-import { ConfirmDialogComponent, Session, SimpleDialogComponent } from '../../../../shared';
+import { ConfirmDialogComponent, DialogMode, Session, SimpleDialogComponent } from '../../../../shared';
 import { ActivatedRoute } from '@angular/router';
 import { SessionService } from 'src/app/core/services/session.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AddEditSessionDialogComponent } from '../add-edit-session-dialog';
 
 @Component({
     selector: 'app-session-list',
@@ -45,11 +46,34 @@ export class SessionListComponent implements OnInit {
     }
 
     async createSession(): Promise<void> {
-        throw new Error('Method not implemented.');
+        const dialogRef = this.dialog.open(AddEditSessionDialogComponent, {
+            width: '50%',
+            data: {
+                bookId: this.id,
+                mode: DialogMode.add
+            }
+        });
+        const result = await dialogRef.afterClosed().toPromise();
+
+        if (result) {
+            await this.getSessions();
+        } 
     }
 
     async editSession(row: any): Promise<void> {
-        throw new Error('Method not implemented.');
+        const session = this.sessions.find(s => s.id === row);
+        const dialogRef = this.dialog.open(AddEditSessionDialogComponent, {
+            width: '50%',
+            data: {                
+                mode: DialogMode.edit,
+                session: session
+            }
+        });
+        const result = await dialogRef.afterClosed().toPromise();
+
+        if (result) {
+            await this.getSessions();
+        }
     }
 
     async deleteSession(row: any): Promise<void> {

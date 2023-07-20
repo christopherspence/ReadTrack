@@ -25,8 +25,8 @@ export class SessionService extends BaseHttpService {
         return this.http.get<Array<Session>>(`${SESSION_URL}/${bookId}/${offset}/${count}/${searchText}`);
     }
 
-    createSession(session: Session): Observable<Session> {
-        return this.http.post<Session>(SESSION_URL, session);
+    createSession(bookId: number, session: Session): Observable<Session> {
+        return this.http.post<Session>(`${SESSION_URL}/${bookId}`, session);
     }
 
     updateSession(session: Session): Observable<object> {
