@@ -64,7 +64,8 @@ public class SessionService : BaseService<SessionService>, ISessionService
         {
             BookId = request.BookId,
             NumberOfPages = request.NumberOfPages,
-            Time = request.Time,
+            Date = request.Date,
+            Duration = request.Duration,
             StartPage = request.StartPage,
             EndPage = request.EndPage,        
             Created = DateTime.UtcNow,
@@ -95,7 +96,7 @@ public class SessionService : BaseService<SessionService>, ISessionService
         }
 
         existingEntity.NumberOfPages = session.NumberOfPages;
-        existingEntity.Time = session.Time;
+        existingEntity.Duration = session.Duration;
         existingEntity.StartPage = session.StartPage;
         existingEntity.EndPage = session.EndPage;        
         existingEntity.Created = DateTime.UtcNow;

@@ -67,7 +67,8 @@ public static class RandomGenerator
             BookId = bookId,
             StartPage = CreateNumber(1, 1000),
             EndPage = CreateNumber(1, 1000),
-            Time = TimeSpan.FromTicks(CreateNumber(1, 100000)),
+            Date = DateTime.UtcNow,
+            Duration = TimeSpan.FromTicks(CreateNumber(1, 100000)),
             NumberOfPages = CreateNumber(1, 100)            
         };
 

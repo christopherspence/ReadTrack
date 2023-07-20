@@ -123,7 +123,8 @@ public class SessionControllerTests : BaseTests
             StartPage = session.StartPage,
             EndPage = session.EndPage,
             NumberOfPages = session.NumberOfPages,
-            Time = session.Time
+            Date = session.Date,
+            Duration = session.Duration
         });
 
         // Assert
@@ -169,7 +170,8 @@ public class SessionControllerTests : BaseTests
         var firstSession = Mapper.Map<SessionEntity, Session>(Sessions.First());
         firstSession.StartPage = RandomGenerator.CreateNumber(1, 1000);
         firstSession.EndPage = RandomGenerator.CreateNumber(1, 1000);
-        firstSession.Time = TimeSpan.FromTicks(RandomGenerator.CreateNumber(1, 100000));
+        firstSession.Date = DateTime.UtcNow;
+        firstSession.Duration = TimeSpan.FromTicks(RandomGenerator.CreateNumber(1, 100000));
         firstSession.NumberOfPages = RandomGenerator.CreateNumber(1, 100);
 
         var response = await controller.UpdateSessionAsync(1, firstSession);
@@ -181,7 +183,8 @@ public class SessionControllerTests : BaseTests
         expected.BookId = book.Id;        
 
         (await Context.Sessions.FirstAsync()).Should().BeEquivalentTo(expected,
-            o => o.Excluding(n => n.Path.EndsWith("Book") ||
+            o => o.Excluding(n => n.Path.EndsWith("Date") ||
+                                  n.Path.EndsWith("Book") ||
                                   n.Path.EndsWith("Created") ||
                                   n.Path.EndsWith("Modified")));
 
