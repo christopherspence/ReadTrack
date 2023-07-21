@@ -107,7 +107,11 @@ export class AddEditSessionDialogComponent implements OnInit {
     
     calculateNumberOfPages(): void {
         const form = this.form.value
-        this.form.patchValue({ numberOfPages: Number(form.endPage) - Number(form.startPage) });        
+        const numberOfPages = Number(form.endPage) - Number(form.startPage);
+
+        if (numberOfPages > 0) {
+            this.form.patchValue({ numberOfPages });        
+        }
     }
 
     private showToast(action: string, id: number): void {

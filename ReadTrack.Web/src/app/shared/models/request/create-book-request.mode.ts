@@ -1,4 +1,4 @@
-import { BookCategory } from "../book-category.model";
+import { BookCategory } from '../book-category.model';
 
 export class CreateBookRequest {
     constructor(
