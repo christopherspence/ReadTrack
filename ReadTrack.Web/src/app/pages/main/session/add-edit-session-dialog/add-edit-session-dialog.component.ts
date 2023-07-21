@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionService } from '../../../../core/services';
+import { CreateSessionRequest } from '../../../../shared';
 
 @Component({
     selector: 'app-add-edit-session-dialog',
@@ -20,13 +21,18 @@ export class AddEditSessionDialogComponent implements OnInit {
         return `${(number < 10 ? '0' : '')}${number}`;      
    }
 
+   get duration(): string {
+       const form = this.form?.value;
+       return `${this.padNumber(Number(form.hours))}:${this.padNumber(Number(form.minutes))}:${this.padNumber(Number(form.seconds))}`;
+   }
+
     get session(): Session {
         const form = this.form?.value;
 
         const session = new Session(
             form.id,
             form.date,
-            `${this.padNumber(Number(form.hours))}:${this.padNumber(Number(form.minutes))}:${this.padNumber(Number(form.seconds))}`,
+            this.duration,
             form.numberOfPages,
             form.startPage,
             form.endPage);
@@ -113,11 +119,19 @@ export class AddEditSessionDialogComponent implements OnInit {
     }
 
     async addSession(): Promise<void> {
-        const session = this.session;
+        const form = this.form.value;
+
+        const request = new CreateSessionRequest(
+            this.bookId, 
+            form.date, 
+            form.duration, 
+            form.numberOfPages, 
+            form.startPage,
+            form.endPage);
 
         if (Session) {
             try {
-                const id = (await this.service.createSession(this.bookId, session).toPromise())?.id;
+                const id = (await this.service.createSession(this.bookId, request).toPromise())?.id;
 
                 if (id) {
                     this.showToast('Added', id);

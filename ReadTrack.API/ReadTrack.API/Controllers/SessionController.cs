@@ -26,16 +26,16 @@ public class SessionController : BaseController<SessionController, ISessionServi
         => this.userService = userService;
 
     [HttpGet]
-    [Route("/api/session/count/{SessionId}")]
+    [Route("/api/session/count/{sessionId}")]
     [SwaggerOperation("GetSessionCountAsync")]
     [SwaggerResponse(statusCode: 200, type: typeof(int), description: "Succeeded")]
-    public async Task<IActionResult> GetSessionCountAsync(int SessionId)
+    public async Task<IActionResult> GetSessionCountAsync(int sessionId)
     {
         try
         {
             var user = await GetCurrentUserAsync();
 
-            return Ok(await Service.GetSessionCountAsync(user.Id, SessionId));
+            return Ok(await Service.GetSessionCountAsync(user.Id, sessionId));
         }
         catch (Exception e)
         {
@@ -45,16 +45,16 @@ public class SessionController : BaseController<SessionController, ISessionServi
     }
 
     [HttpGet]
-    [Route("/api/session/{SessionId}/{offset}/{count}")]
+    [Route("/api/session/{sessionId}/{offset}/{count}")]
     [SwaggerOperation("GetSessionsAsync")]
     [SwaggerResponse(statusCode: 200, type: typeof(IEnumerable<Session>), description: "Succeeded")]
-    public async Task<IActionResult> GetSessionsAsync(int SessionId, int offset, int count)
+    public async Task<IActionResult> GetSessionsAsync(int sessionId, int offset, int count)
     {
         try
         {
             var user = await GetCurrentUserAsync();
 
-            return Ok(await Service.GetSessionsAsync(user.Id, SessionId, offset, count));
+            return Ok(await Service.GetSessionsAsync(user.Id, sessionId, offset, count));
         }
         catch (Exception e)
         {

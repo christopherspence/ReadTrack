@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Book, DialogMode } from '../../../../shared';
+import { Book, CreateBookRequest, DialogMode } from '../../../../shared';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -98,20 +98,21 @@ export class AddEditBookDialogComponent implements OnInit {
     }
 
     async addBook(): Promise<void> {
-        const book = this.book;
+        const form = this.form?.value;
 
-        if (book) {
-            try {
-                const id = (await this.service.createBook(book).toPromise())?.id;
+        const request = new CreateBookRequest(form.name, form.author, form.category, form.numberOfPages, form.published);
+        
+        try {
+            const id = (await this.service.createBook(request).toPromise())?.id;
 
-                if (id) {
-                    this.showToast('Added', id);
-                    this.dialogRef.close(true);
-                }
-            } catch {
-                this.dialogRef.close(false);                
-            }            
-        }        
+            if (id) {
+                this.showToast('Added', id);
+                this.dialogRef.close(true);
+            }
+        } catch {
+            this.dialogRef.close(false);                
+        }            
+             
     }
 
     async updateBook(): Promise<void> {

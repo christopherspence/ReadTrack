@@ -9,6 +9,7 @@ public class SessionEntity : BaseEntity
     public TimeSpan Duration { get; set; }
     public int? StartPage { get; set; }
     public int? EndPage { get; set; }
+    public int UserId { get; set; }
 
     // FKs
     public int BookId { get; set; }

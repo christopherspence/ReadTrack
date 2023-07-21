@@ -60,7 +60,7 @@ public static class RandomGenerator
         return books;
     } 
 
-    public static SessionEntity GenerateRandomSession(int id = 1, int bookId = 1)       
+    public static SessionEntity GenerateRandomSession(int id = 1, int bookId = 1, int userId = 1)       
         => new SessionEntity
         {
             Id = id,
@@ -69,7 +69,10 @@ public static class RandomGenerator
             EndPage = CreateNumber(1, 1000),
             Date = DateTime.UtcNow,
             Duration = TimeSpan.FromTicks(CreateNumber(1, 100000)),
-            NumberOfPages = CreateNumber(1, 100)            
+            NumberOfPages = CreateNumber(1, 100),
+            UserId = userId,
+            Created = DateTime.UtcNow,
+            Modified = DateTime.UtcNow
         };
 
     public static IEnumerable<SessionEntity> GenerateOneHundredRandomSessions(int bookId = 1)

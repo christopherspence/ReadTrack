@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseHttpService } from './base-http-service';
 import { HttpClient } from '@angular/common/http';
-import { Book } from '../../shared';
+import { Book, CreateBookRequest } from '../../shared';
 import { Observable } from 'rxjs';
 
 const BOOK_URL = 'book';
@@ -25,8 +25,8 @@ export class BookService extends BaseHttpService {
         return this.http.get<Array<Book>>(`${BOOK_URL}/${offset}/${count}/${searchText}`);
     }
 
-    createBook(book: Book): Observable<Book> {
-        return this.http.post<Book>(BOOK_URL, book);
+    createBook(request: CreateBookRequest): Observable<Book> {
+        return this.http.post<Book>(BOOK_URL, request);
     }
 
     updateBook(book: Book): Observable<object> {

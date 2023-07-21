@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReadTrack.API.Data;
 
@@ -11,9 +12,11 @@ using ReadTrack.API.Data;
 namespace ReadTrack.API.Data.Migrations
 {
     [DbContext(typeof(ReadTrackContext))]
-    partial class ReadTrackContextModelSnapshot : ModelSnapshot
+    [Migration("20230721023018_AddedUserIdToSession")]
+    partial class AddedUserIdToSession
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

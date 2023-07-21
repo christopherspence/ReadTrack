@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseHttpService } from './base-http-service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Session } from '../../shared';
+import { CreateSessionRequest, Session } from '../../shared';
 
 const SESSION_URL = 'session';
 
@@ -25,8 +25,8 @@ export class SessionService extends BaseHttpService {
         return this.http.get<Array<Session>>(`${SESSION_URL}/${bookId}/${offset}/${count}/${searchText}`);
     }
 
-    createSession(bookId: number, session: Session): Observable<Session> {
-        return this.http.post<Session>(`${SESSION_URL}/${bookId}`, session);
+    createSession(bookId: number, request: CreateSessionRequest): Observable<Session> {
+        return this.http.post<Session>(`${SESSION_URL}/${bookId}`, request);
     }
 
     updateSession(session: Session): Observable<object> {
