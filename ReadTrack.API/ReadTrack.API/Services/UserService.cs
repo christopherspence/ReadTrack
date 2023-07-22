@@ -51,6 +51,11 @@ public class UserService : BaseService<UserService>, IUserService
 
     public async Task<TokenResponse> CreateUserAsync(CreateUserRequest request)
     {
+        if (await Context.Users.AnyAsync(u => u.Email == request.Email && !u.IsDeleted))
+        {
+            throw new ApplicationException($"Email {request.Email} already exists");    
+        }
+
         var entity = new UserEntity
         {
             Email = request.Email,
