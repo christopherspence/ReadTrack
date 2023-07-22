@@ -32,13 +32,18 @@ public class UserService : BaseService<UserService>, IUserService
         return Mapper.Map<UserEntity, User>(entity);
     }
 
-    public async Task<User> GetUserAsync(int id)
+    public async Task<User> GetUserAsync(int id, bool includePassword = false)
     {
         var entity = await Context.Users.FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted);   
 
         if (entity == null)
         {
             return null;
+        }
+
+        if (includePassword == false)
+        {
+            entity.Password = string.Empty;
         }
 
         return Mapper.Map<UserEntity, User>(entity);

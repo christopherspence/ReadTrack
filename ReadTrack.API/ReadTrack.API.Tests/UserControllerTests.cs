@@ -19,6 +19,34 @@ namespace ReadTrack.API.Tests;
 public class UserControllerTests : BaseTests
 {
     [Fact]
+    public async Task CanGetCurrentUser()
+    {
+        // Arrange
+        var user = RandomGenerator.GenerateRandomUser();
+        
+        await Context.Users.AddAsync(user);
+        await Context.SaveChangesAsync();
+        
+        var userService = new UserService(new Mock<ILogger<UserService>>().Object, Context, new Mock<ITokenService>().Object, Mapper);
+
+        var controller = new UserController(new Mock<ILogger<UserController>>().Object, userService)
+        {
+            ControllerContext = CreateControllerContext(user.Email)
+        };
+
+        // Act
+        var response = await controller.GetCurrentUserAsync();
+
+        // Assert
+        var result = (User)response.Should().BeOfType<OkObjectResult>().Subject.Value;
+
+        var expected = Mapper.Map<UserEntity, User>(user);
+        expected.Password = string.Empty;
+
+        result.Should().BeEquivalentTo(expected);
+    }
+
+    [Fact]
     public async Task CanRegisterUser()
     {
         // Arrange

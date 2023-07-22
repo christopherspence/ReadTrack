@@ -1,6 +1,8 @@
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ReadTrack.API.Models;
@@ -12,6 +14,26 @@ namespace ReadTrack.API.Controllers;
 public class UserController : BaseController<UserController, IUserService>
 {
     public UserController(ILogger<UserController> logger, IUserService service) : base(logger, service) { }
+
+    [HttpGet]
+    [Route("api/user")]
+    [SwaggerOperation("GetCurrentUserAsync")]
+    [SwaggerResponse(statusCode: 200, type: typeof(User), description: "Succeeded")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "authPolicy")]
+    public async Task<IActionResult> GetCurrentUserAsync()
+    {
+        try
+        {
+            var userId = (await Service.GetUserByEmailAsync(User.FindFirstValue(ClaimTypes.Email))).Id;
+
+            return Ok(await Service.GetUserAsync(userId));
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, e.Message);
+            throw;
+        }
+    }
 
     [HttpPost]
     [Route("/api/user/register")]
@@ -36,6 +58,7 @@ public class UserController : BaseController<UserController, IUserService>
     [Route("/api/user/{id}")]
     [SwaggerOperation("UpdateUserAsync")]
     [SwaggerResponse(statusCode: 204, description: "Updated")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = "authPolicy")]
     public async Task<IActionResult> UpdateUserAsync(int id, User user)
     {
         try
