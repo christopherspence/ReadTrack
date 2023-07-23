@@ -128,23 +128,22 @@ export class AddEditSessionDialogComponent implements OnInit {
         const request = new CreateSessionRequest(
             this.bookId, 
             form.date, 
-            form.duration, 
+            this.duration, 
             form.numberOfPages, 
             form.startPage,
             form.endPage);
 
-        if (Session) {
-            try {
-                const id = (await this.service.createSession(this.bookId, request).toPromise())?.id;
+        try {
+            const id = (await this.service.createSession(this.bookId, request).toPromise())?.id;
 
-                if (id) {
-                    this.showToast('Added', id);
-                    this.dialogRef.close(true);
-                }
-            } catch {
-                this.dialogRef.close(false);                
-            }            
-        }        
+            if (id) {
+                this.showToast('Added', id);
+                this.dialogRef.close(true);
+            }
+        } catch {
+            this.dialogRef.close(false);                
+        }            
+      
     }
 
     async updateSession(): Promise<void> {

@@ -18,6 +18,10 @@ const routes: Routes = [
     {
         path: 'sessions/:id',
         loadChildren: () => import('../../../pages/main/session/session.module').then(m => m.SessionModule)
+    },
+    {
+        path: 'profile',
+        loadChildren: () => import('../../../pages/main/profile/profile.module').then(m => m.ProfileModule)
     }
 ];
 

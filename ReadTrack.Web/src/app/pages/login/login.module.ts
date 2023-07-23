@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { LoginComponent } from '.';
 import { SharedModule } from '../../shared';
 
-
 const routes = [{ path: '', component: LoginComponent }];
 
 @NgModule({

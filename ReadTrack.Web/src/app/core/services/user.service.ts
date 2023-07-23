@@ -1,14 +1,16 @@
 import { Inject, Injectable } from '@angular/core';
 import { BaseHttpService } from './base-http-service';
 import { HttpClient } from '@angular/common/http';
-import { CreateUserRequest, TokenResponse } from '../../shared';
-import { Observable, tap } from 'rxjs';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
+import { Observable, tap } from 'rxjs';
+import { CreateUserRequest, TokenResponse, User } from '../../shared';
 
 const USER_ID = 'user_id';
 const USER_EMAIL = 'user_email';
 const USER_TOKEN = 'id_token';
 const EXPIRES_AT = 'expires_at';
+
+const USER_URL = 'user';
 
 @Injectable({
     providedIn: 'root'
@@ -18,22 +20,35 @@ export class UserService extends BaseHttpService {
         http: HttpClient,
         @Inject(LOCAL_STORAGE) private storage: StorageService) { super(http); }
 
+    
+
+    getUser(): Observable<User> {
+        return this.http.get<User>(`${USER_URL}`);
+    }
+
     register(request: CreateUserRequest): Observable<object> {
-        return this.http.post('user/register', request)
+        return this.http.post(`${USER_URL}/register`, request)
             .pipe(tap(res => {
-                this.setUserInfo(res as TokenResponse);
+                this.setTokenInfo(res as TokenResponse);
             }));
     }
 
-    setUserInfo(res: TokenResponse): void {
-        this.storage.set(USER_TOKEN, res.token) ;
-        this.storage.set(USER_ID, res.user.id.toString());
-        this.storage.set(USER_EMAIL, res.user.email);
-        this.storage.set(EXPIRES_AT, res.expires.toString());
+    updateUser(user: User): Observable<object> {
+        return this.http.put(`${USER_URL}/${user.id}`, JSON.stringify(user), this.httpOptions);
     }
 
     getToken(): string {
         return this.storage.get(USER_TOKEN) ?? '';
+    }
+
+    setTokenInfo(res: TokenResponse): void {
+        this.storage.set(USER_TOKEN, res.token);        
+        this.storage.set(EXPIRES_AT, res.expires.toString());
+    }
+
+    setUserInfo(user: User) {
+        this.storage.set(USER_ID, user.id.toString());
+        this.storage.set(USER_EMAIL, user.email);        
     }
 
     logout(): void {

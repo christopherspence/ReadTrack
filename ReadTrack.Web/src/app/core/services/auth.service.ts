@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { LoginRequest, TokenResponse } from 'src/app/shared';
 import { UserService } from './user.service';
+import { Token } from '@angular/compiler';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,9 @@ export class AuthService {
     login(email: string, password: string): Observable<object> {
         return this.http.post('auth/login', new LoginRequest(email, password))
             .pipe(tap(res => {
-                this.userService.setUserInfo(res as TokenResponse);
+                const tokenResponse = res as TokenResponse;
+                this.userService.setTokenInfo(tokenResponse)
+                this.userService.setUserInfo(tokenResponse.user);
             }));
     }
 }
