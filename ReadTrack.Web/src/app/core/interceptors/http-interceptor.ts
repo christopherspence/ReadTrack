@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, of, throwError } from 'rxjs';
-import { AuthService } from '../services';
+import { UserService } from '../services';
 import { environment } from 'src/environments/environment';
 
 enum HTTP_STATUS {
@@ -14,7 +14,7 @@ enum HTTP_STATUS {
 @Injectable()
 export class ReadTrackHttpInterceptor implements HttpInterceptor {
     constructor(
-        private authService: AuthService,
+        private userService: UserService,
         private router: Router) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -22,7 +22,7 @@ export class ReadTrackHttpInterceptor implements HttpInterceptor {
             url: `${environment.baseUrl}/${req.url}`
         });
 
-        const token = this.authService.getToken();
+        const token = this.userService.getToken();
         if (token) {
             req = req.clone({
                 headers: req.headers.set('authorization', `Bearer ${token}`)
@@ -39,7 +39,7 @@ export class ReadTrackHttpInterceptor implements HttpInterceptor {
                     return of(resp);
                 } else {
                     if (error.status === HTTP_STATUS.UNAUTHORIZED || error.status === HTTP_STATUS.FORBIDDEN) {
-                        this.authService.logout();
+                        this.userService.logout();
                         this.router.navigate(['login']);
                     }
 

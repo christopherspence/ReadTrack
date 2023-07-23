@@ -53,7 +53,7 @@ public class UserService : BaseService<UserService>, IUserService
     {
         if (await Context.Users.AnyAsync(u => u.Email == request.Email && !u.IsDeleted))
         {
-            throw new ApplicationException($"Email {request.Email} already exists");    
+            throw new ApplicationException($"Email \"{request.Email}\" already exists.");    
         }
 
         var entity = new UserEntity

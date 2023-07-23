@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../core/services'
-import { SimpleDialogComponent } from '../../../shared';
+import { AuthService } from '../../core/services'
+import { SimpleDialogComponent } from '../../shared';
 
 
 @Component({
@@ -56,15 +56,5 @@ export class LoginComponent {
         }
         
         this.loading = false;                    
-    }
-
-    forgotPassword(): void {
-        this.dialog.open(SimpleDialogComponent, {
-            width: '250px',
-            data: {
-                title: 'Coming Soon',
-                message: 'Not available yet'
-            }
-        });
     }
 }

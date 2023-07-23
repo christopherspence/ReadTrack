@@ -4,11 +4,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from '.';
 import { SharedModule } from '../../shared';
 
 
-const routes = [{ path: '', component: LoginComponent }];
+const routes = [{ path: '', component: RegisterComponent }];
 
 @NgModule({
     imports: [
@@ -20,7 +20,7 @@ const routes = [{ path: '', component: LoginComponent }];
         SharedModule
     ],
     declarations: [
-        LoginComponent
+        RegisterComponent        
     ]   
 })
-export class AuthModule { }
+export class RegisterModule { }

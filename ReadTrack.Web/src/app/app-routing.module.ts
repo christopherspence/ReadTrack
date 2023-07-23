@@ -10,7 +10,10 @@ const routes: Routes = [{
     canActivate: [AuthGuard]
 }, {
     path: 'login',
-    loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./pages/login/login.module').then(m => m.AuthModule)
+}, {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule)
 }];
 
 @NgModule({
