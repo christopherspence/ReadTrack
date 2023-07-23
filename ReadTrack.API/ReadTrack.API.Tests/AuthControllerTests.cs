@@ -17,7 +17,7 @@ namespace ReadTrack.API.Tests;
 public class AuthControllerTests : BaseTests
 {
     [Fact]
-    public async void Test1()
+    public async void CanLogin()
     {
         // Arrange
         var user = RandomGenerator.GenerateRandomUser();        
@@ -33,6 +33,7 @@ public class AuthControllerTests : BaseTests
 
         var userService = new UserService(new Mock<ILogger<UserService>>().Object,
             Context,
+            new Mock<IPasswordHasher<User>>().Object,
             new Mock<ITokenService>().Object,
             Mapper);
 

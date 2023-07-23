@@ -27,7 +27,11 @@ public class UserControllerTests : BaseTests
         await Context.Users.AddAsync(user);
         await Context.SaveChangesAsync();
         
-        var userService = new UserService(new Mock<ILogger<UserService>>().Object, Context, new Mock<ITokenService>().Object, Mapper);
+        var userService = new UserService(
+            new Mock<ILogger<UserService>>().Object, 
+            Context, 
+            new Mock<IPasswordHasher<User>>().Object,
+            new Mock<ITokenService>().Object, Mapper);
 
         var controller = new UserController(new Mock<ILogger<UserController>>().Object, userService)
         {
@@ -69,6 +73,7 @@ public class UserControllerTests : BaseTests
         var userService = new UserService(
             new Mock<ILogger<UserService>>().Object, 
             Context, 
+            hasher,
             tokenServiceMock.Object,
             Mapper);
 
@@ -109,11 +114,17 @@ public class UserControllerTests : BaseTests
     {
         // Arrange
         var user = RandomGenerator.GenerateRandomUser();
+        var hasher = new PasswordHasher<User>();        
         
         await Context.Users.AddAsync(user);
         await Context.SaveChangesAsync();
         
-        var userService = new UserService(new Mock<ILogger<UserService>>().Object, Context, new Mock<ITokenService>().Object, Mapper);
+        var userService = new UserService(
+            new Mock<ILogger<UserService>>().Object,
+            Context, 
+            hasher,
+            new Mock<ITokenService>().Object, 
+            Mapper);
 
         var controller = new UserController(new Mock<ILogger<UserController>>().Object, userService)
         {
@@ -122,10 +133,12 @@ public class UserControllerTests : BaseTests
 
         // Act
         var updatedUser = Mapper.Map<UserEntity, User>(user);
+        var originalPassword = updatedUser.Password;
         updatedUser.FirstName = RandomGenerator.CreateFirstName();
         updatedUser.LastName = RandomGenerator.CreateLastName();
         updatedUser.ProfilePicture = $"{Guid.NewGuid()}.jpg";
         updatedUser.Email  = RandomGenerator.CreateEmailAddress();
+        updatedUser.Password = Guid.NewGuid().ToString();
         
         var response = await controller.UpdateUserAsync(updatedUser.Id, updatedUser);
 
@@ -133,11 +146,14 @@ public class UserControllerTests : BaseTests
         response.Should().BeOfType<NoContentResult>();
 
         var expected = Mapper.Map<User, UserEntity>(updatedUser);
+        var actual = await Context.Users.FirstAsync();
         
-        (await Context.Users.FirstAsync()).Should().BeEquivalentTo(expected,
-            o => o.Excluding(n => n.Path.Equals("Books") ||
+        actual.Should().BeEquivalentTo(expected,
+            o => o.Excluding(n => n.Path.Equals("Password") ||
+                                  n.Path.Equals("Books") ||
                                   n.Path.EndsWith("Created") ||
                                   n.Path.EndsWith("Modified")));
-        
+
+        actual.Password.Should().NotBeEquivalentTo(originalPassword);
     }
 }

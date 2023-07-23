@@ -1,24 +1,29 @@
 using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ReadTrack.API.Data;
 using ReadTrack.API.Data.Entities;
 using ReadTrack.API.Models;
-using ReadTrack.API.Models.Requests;
 
 namespace ReadTrack.API.Services;
 
 public class UserService : BaseService<UserService>, IUserService
 {
+    private readonly IPasswordHasher<User> hasher;
     private readonly ITokenService tokenService;
     public UserService(
         ILogger<UserService> logger, 
         ReadTrackContext context, 
+        IPasswordHasher<User> hasher,
         ITokenService tokenService,
         IMapper mapper) : base(logger, context, mapper) 
-        => this.tokenService = tokenService;
+    {
+        this.tokenService = tokenService;
+        this.hasher = hasher;
+    }
     
     public async Task<User> GetUserByEmailAsync(string email)
     {
@@ -66,11 +71,15 @@ public class UserService : BaseService<UserService>, IUserService
             Modified = DateTime.UtcNow
         };
 
+        // Hash the user's password
+        var user = Mapper.Map<UserEntity, User>(entity);
+        entity.Password = hasher.HashPassword(user, request.Password);
+
         await Context.Users.AddAsync(entity);
         await Context.SaveChangesAsync();
 
 
-        return tokenService.GenerateToken(Mapper.Map<UserEntity, User>(entity));
+        return tokenService.GenerateToken(user);
     }
 
     public async Task<bool> UpdateUserAsync(int userId, User user)
@@ -92,6 +101,17 @@ public class UserService : BaseService<UserService>, IUserService
         existingEntity.LastName = user.LastName;
         existingEntity.Email = user.Email;        
         existingEntity.ProfilePicture = user.ProfilePicture;
+
+        // only update the password if they specified a new one and it doensn't match the old one
+        if (!string.IsNullOrEmpty(user.Password))
+        {
+            // have to use the existing entity, otherwise the hasher won't has properly
+            var passwordHash = hasher.HashPassword(Mapper.Map<UserEntity, User>(existingEntity), user.Password);
+            if (existingEntity.Password != passwordHash) 
+            {
+                existingEntity.Password = passwordHash;    
+            }            
+        }
         
         Context.Entry(existingEntity).State = EntityState.Modified;
         await Context.SaveChangesAsync();
