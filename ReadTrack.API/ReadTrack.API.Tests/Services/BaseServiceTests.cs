@@ -9,9 +9,9 @@ using ReadTrack.API.Data;
 using ReadTrack.API.Models;
 using Xunit;
 
-namespace ReadTrack.API.Tests;
+namespace ReadTrack.API.Tests.Services;
 
-public abstract class BaseTests : IAsyncLifetime
+public abstract class BaseServiceTests : IAsyncLifetime
 {
     protected ReadTrackContext Context { get; private set; }
     protected IMapper Mapper { get; private set; }
@@ -39,16 +39,4 @@ public abstract class BaseTests : IAsyncLifetime
     }
 
     public Task DisposeAsync() => Task.CompletedTask;
-
-    protected ControllerContext CreateControllerContext(string email)
-      => new ControllerContext
-         {
-             HttpContext = new DefaultHttpContext
-             {
-                 User = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
-                 {
-                     new Claim(ClaimTypes.Email, email)
-                 }, "mock"))
-             }
-         };
 }

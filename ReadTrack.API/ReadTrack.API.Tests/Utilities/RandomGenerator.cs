@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using RandomNameGeneratorLibrary;
 using ReadTrack.API.Data.Entities;
@@ -22,7 +21,7 @@ public static class RandomGenerator
     public static string CreateEmailAddress() => $"{CreateFirstName().ToLower()}.{CreateLastName().ToLower()}@gmail.com";
 
     public static UserEntity GenerateRandomUser(int id = 1)
-        => new UserEntity
+        => new()
         {
             Id = id,
             Email = CreateEmailAddress(),
@@ -35,8 +34,19 @@ public static class RandomGenerator
             SortOrder = 0
         };
 
+    public static User GenerateRandomUserModel(int id = 1)
+        => new()
+        {
+            Id = id,
+            Email = CreateEmailAddress(),
+            Password = Guid.NewGuid().ToString(),
+            FirstName = CreateFirstName(),
+            LastName = CreateLastName(),
+            ProfilePicture = Guid.NewGuid().ToString()
+        };
+
     public static BookEntity GenerateRandomBook(int id = 1, int userId = 1)
-        => new BookEntity
+        => new()
         {
             Id = id,
             Name = CreatePlaceName(),
@@ -46,6 +56,17 @@ public static class RandomGenerator
             UserId = userId,
             Created = DateTime.UtcNow,
             Modified = DateTime.UtcNow
+        };
+
+    public static Book GenerateRandomBookModel(int id = 1)
+        => new()
+        {
+            Id = id,
+            Name = CreatePlaceName(),
+            Author = CreateAuthorName(),
+            Category = (BookCategory)Random.Next(1, 12),
+            Published = DateTime.UtcNow.AddYears(CreateNumber(1, 30)),
+            Finished = CreateNumber(0, 1) == 1
         };
 
     public static IEnumerable<BookEntity> GenerateOneHundredRandomBooks(int userId = 1)
@@ -61,7 +82,7 @@ public static class RandomGenerator
     } 
 
     public static SessionEntity GenerateRandomSession(int id = 1, int bookId = 1, int userId = 1)       
-        => new SessionEntity
+        => new()
         {
             Id = id,
             BookId = bookId,
