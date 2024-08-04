@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ReadTrack.API.Models;
-using ReadTrack.API.Models.Requests;
+using ReadTrack.Shared;
+using ReadTrack.Shared.Requests;
 using ReadTrack.API.Services;
 using Swashbuckle.AspNetCore.Annotations;
 

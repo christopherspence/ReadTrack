@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
-using ReadTrack.API.Models;
-using ReadTrack.API.Models.Requests;
+using ReadTrack.Shared;
+using ReadTrack.Shared.Requests;
 
 namespace ReadTrack.API.Services;
 

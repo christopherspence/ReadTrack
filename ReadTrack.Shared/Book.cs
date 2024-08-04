@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ReadTrack.API.Models;
+namespace ReadTrack.Shared;
 
 public class Book : BaseModel
 {

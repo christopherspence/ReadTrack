@@ -1,6 +1,6 @@
 using System;
 
-namespace ReadTrack.API.Models.Requests;
+namespace ReadTrack.Shared.Requests;
 
 public class CreateSessionRequest
 {

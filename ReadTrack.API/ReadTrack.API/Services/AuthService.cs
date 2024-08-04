@@ -3,8 +3,8 @@ using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using ReadTrack.API.Data;
-using ReadTrack.API.Models;
-using ReadTrack.API.Models.Requests;
+using ReadTrack.Shared;
+using ReadTrack.Shared.Requests;
 
 namespace ReadTrack.API.Services;
 

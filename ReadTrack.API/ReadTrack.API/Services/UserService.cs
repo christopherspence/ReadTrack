@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ReadTrack.API.Data;
 using ReadTrack.API.Data.Entities;
-using ReadTrack.API.Models;
+using ReadTrack.Shared;
 
 namespace ReadTrack.API.Services;
 

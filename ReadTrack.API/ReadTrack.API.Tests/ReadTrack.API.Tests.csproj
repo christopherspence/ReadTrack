@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ReadTrack.API\ReadTrack.API.csproj" />
+    <ProjectReference Include="..\..\ReadTrack.Shared\ReadTrack.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using ReadTrack.API.Data;
 using ReadTrack.API.Extensions;
 using ReadTrack.API.Models;
+using ReadTrack.Shared;
 
 namespace ReadTrack.API.Services;
 

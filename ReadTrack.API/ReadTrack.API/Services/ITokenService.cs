@@ -1,5 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
-using ReadTrack.API.Models;
+using ReadTrack.Shared;
 
 namespace ReadTrack.API.Services;
 

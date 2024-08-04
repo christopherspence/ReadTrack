@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
 using ReadTrack.API.Data.Entities;
-using ReadTrack.API.Models;
+using ReadTrack.Shared;
 using ReadTrack.API.Services;
 using ReadTrack.API.Tests.Utilities;
 using Xunit;

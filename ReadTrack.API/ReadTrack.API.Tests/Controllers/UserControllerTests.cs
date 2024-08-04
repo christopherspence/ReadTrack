@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using ReadTrack.API.Controllers;
-using ReadTrack.API.Models;
+using ReadTrack.Shared;
 using ReadTrack.API.Services;
 using ReadTrack.API.Tests.Utilities;
 using Xunit;

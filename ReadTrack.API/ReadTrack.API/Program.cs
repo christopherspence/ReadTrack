@@ -9,8 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ReadTrack.API.Data;
 using ReadTrack.API.Extensions;
-using ReadTrack.API.Models;
+using ReadTrack.Shared;
 using ReadTrack.API.Services;
+using ReadTrack.API.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace ReadTrack.API.Models;
+namespace ReadTrack.Shared;
 
 public class TokenResponse
 {

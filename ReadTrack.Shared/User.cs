@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ReadTrack.API.Models;
+namespace ReadTrack.Shared;
 
 public class User : BaseModel
 {

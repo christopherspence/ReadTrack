@@ -1,4 +1,4 @@
-namespace ReadTrack.API.Models;
+namespace ReadTrack.Shared;
 
 public abstract class BaseModel
 {
