@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
 using ReadTrack.API.Data.Entities;
 using ReadTrack.API.Models;
-using ReadTrack.API.Models.Requests;
 using ReadTrack.API.Services;
 using ReadTrack.API.Tests.Utilities;
 using Xunit;
@@ -105,21 +103,27 @@ public class BookServiceTests : BaseServiceTests
     {
         // Arrange
         var user = RandomGenerator.GenerateRandomUser();
-        var book = RandomGenerator.GenerateRandomBook();
-
+        
         var service = new BookService(new Mock<ILogger<BookService>>().Object, Context, Mapper);
 
         // Act
-        var result = await service.CreateBookAsync(user.Id, new CreateBookRequest
-        {
-            Name = book.Name,
-            Author = book.Author,
-            Category = book.Category,
-            NumberOfPages = book.NumberOfPages,
-            Published = book.Published
-        });
+        var request = RandomGenerator.GenerateRandomCreateBookRequest();
+        var result = await service.CreateBookAsync(user.Id, request);
 
         // Assert
+        var book = new BookEntity
+        {
+            Id = 1,
+            Name = request.Name,
+            Author = request.Author,
+            Category = request.Category,
+            NumberOfPages = request.NumberOfPages,
+            Published = request.Published,
+            UserId = user.Id,
+            Created = DateTime.UtcNow,
+            Modified = DateTime.UtcNow
+        };
+
         result.Should().BeEquivalentTo(Mapper.Map<BookEntity, Book>(book));
 
         (await Context.Books.SingleAsync()).Should().BeEquivalentTo(book, o => o.Excluding(n =>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using RandomNameGeneratorLibrary;
 using ReadTrack.API.Data.Entities;
 using ReadTrack.API.Models;
+using ReadTrack.API.Models.Requests;
 
 namespace ReadTrack.API.Tests.Utilities;
 
@@ -19,6 +20,15 @@ public static class RandomGenerator
     public static string CreatePlaceName() => PlaceNameGenerator.GenerateRandomPlaceName();
     public static string CreateAuthorName() => $"{CreateLastName()}, {CreateFirstName()}";
     public static string CreateEmailAddress() => $"{CreateFirstName().ToLower()}.{CreateLastName().ToLower()}@gmail.com";
+
+    public static CreateUserRequest GenerateRandomCreateUserRequest()
+        => new()
+        {
+            Email = CreateEmailAddress(),
+            FirstName = CreateFirstName(),
+            LastName = CreateLastName(),
+            Password = CreatePlaceName()
+        };
 
     public static UserEntity GenerateRandomUser(int id = 1)
         => new()
@@ -43,6 +53,15 @@ public static class RandomGenerator
             FirstName = CreateFirstName(),
             LastName = CreateLastName(),
             ProfilePicture = Guid.NewGuid().ToString()
+        };
+
+    public static CreateBookRequest GenerateRandomCreateBookRequest()
+        => new ()
+        {
+            Name = CreatePlaceName(),
+            Author = CreateAuthorName(),
+            Category = (BookCategory)CreateNumber(0, 15),
+            Published = DateTime.UtcNow.AddYears(CreateNumber(1, 30))
         };
 
     public static BookEntity GenerateRandomBook(int id = 1, int userId = 1)
@@ -81,6 +100,22 @@ public static class RandomGenerator
         return books;
     } 
 
+    public static CreateSessionRequest GenerateRandomCreateSessionRequest(int bookId = 1)
+    {
+        var startPage = CreateNumber(1, 100);
+        var endPage = startPage + CreateNumber(1, 100);
+        return new()
+        {
+            BookId = bookId,
+            StartPage = startPage,
+            EndPage = endPage,
+            NumberOfPages = endPage - startPage,
+            Date = DateTime.UtcNow,
+            Duration = new TimeSpan(CreateNumber(1, 10), CreateNumber(1, 60), CreateNumber(1, 60))
+        };
+    }
+
+
     public static SessionEntity GenerateRandomSession(int id = 1, int bookId = 1, int userId = 1)       
         => new()
         {
@@ -95,6 +130,19 @@ public static class RandomGenerator
             Created = DateTime.UtcNow,
             Modified = DateTime.UtcNow
         };
+
+        public static Session GenerateRandomSessionModel(int id = 1, int bookId = 1, int userId = 1)       
+        => new()
+        {
+            Id = id,
+            StartPage = CreateNumber(1, 1000),
+            EndPage = CreateNumber(1, 1000),
+            Date = DateTime.UtcNow,
+            Duration = TimeSpan.FromTicks(CreateNumber(1, 100000)),
+            NumberOfPages = CreateNumber(1, 100),
+            UserId = userId
+        };
+
 
     public static IEnumerable<SessionEntity> GenerateOneHundredRandomSessions(int bookId = 1)
     {

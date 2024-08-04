@@ -1,9 +1,6 @@
 using System;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ReadTrack.API.Data;
 using ReadTrack.API.Models;

@@ -125,13 +125,7 @@ public class BookControllerTests : BaseControllerTests
         };
 
         // Act
-        var request = new CreateBookRequest
-        {
-            Name = RandomGenerator.CreatePlaceName(),
-            Author = RandomGenerator.CreateAuthorName(),
-            Category = (BookCategory)RandomGenerator.CreateNumber(0, 15),
-            Published = DateTime.UtcNow.AddYears(RandomGenerator.CreateNumber(1, 30))
-        };
+        var request = RandomGenerator.GenerateRandomCreateBookRequest();
         var response = await controller.CreateBookAsync(request);
 
         // Assert

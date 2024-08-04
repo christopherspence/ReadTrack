@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using ReadTrack.API.Data.Entities;
 using ReadTrack.API.Models;
-using ReadTrack.API.Models.Requests;
 using ReadTrack.API.Services;
 using ReadTrack.API.Tests.Utilities;
 using Xunit;
@@ -61,24 +60,28 @@ public class SessionServiceTests : BaseServiceTests
     public async Task CanCreateSession()
     {
         // Arrange
-        var user = RandomGenerator.GenerateRandomUser();
-        var session = RandomGenerator.GenerateRandomSession();
+        var user = RandomGenerator.GenerateRandomUser();        
         var book = Mapper.Map<BookEntity, Book>(RandomGenerator.GenerateRandomBook());
 
         var service = new SessionService(new Mock<ILogger<SessionService>>().Object, Context, Mapper);
 
         // Act
-        var result = await service.CreateSessionAsync(user.Id, new CreateSessionRequest
-        {
-            BookId = book.Id,
-            StartPage = session.StartPage,
-            EndPage = session.EndPage,
-            NumberOfPages = session.NumberOfPages,
-            Date = session.Date,
-            Duration = session.Duration
-        });
+        var request = RandomGenerator.GenerateRandomCreateSessionRequest(book.Id);
+        var result = await service.CreateSessionAsync(user.Id, request);
 
         // Assert
+        var session = new SessionEntity
+        {
+            Id = 1,
+            BookId = request.BookId,
+            NumberOfPages = request.NumberOfPages,
+            Date = request.Date,
+            Duration = request.Duration,
+            StartPage = request.StartPage,
+            EndPage = request.EndPage,
+            UserId = user.Id
+        };
+
         result.Should().BeEquivalentTo(Mapper.Map<SessionEntity, Session>(session));
 
         (await Context.Sessions.SingleAsync()).Should().BeEquivalentTo(session, o => o.Excluding(n =>

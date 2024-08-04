@@ -1,14 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
 using ReadTrack.API.Controllers;
-using ReadTrack.API.Data.Entities;
 using ReadTrack.API.Models;
 using ReadTrack.API.Models.Requests;
 using ReadTrack.API.Services;
@@ -19,36 +15,32 @@ namespace ReadTrack.API.Tests.Controllers;
 
 public class SessionControllerTests : BaseControllerTests
 {
-   /* [Fact]
+    [Fact]
     public async Task CanGetSessionCount()
     {
         // Arrange
-        var user = RandomGenerator.GenerateRandomUser();
-        var book = Mapper.Map<BookEntity, Book>(RandomGenerator.GenerateRandomBook());
-
-        var sessions = RandomGenerator.GenerateOneHundredRandomSessions();
-        await Context.Sessions.AddRangeAsync(sessions);
-        await Context.SaveChangesAsync();
+        var user = RandomGenerator.GenerateRandomUserModel();        
         
         var userServiceMock = new Mock<IUserService>();
         userServiceMock.Setup(m => m.GetUserByEmailAsync(It.IsAny<string>()))
-            .ReturnsAsync(Mapper.Map<UserEntity, User>(user));
+            .ReturnsAsync(user);
 
-        var sessionService = new SessionService(new Mock<ILogger<SessionService>>().Object, Context, Mapper);
+        var sessionServiceMock = new Mock<ISessionService>();
+        sessionServiceMock.Setup(m => m.GetSessionCountAsync(It.IsAny<int>(), It.IsAny<int>())).ReturnsAsync(0);
 
-        var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionService)
+        var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionServiceMock.Object)
         {
             ControllerContext = CreateControllerContext(user.Email)
         };
 
         // Act
-        var response = await controller.GetSessionCountAsync(book.Id);
+        var bookId = RandomGenerator.CreateNumber(1, 99);
+        var response = await controller.GetSessionCountAsync(bookId);
 
         // Assert
-        var result = (int)response.Should().BeOfType<OkObjectResult>().Subject.Value;
+        response.Should().BeOfType<OkObjectResult>();
 
-        result.Should().Be(100);
-        
+        sessionServiceMock.Verify(m => m.GetSessionCountAsync(user.Id, bookId), Times.Once);
         userServiceMock.Verify(m => m.GetUserByEmailAsync(It.IsAny<string>()), Times.Once);
     }
 
@@ -56,32 +48,31 @@ public class SessionControllerTests : BaseControllerTests
     public async Task CanGetFirstTenSessions()
     {
         // Arrange
-        var user = RandomGenerator.GenerateRandomUser();
-        var book = Mapper.Map<BookEntity, Book>(RandomGenerator.GenerateRandomBook());
-
-        var sessions = RandomGenerator.GenerateOneHundredRandomSessions();
-        await Context.Sessions.AddRangeAsync(sessions);
-        await Context.SaveChangesAsync();
+        var user = RandomGenerator.GenerateRandomUserModel();
         
         var userServiceMock = new Mock<IUserService>();
         userServiceMock.Setup(m => m.GetUserByEmailAsync(It.IsAny<string>()))
-            .ReturnsAsync(Mapper.Map<UserEntity, User>(user));
+            .ReturnsAsync(user);
 
-        var sessionService = new SessionService(new Mock<ILogger<SessionService>>().Object, Context, Mapper);
+        var sessionServiceMock = new Mock<ISessionService>();
+        sessionServiceMock.Setup(m => m.GetSessionsAsync(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()))
+            .ReturnsAsync(new List<Session>());
 
-        var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionService)
+        var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionServiceMock.Object)
         {
             ControllerContext = CreateControllerContext(user.Email)
         };
 
         // Act
-        var response = await controller.GetSessionsAsync(book.Id, 0, 10);
+        var bookId = RandomGenerator.CreateNumber(1, 99);
+        var offset = RandomGenerator.CreateNumber(1, 99);
+        var count = RandomGenerator.CreateNumber(1, 99);
+        var response = await controller.GetSessionsAsync(bookId, offset, count);
 
         // Assert
-        var result = (IEnumerable<Session>)response.Should().BeOfType<OkObjectResult>().Subject.Value;
+        response.Should().BeOfType<OkObjectResult>();
 
-        result.Should().BeEquivalentTo(Mapper.Map<IEnumerable<SessionEntity>, IEnumerable<Session>>(sessions.Take(10)));
-
+        sessionServiceMock.Verify(m => m.GetSessionsAsync(user.Id, bookId, offset, count), Times.Once);
         userServiceMock.Verify(m => m.GetUserByEmailAsync(It.IsAny<string>()), Times.Once);
     }
 
@@ -89,43 +80,29 @@ public class SessionControllerTests : BaseControllerTests
     public async Task CanCreateSession()
     {
         // Arrange
-        var user = RandomGenerator.GenerateRandomUser();
-        var session = RandomGenerator.GenerateRandomSession();
-        var book = Mapper.Map<BookEntity, Book>(RandomGenerator.GenerateRandomBook());
-
+        var user = RandomGenerator.GenerateRandomUserModel();
+        
         var userServiceMock = new Mock<IUserService>();
         userServiceMock.Setup(m => m.GetUserByEmailAsync(It.IsAny<string>()))
-            .ReturnsAsync(Mapper.Map<UserEntity, User>(user));
+            .ReturnsAsync(user);
 
+        var sessionServiceMock = new Mock<ISessionService>();
+        sessionServiceMock.Setup(m => m.CreateSessionAsync(It.IsAny<int>(), It.IsAny<CreateSessionRequest>()))
+            .ReturnsAsync(new Session());
 
-        var sessionService = new SessionService(new Mock<ILogger<SessionService>>().Object, Context, Mapper);
-
-        var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionService)
+        var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionServiceMock.Object)
         {
             ControllerContext = CreateControllerContext(user.Email)
         };
 
         // Act
-        var response = await controller.CreateSessionAsync(new CreateSessionRequest
-        {
-            BookId = book.Id,
-            StartPage = session.StartPage,
-            EndPage = session.EndPage,
-            NumberOfPages = session.NumberOfPages,
-            Date = session.Date,
-            Duration = session.Duration
-        });
+        var request = RandomGenerator.GenerateRandomCreateSessionRequest();
+        var response = await controller.CreateSessionAsync(request);
 
         // Assert
-        var result = (Session)response.Should().BeOfType<CreatedResult>().Subject.Value;
+        response.Should().BeOfType<CreatedResult>();
 
-        result.Should().BeEquivalentTo(Mapper.Map<SessionEntity, Session>(session));
-
-        (await Context.Sessions.SingleAsync()).Should().BeEquivalentTo(session, o => o.Excluding(n =>
-            n.Path.EndsWith("Book") ||
-            n.Path.EndsWith("Created") ||
-            n.Path.EndsWith("Modified")));
-        
+        sessionServiceMock.Verify(m => m.CreateSessionAsync(user.Id, request), Times.Once);
         userServiceMock.Verify(m => m.GetUserByEmailAsync(It.IsAny<string>()), Times.Once);    
     }
 
@@ -133,46 +110,29 @@ public class SessionControllerTests : BaseControllerTests
     public async Task CanUpdateSession()
     {
         // Arrange
-        var user = RandomGenerator.GenerateRandomUser();
-        var book = Mapper.Map<BookEntity, Book>(RandomGenerator.GenerateRandomBook());
-
-        var sessions = RandomGenerator.GenerateOneHundredRandomSessions();
-        await Context.Sessions.AddRangeAsync(sessions);
-        await Context.SaveChangesAsync();
+        var user = RandomGenerator.GenerateRandomUserModel();
         
         var userServiceMock = new Mock<IUserService>();
         userServiceMock.Setup(m => m.GetUserByEmailAsync(It.IsAny<string>()))
-            .ReturnsAsync(Mapper.Map<UserEntity, User>(user));
+            .ReturnsAsync(user);
 
-        var sessionService = new SessionService(new Mock<ILogger<SessionService>>().Object, Context, Mapper);
+        var sessionServiceMock = new Mock<ISessionService>();
+        sessionServiceMock.Setup(m => m.UpdateSessionAsync(It.IsAny<int>(), It.IsAny<Session>()))
+            .ReturnsAsync(true);
 
-        var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionService)
+        var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionServiceMock.Object)
         {
             ControllerContext = CreateControllerContext(user.Email)
         };
 
         // Act
-        var firstSession = Mapper.Map<SessionEntity, Session>(sessions.First());
-        firstSession.StartPage = RandomGenerator.CreateNumber(1, 1000);
-        firstSession.EndPage = RandomGenerator.CreateNumber(1, 1000);
-        firstSession.Date = DateTime.UtcNow;
-        firstSession.Duration = TimeSpan.FromTicks(RandomGenerator.CreateNumber(1, 100000));
-        firstSession.NumberOfPages = RandomGenerator.CreateNumber(1, 100);
-
-        var response = await controller.UpdateSessionAsync(1, firstSession);
+        var session = RandomGenerator.GenerateRandomSessionModel();        
+        var response = await controller.UpdateSessionAsync(session.Id, session);
 
         // Assert
         response.Should().BeOfType<NoContentResult>();
 
-        var expected = Mapper.Map<Session, SessionEntity>(firstSession);
-        expected.BookId = book.Id;        
-
-        (await Context.Sessions.FirstAsync()).Should().BeEquivalentTo(expected,
-            o => o.Excluding(n => n.Path.EndsWith("Date") ||
-                                  n.Path.EndsWith("Book") ||
-                                  n.Path.EndsWith("Created") ||
-                                  n.Path.EndsWith("Modified")));
-
+        sessionServiceMock.Verify(m => m.UpdateSessionAsync(user.Id, session), Times.Once);
         userServiceMock.Verify(m => m.GetUserByEmailAsync(It.IsAny<string>()), Times.Once);
     }
 
@@ -180,32 +140,29 @@ public class SessionControllerTests : BaseControllerTests
     public async Task CanDeleteSession()
     {
         // Arrange
-        var user = RandomGenerator.GenerateRandomUser();
-        var book = Mapper.Map<BookEntity, Book>(RandomGenerator.GenerateRandomBook());
-
-        var sessions = RandomGenerator.GenerateOneHundredRandomSessions();
-        await Context.Sessions.AddRangeAsync(sessions);
-        await Context.SaveChangesAsync();
+        var user = RandomGenerator.GenerateRandomUserModel();
         
         var userServiceMock = new Mock<IUserService>();
         userServiceMock.Setup(m => m.GetUserByEmailAsync(It.IsAny<string>()))
-            .ReturnsAsync(Mapper.Map<UserEntity, User>(user));
+            .ReturnsAsync(user);
 
-        var sessionService = new SessionService(new Mock<ILogger<SessionService>>().Object, Context, Mapper);
+        var sessionServiceMock = new Mock<ISessionService>();
+        sessionServiceMock.Setup(m => m.DeleteSessionAsync(It.IsAny<int>(), It.IsAny<int>()))
+            .ReturnsAsync(true);
 
-        var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionService)
+        var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionServiceMock.Object)
         {
             ControllerContext = CreateControllerContext(user.Email)
         };
 
         // Act
-        var response = await controller.DeleteSessionAsync(sessions.First().Id);
+        var sessionId = RandomGenerator.CreateNumber(1, 99);
+        var response = await controller.DeleteSessionAsync(sessionId);
 
         // Assert
         response.Should().BeOfType<NoContentResult>();
 
-        (await Context.Sessions.FirstAsync()).IsDeleted.Should().BeTrue();
-
+        sessionServiceMock.Verify(m => m.DeleteSessionAsync(user.Id, sessionId), Times.Once);
         userServiceMock.Verify(m => m.GetUserByEmailAsync(It.IsAny<string>()), Times.Once);
-    }*/
+    }
 }
