@@ -1,0 +1,73 @@
+<form [formGroup]="form" (submit)="submit()">
+    <div class="profile-main">
+        <mat-card *ngIf="this.user">
+            <mat-card-header>
+                <mat-card-title>Profile</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div *ngIf="this.imageSource" class="col-md-5 d-flex justify-content-center pt-4">
+                    <div class="profile-upload d-inline-block">
+                        <img #profileImage [src]="imageSource" class="mr-4">
+                        <input class="ng-hide" id="input-file-id" type="file" (change)="onFileChange($event)" />
+                    </div>
+                    <h4 class="d-inline borderbottom pt-5 font-weight-bold edit-txt ml-sm-4">Edit Profile Picture <input
+                            class="ng-hide" id="input-file-id" type="file" (change)="onFileChange($event)" />
+                    </h4>
+                </div>
+                <mat-form-field>
+                    <mat-label>First Name</mat-label>
+                    <input formControlName="firstName" matInput  />
+                    <mat-error *ngIf="hasError('firstName', 'required')">
+                        First Name is required
+                    </mat-error>
+                </mat-form-field>
+                <br />
+                <mat-form-field>
+                    <mat-label>Last Name</mat-label>
+                    <input formControlName="lastName" matInput  />
+                    <mat-error *ngIf="hasError('lastName', 'required')">
+                        First Name is required
+                    </mat-error>                    
+                </mat-form-field>
+                <br />
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input formControlName="email" matInput readonly  />
+                    <mat-error *ngIf="hasError('email', 'required')">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="hasError('email', 'email')">
+                        Email is invalid
+                    </mat-error>
+                </mat-form-field>
+                <br />
+                <mat-form-field>
+                    <mat-label>New Password</mat-label>
+                    <input formControlName="password" type="password" matInput (keyup)="this.passowrdChanged = true" />
+                    <mat-error *ngIf="hasError('password', 'required')">
+                        Password is required
+                    </mat-error>
+                </mat-form-field>
+                <br />
+                <mat-form-field>
+                    <mat-label>Confirm New Password</mat-label>
+                    <input formControlName="confirmPassword" type="password" matInput />
+                    <mat-error *ngIf="hasError('confirmPassword', 'required')">
+                        Confirm Password is required
+                    </mat-error>
+                    <mat-error *ngIf="hasError('confirmPassword', 'confirmedValidator')">
+                        Passwords do not match
+                    </mat-error>
+                </mat-form-field>
+                <br />                                
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <button mat-raised-button color="primary" [disabled]="!form.valid">
+                    Save
+                    <img *ngIf="loading" src="assets/img/spinner.gif" />
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</form>
+
