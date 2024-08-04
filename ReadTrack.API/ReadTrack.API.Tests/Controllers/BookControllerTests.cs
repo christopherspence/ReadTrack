@@ -187,7 +187,7 @@ public class BookControllerTests : BaseControllerTests
             .ReturnsAsync(user);
 
         var bookServiceMock = new Mock<IBookService>();
-        bookServiceMock.Setup(m => m.GetBookAsync(It.IsAny<int>(), It.IsAny<int>())).ReturnsAsync(new Book());
+        bookServiceMock.Setup(m => m.DeleteBookAsync(It.IsAny<int>(), It.IsAny<int>())).ReturnsAsync(true);
 
         var controller = new BookController(new Mock<ILogger<BookController>>().Object, userServiceMock.Object, bookServiceMock.Object)
         {

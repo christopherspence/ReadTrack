@@ -23,7 +23,8 @@ public class AuthServiceTests : BaseServiceTests
         var expectedToken = Guid.NewGuid().ToString();                
 
         var hasherMock = new Mock<IPasswordHasher<User>>();
-        hasherMock.Setup(m => m.VerifyHashedPassword(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()));
+        hasherMock.Setup(m => m.VerifyHashedPassword(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()))
+            .Returns(PasswordVerificationResult.Success);
 
         var userServiceMock = new Mock<IUserService>();
         userServiceMock.Setup(m => m.GetUserByEmailAsync(It.IsAny<string>())).ReturnsAsync(user);
