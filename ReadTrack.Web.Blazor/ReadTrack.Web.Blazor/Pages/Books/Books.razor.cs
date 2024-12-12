@@ -8,7 +8,7 @@ namespace ReadTrack.Web.Blazor.Pages.Books;
 
 public partial class BookListComponent : ComponentBase
 {
-    [Inject] private BookService Service { get; set; }
+    /*[Inject] private BookService Service { get; set; }
     [Inject] private ISnackBar SnackBar { get; set; }
     [Inject] private IDialogService Dialog { get; set; }
 
@@ -103,6 +103,6 @@ public partial class BookListComponent : ComponentBase
             book.Finished = eventArgs.Checked;
             await Service.UpdateBook(book);
         }
-    }
+    }*/
 }
 

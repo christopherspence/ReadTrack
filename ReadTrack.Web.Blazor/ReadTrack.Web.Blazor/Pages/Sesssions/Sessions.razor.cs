@@ -8,7 +8,7 @@ namespace ReadTrack.Web.Blazor.Pages.Sessions;
 
 public partial class SessionListComponent : ComponentBase
 {
-    [Inject] private IActivatedRoute Route { get; set; }
+    /*[Inject] private IActivatedRoute Route { get; set; }
     [Inject] private ISessionService Service { get; set; }
     [Inject] private IDialogService Dialog { get; set; }
     [Inject] private ISnackBarService SnackBar { get; set; }
@@ -123,6 +123,6 @@ public partial class SessionListComponent : ComponentBase
         limit = eventArgs.Limit;
         offset = eventArgs.Offset;
         await GetSessions();
-    }
+    }*/
 }
 

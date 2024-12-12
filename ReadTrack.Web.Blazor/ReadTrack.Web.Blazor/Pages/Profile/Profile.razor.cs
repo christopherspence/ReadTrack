@@ -9,7 +9,7 @@ namespace ReadTrack.Web.Blazor.Pages.Profile;
 
 public partial class ProfileComponent : ComponentBase
 {
-    private EditContext form;
+   /* private EditContext form;
     private bool loading = false;
     private string imageSource = string.Empty;
     private bool imageChanged = false;
@@ -124,6 +124,6 @@ public partial class ProfileComponent : ComponentBase
 
             loading = false;
         }
-    }
+    }*/
 }
 

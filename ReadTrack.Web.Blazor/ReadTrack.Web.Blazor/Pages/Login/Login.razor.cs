@@ -7,7 +7,7 @@ namespace ReadTrack.Web.Blazor.Pages.Login;
 
 public partial class LoginComponent
 {
-    private EditForm form;
+   /* private EditForm form;
     private bool loading = false;
 
     private string email;
@@ -40,6 +40,6 @@ public partial class LoginComponent
         }
 
         loading = false;
-    }
+    }*/
 }
 
