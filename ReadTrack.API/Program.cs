@@ -15,6 +15,8 @@ using ReadTrack.API.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 // Add services to the container.
 builder.Services.AddCors(options => 
 {

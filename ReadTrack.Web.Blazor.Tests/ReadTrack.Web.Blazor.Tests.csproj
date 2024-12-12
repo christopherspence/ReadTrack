@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ReadTrack.Web.Blazor\ReadTrack.Web.Blazor.csproj" />
-    <ProjectReference Include="..\..\ReadTrack.Shared\ReadTrack.Shared.csproj" />
+    <ProjectReference Include="..\ReadTrack.Shared\ReadTrack.Shared.csproj" />
   </ItemGroup>
 
 
