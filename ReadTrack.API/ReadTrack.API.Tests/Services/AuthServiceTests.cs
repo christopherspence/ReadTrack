@@ -8,13 +8,14 @@ using ReadTrack.Shared.Requests;
 using ReadTrack.API.Services;
 using ReadTrack.API.Tests.Utilities;
 using Xunit;
+using System.Threading.Tasks;
 
 namespace ReadTrack.API.Tests.Services;
 
 public class AuthServiceTests : BaseServiceTests
 {
     [Fact]
-    public async void CanLogin()
+    public async Task CanLogin()
     {
         // Arrange
         var user = RandomGenerator.GenerateRandomUserModel();

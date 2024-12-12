@@ -67,6 +67,7 @@ public class UserService : BaseService<UserService>, IUserService
             Password = request.Password,
             FirstName = request.FirstName,
             LastName = request.LastName,
+            ProfilePicture = string.Empty,
             Created = DateTime.UtcNow,
             Modified = DateTime.UtcNow
         };

@@ -9,13 +9,14 @@ using ReadTrack.Shared.Requests;
 using ReadTrack.API.Services;
 using ReadTrack.API.Tests.Utilities;
 using Xunit;
+using System.Threading.Tasks;
 
 namespace ReadTrack.API.Tests.Controllers;
 
 public class AuthControllerTests : BaseControllerTests
 {
     [Fact]
-    public async void CanLogin()
+    public async Task CanLogin()
     {
         // Arrange
         var authServiceMock = new Mock<IAuthService>();
