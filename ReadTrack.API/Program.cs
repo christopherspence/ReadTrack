@@ -25,6 +25,7 @@ builder.Services.AddCors(options =>
         builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
     });
 });
+var connectionString = builder.Configuration.GetConnectionString("sqldb");
 builder.Services.AddDbContext<ReadTrackContext>(options => options.UseSqlServer(builder.Configuration["ConnectionStrings:Default"]));
 
 var jwtSettings = new JwtSettings();
@@ -66,7 +67,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseExceptionHandler(c => c.Run(async context =>
 {
