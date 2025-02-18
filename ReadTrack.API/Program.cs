@@ -7,11 +7,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ReadTrack.API;
 using ReadTrack.API.Data;
 using ReadTrack.API.Extensions;
-using ReadTrack.Shared;
 using ReadTrack.API.Services;
 using ReadTrack.API.Models;
+using ReadTrack.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,8 +26,9 @@ builder.Services.AddCors(options =>
         builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
     });
 });
+
 var connectionString = builder.Configuration.GetConnectionString("sqldb");
-builder.Services.AddDbContext<ReadTrackContext>(options => options.UseSqlServer(builder.Configuration["ConnectionStrings:Default"]));
+builder.Services.AddDbContext<ReadTrackContext>(options => options.UseSqlServer(connectionString));
 
 var jwtSettings = new JwtSettings();
 var section = builder.Configuration.GetSection("JwtSettings");
@@ -81,6 +83,8 @@ app.UseExceptionHandler(c => c.Run(async context =>
 }));
 
 app.UseAuthorization();
+
+app.CreateOrUpdateDatabaseAsync();
 
 app.MapControllers();
 
