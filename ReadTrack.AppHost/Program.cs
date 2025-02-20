@@ -9,16 +9,15 @@ var db = sql.AddDatabase("sqldb", "ReadTrack");
 
 var api = builder.AddProject<ReadTrack_API>("api")
     .WithReference(db)
-    .WaitFor(db)
+    .WaitFor(db)    
     .WithExternalHttpEndpoints();
 
 builder.AddNpmApp("angular", "../ReadTrack.Web.Angular")
     .WithReference(api)
     .WaitFor(api)
     .WithHttpEndpoint(env: "PORT", port: 4200)
-    .WithExternalHttpEndpoints()
+    .WithExternalHttpEndpoints()    
     .PublishAsDockerFile();
-
 
 builder.AddProject<ReadTrack_Web_Blazor>("blazor")
     .WithReference(api);

@@ -11,7 +11,8 @@
     <UserSecretsId>304971be-1485-4513-821e-b0a7025806ed</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup>    
+    <PackageReference Include="Aspire.Hosting" Version="9.0.0" />    
     <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0" />
     <PackageReference Include="Aspire.Hosting.NodeJs" Version="9.0.0" />
     <PackageReference Include="Aspire.Hosting.SqlServer" Version="9.0.0" />

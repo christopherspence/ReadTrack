@@ -19,7 +19,7 @@ export class ReadTrackHttpInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         req = req.clone({
-            url: `api/${req.url}`
+            url: `${environment.baseUrl}/${req.url}`
         });
 
         const token = this.userService.getToken();

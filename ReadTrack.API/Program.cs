@@ -84,7 +84,7 @@ app.UseExceptionHandler(c => c.Run(async context =>
 
 app.UseAuthorization();
 
-app.CreateOrUpdateDatabaseAsync();
+await app.CreateOrUpdateDatabaseAsync();
 
 app.MapControllers();
 
