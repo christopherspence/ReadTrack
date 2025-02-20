@@ -9,6 +9,7 @@ import { AddEditBookDialogComponent } from '../add-edit-book-dialog';
 
 @Component({
     selector: 'app-book-list',
+    standalone: false,
     templateUrl: './book-list.component.html',
     styleUrls: ['./book-list.component.css']
 })

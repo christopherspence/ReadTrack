@@ -8,6 +8,7 @@ import { CreateSessionRequest } from '../../../../shared';
 
 @Component({
     selector: 'app-add-edit-session-dialog',
+    standalone: false,
     templateUrl: './add-edit-session-dialog.component.html',
     styleUrls: ['./add-edit-session-dialog.component.css']
 })

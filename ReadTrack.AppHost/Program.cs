@@ -12,10 +12,15 @@ var api = builder.AddProject<ReadTrack_API>("api")
     .WaitFor(db)
     .WithExternalHttpEndpoints();
 
+builder.AddNpmApp("angular", "../ReadTrack.Web.Angular")
+    .WithReference(api)
+    .WaitFor(api)
+    .WithHttpEndpoint(env: "PORT", port: 4200)
+    .WithExternalHttpEndpoints()
+    .PublishAsDockerFile();
+
+
 builder.AddProject<ReadTrack_Web_Blazor>("blazor")
     .WithReference(api);
-
-builder.AddNpmApp("angular", "../ReadTrack.Web.Angular")    
-    .PublishAsDockerFile();
 
 builder.Build().Run();

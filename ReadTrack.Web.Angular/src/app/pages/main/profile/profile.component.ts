@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-profile',
+    standalone: false,
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.css']
 })

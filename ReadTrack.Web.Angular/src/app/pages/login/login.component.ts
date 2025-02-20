@@ -5,9 +5,9 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/services'
 import { SimpleDialogComponent } from '../../shared';
 
-
 @Component({
     selector: 'app-login',
+    standalone: false,
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
