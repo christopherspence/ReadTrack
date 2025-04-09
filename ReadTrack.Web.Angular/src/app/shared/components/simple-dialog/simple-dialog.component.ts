@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-validation-dialog',
+    standalone: false,
     templateUrl: './simple-dialog.component.html',
     styleUrls: ['./simple-dialog.component.scss']
 })

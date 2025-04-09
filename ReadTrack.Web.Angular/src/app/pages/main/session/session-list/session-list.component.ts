@@ -9,6 +9,7 @@ import { AddEditSessionDialogComponent } from '../add-edit-session-dialog';
 
 @Component({
     selector: 'app-session-list',
+    standalone: false,
     templateUrl: './session-list.component.html',
     styleUrls: ['./session-list.component.css']
 })

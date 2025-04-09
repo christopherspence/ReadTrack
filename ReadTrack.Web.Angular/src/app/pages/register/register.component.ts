@@ -8,6 +8,7 @@ import { UserService } from '../../core/services';
 
 @Component({
     selector: 'app-register',
+    standalone: false,
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.css']
 })

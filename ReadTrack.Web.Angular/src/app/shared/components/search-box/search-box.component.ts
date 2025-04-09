@@ -3,6 +3,7 @@ import { Subject, debounceTime } from 'rxjs';
 
 @Component({
     selector: 'app-search-box',
+    standalone: false,
     templateUrl: './search-box.component.html',
     styleUrls: ['./search-box.component.css']
 })

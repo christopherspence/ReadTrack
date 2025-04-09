@@ -8,6 +8,7 @@ import { BookCategory } from 'src/app/shared/models/book-category.model';
 
 @Component({
     selector: 'app-add-edit-book-dialog',
+    standalone: false,
     templateUrl: './add-edit-book-dialog.component.html',
     styleUrls: ['./add-edit-book-dialog.component.css']
 })
