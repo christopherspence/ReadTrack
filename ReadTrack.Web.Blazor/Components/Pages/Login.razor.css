@@ -1,0 +1,19 @@
+
+.login-main {
+    margin-top: 10%;    
+}
+
+mat-card {
+    min-width: 40%;
+    max-width: 60%;
+    margin: auto;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+button img {
+    width: 20px;
+    padding: 5px;
+}

@@ -1,20 +1,18 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+<MatDrawerContainer Style="width: 100vw; height: 100vh;">
+    <MatDrawer @bind-Opened="@Opened" Mode="@MatDrawerMode.Modal">
+        DrawerContainer
+    </MatDrawer>
+    <MatDrawerContent>
+        <div>
+            <MatButton OnClick="ButtonClicked">Open Menu</MatButton>
         </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+        <p>
+            @Body     
+        </p>
+    </MatDrawerContent>
+</MatDrawerContainer>
 
 <div id="blazor-error-ui" data-nosnippet>
     An unhandled error has occurred.
