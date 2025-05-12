@@ -16,5 +16,7 @@ public interface IUserService : IService
 
     Task SetUserInfoAsync(User user);
 
+    Task SetTokenInfoAsync(TokenResponse response);
+    
     Task LogoutAsync();
 }

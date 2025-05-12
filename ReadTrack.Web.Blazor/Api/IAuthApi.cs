@@ -7,5 +7,5 @@ namespace ReadTrack.Web.Blazor.Api;
 public interface IAuthApi
 {
     [Post("/api/auth/login")]
-    public TokenResponse LoginAsync(AuthRequest request);
+    public Task<TokenResponse> LoginAsync(AuthRequest request);
 }

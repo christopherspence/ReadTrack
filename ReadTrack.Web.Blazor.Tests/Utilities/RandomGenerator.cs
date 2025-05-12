@@ -40,14 +40,14 @@ public static class RandomGenerator
             ProfilePicture = Guid.NewGuid().ToString()
         };
 
-    public static TokenResponse GenerateRandomTokenResponse()
+    public static TokenResponse GenerateRandomTokenResponse(bool includeUser = true)
         => new()
         {
             Token = CreatePlaceName(),
             Type = CreatePlaceName(),
             Issued = DateTime.UtcNow,
             Expires = DateTime.UtcNow.AddDays(CreateNumber(1, 5)),
-            User = GenerateRandomUser()
+            User = includeUser ? GenerateRandomUser() : default
         };
 
     public static CreateBookRequest GenerateRandomCreateBookRequest()

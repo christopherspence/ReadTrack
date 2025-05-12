@@ -43,6 +43,8 @@ public class UserService : BaseService<UserService>, IUserService
             Constants.ExpiresAt
         ]);
 
+    
+
     public async Task SetUserInfoAsync(User user)
     {
         if (user.Email != null)
@@ -52,15 +54,15 @@ public class UserService : BaseService<UserService>, IUserService
         }
     }
 
-    public Task UpdateUserAsync(User user)
-        => userApi.UpdateUserAsync(user.Id, user);
-
-    private async Task SetTokenInfoAsync(TokenResponse response)
+    public async Task SetTokenInfoAsync(TokenResponse response)
     {
         if (response.Token != null)
         {
             await localStorageService.SetItemAsStringAsync(Constants.UserToken, response.Token);
-            await localStorageService.SetItemAsStringAsync(Constants.ExpiresAt, response.Expires.ToString());
+            await localStorageService.SetItemAsync(Constants.ExpiresAt, response.Expires);
         }        
     }
+
+    public Task UpdateUserAsync(User user)
+        => userApi.UpdateUserAsync(user.Id, user);    
 }

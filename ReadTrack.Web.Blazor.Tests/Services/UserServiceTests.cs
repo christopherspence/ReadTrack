@@ -87,7 +87,7 @@ public class UserServiceTests
         apiMock.Verify(m => m.RegisterAsync(request), Times.Once);
 
         localStorageServiceMock.Verify(m => m.SetItemAsStringAsync(Constants.UserToken, response.Token!, It.IsAny<CancellationToken>()), Times.Once);
-        localStorageServiceMock.Verify(m => m.SetItemAsStringAsync(Constants.ExpiresAt, response.Expires.ToString(), It.IsAny<CancellationToken>()), Times.Once);
+        localStorageServiceMock.Verify(m => m.SetItemAsync(Constants.ExpiresAt, response.Expires, It.IsAny<CancellationToken>()), Times.Once);
         localStorageServiceMock.VerifyNoOtherCalls();
     }
 
@@ -142,14 +142,11 @@ public class UserServiceTests
         // Arrange
         var user = RandomGenerator.GenerateRandomUser();
 
-        var apiMock = new Mock<IUserApi>();
-        apiMock.Setup(m => m.GetUserAsync()).ReturnsAsync(user);
-
         var localStorageServiceMock = new Mock<ILocalStorageService>();
 
         var service = new UserService(
             new Mock<ILogger<UserService>>().Object,
-            apiMock.Object,
+            new Mock<IUserApi>().Object,
             localStorageServiceMock.Object);
 
         // Act
@@ -158,6 +155,28 @@ public class UserServiceTests
         // Assert
         localStorageServiceMock.Verify(m => m.SetItemAsync(Constants.UserId, user.Id, It.IsAny<CancellationToken>()), Times.Once);
         localStorageServiceMock.Verify(m => m.SetItemAsStringAsync(Constants.UserEmail, user.Email!, It.IsAny<CancellationToken>()), Times.Once);
+        localStorageServiceMock.VerifyNoOtherCalls();        
+    }
+
+    [Fact]
+    public async Task UserService_SetTokenInfoAsync_SetsTokenInfo()
+    {
+        // Arrange
+        var response = RandomGenerator.GenerateRandomTokenResponse();
+
+        var localStorageServiceMock = new Mock<ILocalStorageService>();
+
+        var service = new UserService(
+            new Mock<ILogger<UserService>>().Object,
+            new Mock<IUserApi>().Object,
+            localStorageServiceMock.Object);
+
+        // Act
+        await service.SetTokenInfoAsync(response);
+
+        // Assert
+        localStorageServiceMock.Verify(m => m.SetItemAsStringAsync(Constants.UserToken, response.Token!, It.IsAny<CancellationToken>()), Times.Once);
+        localStorageServiceMock.Verify(m => m.SetItemAsync(Constants.ExpiresAt, response.Expires, It.IsAny<CancellationToken>()), Times.Once);
         localStorageServiceMock.VerifyNoOtherCalls();        
     }
 
