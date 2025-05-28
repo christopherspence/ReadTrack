@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using RandomNameGeneratorLibrary;
 using ReadTrack.API.Data.Entities;
-using ReadTrack.Shared;
-using ReadTrack.Shared.Requests;
+using ReadTrack.Shared.Models;
+using ReadTrack.Shared.Models.Requests;
 
 namespace ReadTrack.API.Tests.Utilities;
 

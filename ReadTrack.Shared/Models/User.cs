@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using ReadTrack.Shared.Models;
 
-namespace ReadTrack.Shared;
+namespace ReadTrack.Shared.Models;
 
 public class User : BaseModel
 {

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using ReadTrack.Shared;
+using ReadTrack.Shared.Models;
 
 namespace ReadTrack.API.Data.Entities;
 
