@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.Web.Blazor.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.ServiceDefaults", "ReadTrack.ServiceDefaults\ReadTrack.ServiceDefaults.csproj", "{65A74B7D-2509-4BDD-B020-1F1BC0DDC3A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.App.MAUI", "ReadTrack.App.MAUI\ReadTrack.App.MAUI.csproj", "{5D611C66-E15B-46E1-AF08-500690CFCD57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{65A74B7D-2509-4BDD-B020-1F1BC0DDC3A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65A74B7D-2509-4BDD-B020-1F1BC0DDC3A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65A74B7D-2509-4BDD-B020-1F1BC0DDC3A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D611C66-E15B-46E1-AF08-500690CFCD57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D611C66-E15B-46E1-AF08-500690CFCD57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D611C66-E15B-46E1-AF08-500690CFCD57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D611C66-E15B-46E1-AF08-500690CFCD57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
