@@ -3,6 +3,27 @@
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <x:String x:Key="ApplicationTitle">
+        ReadTrack
+    </x:String>
+    <x:Double x:Key="DefaultSpacingForGrid">
+        10
+    </x:Double>
+
+    <Style TargetType="Grid">
+        <Setter 
+            Property="ColumnSpacing"
+            Value="{StaticResource DefaultSpacingForGrid}" />
+        <Setter 
+            Property="RowSpacing"
+            Value="{StaticResource DefaultSpacingForGrid}" />
+        <Setter
+            Property="Margin"
+            Value="{StaticResource DefaultSpacingForGrid}" />
+        <Setter
+            Property="Padding"
+            Value="{StaticResource DefaultSpacingForGrid}" />
+    </Style>
 
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />

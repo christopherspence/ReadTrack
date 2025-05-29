@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:view="clr-namespace:ReadTrack.App.MAUI.Views"
+    x:Class="ReadTrack.App.MAUI.Views.HeaderView"
+    x:DataType="view:HeaderView"
+    x:Name="header">
+    <Grid BindingContext="{x:Reference header}"
+          RowDefinitions="Auto, Auto">
+        <Label
+            Text="{Binding Path=ViewTitle, FallbackValue='Page Title'}"
+            HorizontalOptions="Center"
+            FontSize="Title" />
+        <Label 
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Text="{Binding Path=ViewDescription, FallbackValue=''}"
+            FontSize="Body" />
+    </Grid>
+</ContentView>

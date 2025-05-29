@@ -10,5 +10,12 @@
         <key>com.apple.security.network.client</key>
         <true/>
     </dict>
+    <dict>
+        <!-- Add your keychain access groups here -->
+        <key>keychain-access-groups</key>
+        <array>
+            <string>$(AppIdentifierPrefix)com.companyname.readtrack.app.maui</string>
+        </array>
+    </dict>
 </plist>
 

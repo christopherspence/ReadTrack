@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using ReadTrack.App.MAUI.Extensions;
 
 namespace ReadTrack.App.MAUI;
 
@@ -7,6 +8,9 @@ public static class MauiProgram
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
+
+		builder.Services.AddServicesToDI();
+
 		builder
 			.UseMauiApp<App>()
 			.ConfigureFonts(fonts =>

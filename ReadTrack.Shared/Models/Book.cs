@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using ReadTrack.Shared.Models;
 
 namespace ReadTrack.Shared.Models;
 
@@ -12,6 +11,5 @@ public class Book : BaseModel
     public DateTime? Published { get; set; }
     public int NumberOfPages { get; set; }
     public bool Finished { get; set; }
-
     public IEnumerable<Session>? Sessions { get; set; }
 }

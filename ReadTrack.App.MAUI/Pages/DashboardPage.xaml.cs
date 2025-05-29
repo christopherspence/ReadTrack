@@ -1,10 +1,10 @@
-﻿namespace ReadTrack.App.MAUI;
+﻿namespace ReadTrack.App.MAUI.Pages;
 
-public partial class MainPage : ContentPage
+public partial class DashboardPage : ContentPage
 {
 	int count = 0;
 
-	public MainPage()
+	public DashboardPage()
 	{
 		InitializeComponent();
 	}
