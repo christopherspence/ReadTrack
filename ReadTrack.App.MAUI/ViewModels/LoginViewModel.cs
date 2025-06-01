@@ -1,5 +1,4 @@
 using System.Windows.Input;
-using ReadTrack.App.MAUI.Pages;
 using ReadTrack.App.MAUI.Services;
 using Refit;
 
@@ -7,15 +6,18 @@ namespace ReadTrack.App.MAUI.ViewModels;
 
 public class LoginViewModel : BaseViewModel
 {
-    private readonly IUserService userService;
+    private readonly IAlertService alertService;
     private readonly IAuthService authService;
+    private readonly IUserService userService;
+    
 
     private string? email;
     private string? password;
 
 
-    public LoginViewModel(IAuthService authService, IUserService userService)
+    public LoginViewModel(IAlertService alertService, IAuthService authService, IUserService userService)
     {
+        this.alertService = alertService;
         this.authService = authService;
         this.userService = userService;
     }
@@ -78,7 +80,7 @@ public class LoginViewModel : BaseViewModel
 
         if (!string.IsNullOrEmpty(errorMessage))
         {
-            await DisplayAlertAsync("Validation", errorMessage);
+            await alertService.DisplayAlertAsync("Validation", errorMessage);
             return;
         }
 
@@ -92,21 +94,11 @@ public class LoginViewModel : BaseViewModel
         }
         catch (ApiException e)
         {
-            await DisplayAlertAsync("Validation", e.Message);
+            await alertService.DisplayAlertAsync("Validation", e.Message);
             return;
         }
 
         // token is set
         await RedirectIfLogedInAsync();
-    }
-
-    private async Task DisplayAlertAsync(string title, string message)
-    {
-        // TODO: find a better way to do this
-        if (App.Current?.MainPage != null)
-        {
-            await App.Current.MainPage.DisplayAlert(title, message, "OK");
-        }
-
-    }
+    }    
 }

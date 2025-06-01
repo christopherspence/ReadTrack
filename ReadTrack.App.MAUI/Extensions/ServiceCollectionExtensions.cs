@@ -39,6 +39,7 @@ public static class ServiceCollectionExtensions
 
     private static void AddServices(IServiceCollection services)
     {
+        services.AddSingleton<IAlertService, AlertService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddSingleton<ILocalStorageService, LocalStorageService>();
         services.AddScoped<IUserService, UserService>();
