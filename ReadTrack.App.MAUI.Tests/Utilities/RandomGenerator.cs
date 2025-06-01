@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using RandomNameGeneratorLibrary;
 using ReadTrack.Shared.Models;
 using ReadTrack.Shared.Models.Requests;
@@ -25,6 +26,29 @@ public static class RandomGenerator
             Email = CreateEmailAddress(),
             Password = CreatePlaceName()
         };
+
+    private static Book GenerateRandomBook(int id = 1)
+        => new()
+        {
+            Id = id,
+            Name = CreatePlaceName(),
+            Author = CreateAuthorName(),
+            Category = (BookCategory)Random.Next(1, 12),
+            Published = DateTime.UtcNow.AddYears(CreateNumber(1, 30)),
+            Finished = CreateNumber(0, 1) == 1,            
+        };
+
+    public static IEnumerable<Book> GenerateOneHundredRandomBooks()
+    {
+        var books = new List<Book>();
+
+        for (var i = 1; i <= 100; i++)
+        {
+            books.Add(GenerateRandomBook(i));
+        }
+
+        return books;
+    } 
 
     public static TokenResponse GenerateRandomTokenResponse()
         => new()

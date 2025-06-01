@@ -13,6 +13,7 @@ public class MenuViewModel : BaseViewModel
     private readonly IUserService userService;
 
     public MenuViewModel(IAlertService alertService, IPageService pageService, IUserService userService)
+        : base()
     {
         this.alertService = alertService;
         this.pageService = pageService;
@@ -32,13 +33,13 @@ public class MenuViewModel : BaseViewModel
         switch (text.ToLower())
         {
             case "dashboard":
-                await pageService.GoToAsync(nameof(DashboardPage));
+                await pageService.GoToAsync($"/{nameof(DashboardPage)}");
                 break;
-            case "books":                
-                await alertService.DisplayAlertAsync("Nope", "Not Implmented Yet");
+            case "books":
+                await pageService.GoToAsync($"/{nameof(BooksPage)}");
                 break;
             case "profile":
-                await alertService.DisplayAlertAsync("Nope", "Not Implmented Yet", "OK");
+                await alertService.DisplayAlertAsync("Nope", "Not Implemented Yet", "OK");
                 break;
             case "logout":
                 await userService.LogOutAsync();

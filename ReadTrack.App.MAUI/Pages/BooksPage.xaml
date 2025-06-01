@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:model="clr-namespace:ReadTrack.Shared.Models;assembly=ReadTrack.Shared"
+    xmlns:view="clr-namespace:ReadTrack.App.MAUI.Views"
+    xmlns:vm="clr-namespace:ReadTrack.App.MAUI.ViewModels"
+    x:Class="ReadTrack.App.MAUI.Pages.BooksPage"
+    x:DataType="vm:BookViewModel">
+    <Border>
+        <Grid RowDefinitions="Auto, *">
+            <view:HeaderView Title="Books" />
+
+            <ListView 
+                Grid.Row="1" 
+                SeparatorColor="Black" 
+                SeparatorVisibility="Default"
+                ItemsSource="{Binding Books}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Book">
+                        <TextCell Text="{Binding Name}" Detail="{Binding Author}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>    
+            </ListView>
+        </Grid>
+    </Border>
+</ContentPage>

@@ -20,6 +20,7 @@ public class LoginViewModel : BaseViewModel
 
 
     public LoginViewModel(IAlertService alertService, IAuthService authService, IPageService pageService, IUserService userService)
+        : base()
     {
         this.alertService = alertService;
         this.authService = authService;

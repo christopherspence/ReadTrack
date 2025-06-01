@@ -19,6 +19,9 @@ public class UserService : BaseService<UserService, IApi>, IUserService
         return !string.IsNullOrEmpty(await localStorageService.GetAsync(Constants.UserToken));
     }
 
+    public async Task<string?> GetTokenAsync()
+        => await localStorageService.GetAsync(Constants.UserToken);
+
     public async Task LogOutAsync()
     {
         await localStorageService.SetAsync(Constants.UserToken, string.Empty);

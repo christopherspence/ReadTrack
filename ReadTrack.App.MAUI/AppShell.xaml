@@ -10,11 +10,10 @@
     Title="ReadTrack.App.MAUI">
 
     <ShellContent
-        Title="Home"
+        Title="Dashboard"
         ContentTemplate="{DataTemplate pages:DashboardPage}"
         Route="DashboardPage" />
 
-    <MenuItem Text="Dashboard" Command="{Binding MenuItemCommand}" CommandParameter="Dashboard" />
     <MenuItem Text="Books" Command="{Binding MenuItemCommand}" CommandParameter="Books" />
     <MenuItem Text="Profile" Command="{Binding MenuItemCommand}" CommandParameter="Profile" />
     <MenuItem Text="Log Out" Command="{Binding MenuItemCommand}" CommandParameter="LogOut"  />

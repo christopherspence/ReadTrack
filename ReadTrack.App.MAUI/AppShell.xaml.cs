@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using ReadTrack.App.MAUI.Pages;
@@ -18,10 +19,13 @@ public partial class AppShell : Shell
 
         InitializeComponent();
 
-        Routing.RegisterRoute(
-            nameof(DashboardPage),
-            typeof(DashboardPage)
-        );
+        RegisterRoutes();
+    }
+
+    private void RegisterRoutes()
+    {
+        Routing.RegisterRoute(nameof(BooksPage), typeof(BooksPage));
+        Routing.RegisterRoute(nameof(DashboardPage),typeof(DashboardPage));
     }
 
     protected override void OnAppearing()

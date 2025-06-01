@@ -29,12 +29,15 @@ public class MenuViewModelTests
         switch (text)
         {
             case "dashboard":
-                pageServiceMock.Verify(m => m.GoToAsync(nameof(DashboardPage)), Times.Once);
+                pageServiceMock.Verify(m => m.GoToAsync($"/{nameof(DashboardPage)}"), Times.Once);
                 pageServiceMock.VerifyNoOtherCalls();
                 break;
             case "books":
+                pageServiceMock.Verify(m => m.GoToAsync($"/{nameof(BooksPage)}"), Times.Once);
+                pageServiceMock.VerifyNoOtherCalls();
+                break;
             case "profile":
-                alertServiceMock.Verify(m => m.DisplayAlertAsync("Nope", "Not Implmented Yet", "OK"), Times.Once);
+                alertServiceMock.Verify(m => m.DisplayAlertAsync("Nope", "Not Implemented Yet", "OK"), Times.Once);
                 alertServiceMock.VerifyNoOtherCalls();
                 break;
             case "logout":
