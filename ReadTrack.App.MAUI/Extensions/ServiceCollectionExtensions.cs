@@ -1,5 +1,6 @@
 
-using Microsoft.Maui.Controls.Handlers.Compatibility;
+using System;
+using Microsoft.Extensions.DependencyInjection;
 using ReadTrack.App.MAUI.Pages;
 using ReadTrack.App.MAUI.Services;
 using ReadTrack.App.MAUI.ViewModels;
@@ -39,7 +40,7 @@ public static class ServiceCollectionExtensions
 
     private static void AddServices(IServiceCollection services)
     {
-        services.AddSingleton<IAlertService, AlertService>();
+        services.AddScoped<IAlertService, AlertService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddSingleton<ILocalStorageService, LocalStorageService>();
         services.AddScoped<IUserService, UserService>();

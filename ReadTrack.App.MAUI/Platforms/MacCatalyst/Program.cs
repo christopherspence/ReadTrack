@@ -1,7 +1,6 @@
-﻿using ObjCRuntime;
-using UIKit;
+﻿using UIKit;
 
-namespace ReadTrack.App.MAUI;
+namespace ReadTrack.App.MAUI.Platforms.MacCatalyst;
 
 public class Program
 {

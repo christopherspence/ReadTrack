@@ -1,4 +1,8 @@
-﻿namespace ReadTrack.App.MAUI.Pages;
+﻿using System;
+using Microsoft.Maui.Accessibility;
+using Microsoft.Maui.Controls;
+
+namespace ReadTrack.App.MAUI.Pages;
 
 public partial class DashboardPage : ContentPage
 {

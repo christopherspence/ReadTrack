@@ -1,6 +1,8 @@
 ﻿using Foundation;
+using Microsoft.Maui;
+using Microsoft.Maui.Hosting;
 
-namespace ReadTrack.App.MAUI;
+namespace ReadTrack.App.MAUI.Platforms.iOS;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

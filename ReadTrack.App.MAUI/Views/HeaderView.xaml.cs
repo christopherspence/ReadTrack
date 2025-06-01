@@ -1,3 +1,5 @@
+using Microsoft.Maui.Controls;
+
 namespace ReadTrack.App.MAUI.Views;
 
 public partial class HeaderView : ContentView

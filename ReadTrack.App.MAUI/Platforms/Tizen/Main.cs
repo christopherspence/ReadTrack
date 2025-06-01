@@ -2,7 +2,7 @@ using System;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 
-namespace ReadTrack.App.MAUI;
+namespace ReadTrack.App.MAUI.Tizen;
 
 class Program : MauiApplication
 {

@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace ReadTrack.App.MAUI.Services;
 
 public interface ILocalStorageService : IService

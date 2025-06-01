@@ -1,4 +1,6 @@
-﻿using ReadTrack.App.MAUI.Pages;
+﻿using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using ReadTrack.App.MAUI.Pages;
 using ReadTrack.App.MAUI.ViewModels;
 
 namespace ReadTrack.App.MAUI;
