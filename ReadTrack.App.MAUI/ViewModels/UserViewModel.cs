@@ -15,6 +15,4 @@ public class UserViewModel : BaseViewModel
             RaisePropertyChanged();
         }
     }
-
-    
 }

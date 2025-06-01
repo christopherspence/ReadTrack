@@ -1,6 +1,8 @@
 using System;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using ReadTrack.App.MAUI.Utilities;
 using ReadTrack.Shared.Api;
 using ReadTrack.Shared.Models;
 
@@ -8,11 +10,6 @@ namespace ReadTrack.App.MAUI.Services;
 
 public class UserService : BaseService<UserService, IApi>, IUserService
 {
-    const string UserToken = "user_token";
-    const string ExpiresAt = "expires_at";
-    const string UserId = "user_id";
-    const string UserEmail = "user_email";
-
     private readonly ILocalStorageService localStorageService;
 
     public UserService(ILogger<UserService> logger, IAuthApi api, ILocalStorageService localStorageService) : base(logger, api)
@@ -20,7 +17,7 @@ public class UserService : BaseService<UserService, IApi>, IUserService
 
     public async Task<bool> IsLoggedInAsync()
     {
-        return await localStorageService.GetAsync(UserToken) != null;
+        return await localStorageService.GetAsync(Constants.UserToken) != null;
     }
 
     public async Task SetTokenInfoAsync(TokenResponse response)
@@ -30,8 +27,8 @@ public class UserService : BaseService<UserService, IApi>, IUserService
             throw new NullReferenceException("token is null or empty");
         }
 
-        await localStorageService.SetAsync(UserToken, response.Token);
-        await localStorageService.SetAsync(ExpiresAt, response.Expires.ToString());
+        await localStorageService.SetAsync(Constants.UserToken, response.Token);
+        await localStorageService.SetAsync(Constants.ExpiresAt, response.Expires.ToString());
 
     }
 
@@ -42,7 +39,7 @@ public class UserService : BaseService<UserService, IApi>, IUserService
             throw new NullReferenceException("email should not be empty");
         }
 
-        await localStorageService.SetAsync(UserId, user.Id.ToString());
-        await localStorageService.SetAsync(UserEmail, user.Email);
+        await localStorageService.SetAsync(Constants.UserId, user.Id.ToString());
+        await localStorageService.SetAsync(Constants.UserEmail, user.Email);
     }
 }
