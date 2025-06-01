@@ -8,4 +8,5 @@ public interface IUserService : IService
     Task<bool> IsLoggedInAsync();
     Task SetTokenInfoAsync(TokenResponse response);
     Task SetUserInfoAsync(User user);
+    Task LogOutAsync();
 }

@@ -9,19 +9,19 @@ public partial class HeaderView : ContentView
         InitializeComponent();
     }
 
-    public string ViewTitle
+    public string Title
     {
-        get => (string)GetValue(ViewTitleProperty);
-        set => SetValue(ViewTitleProperty, value);
+        get => (string)GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
     }
 
-    public static readonly BindableProperty ViewTitleProperty = BindableProperty.Create(nameof(ViewTitle), typeof(string), typeof(HeaderView), string.Empty);
+    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(HeaderView), string.Empty);
 
-    public string ViewDescription
+    public string Description
     {
-        get => (string)GetValue(ViewDescriptionProperty);
-        set => SetValue(ViewDescriptionProperty, value);
+        get => (string)GetValue(DescriptionProperty);
+        set => SetValue(DescriptionProperty, value);
     }
 
-     public static readonly BindableProperty ViewDescriptionProperty = BindableProperty.Create(nameof(ViewDescription), typeof(string), typeof(HeaderView), string.Empty);
+     public static readonly BindableProperty DescriptionProperty = BindableProperty.Create(nameof(Description), typeof(string), typeof(HeaderView), string.Empty);
 }

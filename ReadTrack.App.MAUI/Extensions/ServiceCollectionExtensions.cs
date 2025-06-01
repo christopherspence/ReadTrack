@@ -30,6 +30,7 @@ public static class ServiceCollectionExtensions
     private static void AddViewModels(IServiceCollection services)
     {
         services.AddScoped<LoginViewModel>();
+        services.AddScoped<MenuViewModel>();
     }
 
     private static void AddPages(IServiceCollection services)
@@ -43,6 +44,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IAlertService, AlertService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddSingleton<ILocalStorageService, LocalStorageService>();
+        services.AddSingleton<IPageService, PageService>();
         services.AddScoped<IUserService, UserService>();
     }
 }

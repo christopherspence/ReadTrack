@@ -17,7 +17,9 @@ public partial class LoginPage : ContentPage
     {
         base.OnAppearing();
         BindingContext = viewModel;
-        
+
+        viewModel.ClearValues();
+
         await viewModel.RedirectIfLogedInAsync();
     }
 }

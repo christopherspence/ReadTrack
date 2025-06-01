@@ -12,7 +12,7 @@
         ColumnDefinitions="Auto, *">
         <view:HeaderView
             Grid.ColumnSpan="2"
-            ViewTitle="Please Login" />
+            Title="Please Login" />
         
         <Label 
             Grid.Row="1"

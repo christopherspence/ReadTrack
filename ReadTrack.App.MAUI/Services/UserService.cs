@@ -1,5 +1,4 @@
 using System;
-using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using ReadTrack.App.MAUI.Utilities;
@@ -17,7 +16,13 @@ public class UserService : BaseService<UserService, IApi>, IUserService
 
     public async Task<bool> IsLoggedInAsync()
     {
-        return await localStorageService.GetAsync(Constants.UserToken) != null;
+        return !string.IsNullOrEmpty(await localStorageService.GetAsync(Constants.UserToken));
+    }
+
+    public async Task LogOutAsync()
+    {
+        await localStorageService.SetAsync(Constants.UserToken, string.Empty);
+        await localStorageService.SetAsync(Constants.ExpiresAt, string.Empty);
     }
 
     public async Task SetTokenInfoAsync(TokenResponse response)

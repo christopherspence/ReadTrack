@@ -3,7 +3,9 @@
     x:Class="ReadTrack.App.MAUI.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:ReadTrack.App.MAUI.ViewModels"
     xmlns:pages="clr-namespace:ReadTrack.App.MAUI.Pages"
+    x:DataType="vm:MenuViewModel"
     Shell.FlyoutBehavior="Flyout"
     Title="ReadTrack.App.MAUI">
 
@@ -12,4 +14,8 @@
         ContentTemplate="{DataTemplate pages:DashboardPage}"
         Route="DashboardPage" />
 
+    <MenuItem Text="Dashboard" Command="{Binding MenuItemCommand}" CommandParameter="Dashboard" />
+    <MenuItem Text="Books" Command="{Binding MenuItemCommand}" CommandParameter="Books" />
+    <MenuItem Text="Profile" Command="{Binding MenuItemCommand}" CommandParameter="Profile" />
+    <MenuItem Text="Log Out" Command="{Binding MenuItemCommand}" CommandParameter="LogOut"  />
 </Shell>

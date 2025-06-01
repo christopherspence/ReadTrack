@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,17 +12,18 @@ public class LoginViewModel : BaseViewModel
 {
     private readonly IAlertService alertService;
     private readonly IAuthService authService;
+    private readonly IPageService pageService;
     private readonly IUserService userService;
-    
 
     private string? email;
     private string? password;
 
 
-    public LoginViewModel(IAlertService alertService, IAuthService authService, IUserService userService)
+    public LoginViewModel(IAlertService alertService, IAuthService authService, IPageService pageService, IUserService userService)
     {
         this.alertService = alertService;
         this.authService = authService;
+        this.pageService = pageService;
         this.userService = userService;
     }
 
@@ -58,12 +60,7 @@ public class LoginViewModel : BaseViewModel
     {
         if (await userService.IsLoggedInAsync())
         {
-            // TODO: figure out if this is right
-            var appCurrent = Application.Current;
-            if (appCurrent != null && appCurrent.Windows.Any())
-            {
-                appCurrent.Windows[0].Page = new AppShell();
-            }
+            pageService.SwitchToDashboard();
         }
     }
 
@@ -103,5 +100,11 @@ public class LoginViewModel : BaseViewModel
 
         // token is set
         await RedirectIfLogedInAsync();
-    }    
+    }
+
+    public void ClearValues()
+    {
+        Email = string.Empty;
+        Password = string.Empty;
+    }
 }

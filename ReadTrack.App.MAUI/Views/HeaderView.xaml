@@ -9,13 +9,13 @@
     <Grid BindingContext="{x:Reference header}"
           RowDefinitions="Auto, Auto">
         <Label
-            Text="{Binding Path=ViewTitle, FallbackValue='Page Title'}"
+            Text="{Binding Path=Title, FallbackValue='Page Title'}"
             HorizontalOptions="Center"
             FontSize="Title" />
         <Label 
             Grid.Row="1"
             Grid.ColumnSpan="2"
-            Text="{Binding Path=ViewDescription, FallbackValue=''}"
+            Text="{Binding Path=Description, FallbackValue=''}"
             FontSize="Body" />
     </Grid>
 </ContentView>
