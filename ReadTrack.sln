@@ -11,15 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.AppHost", "ReadTr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.Shared", "ReadTrack.Shared\ReadTrack.Shared.csproj", "{FD8AC78E-C61B-4ED0-89F9-69140A8E69EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.Web.Blazor", "ReadTrack.Web.Blazor\ReadTrack.Web.Blazor.csproj", "{FC776C99-FA47-484A-AE7A-9FDC82AA0C06}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.Web.Blazor.Tests", "ReadTrack.Web.Blazor.Tests\ReadTrack.Web.Blazor.Tests.csproj", "{4EAFE226-1BDB-48AA-8AE2-7B83C1C1059B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.ServiceDefaults", "ReadTrack.ServiceDefaults\ReadTrack.ServiceDefaults.csproj", "{65A74B7D-2509-4BDD-B020-1F1BC0DDC3A3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.App.MAUI", "ReadTrack.App.MAUI\ReadTrack.App.MAUI.csproj", "{5D611C66-E15B-46E1-AF08-500690CFCD57}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.App.MAUI.Tests", "ReadTrack.App.MAUI.Tests\ReadTrack.App.MAUI.Tests.csproj", "{0C2EAA55-935B-4D68-87B0-F69EB5A1133F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,26 +35,10 @@ Global
 		{FD8AC78E-C61B-4ED0-89F9-69140A8E69EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD8AC78E-C61B-4ED0-89F9-69140A8E69EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD8AC78E-C61B-4ED0-89F9-69140A8E69EC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FC776C99-FA47-484A-AE7A-9FDC82AA0C06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FC776C99-FA47-484A-AE7A-9FDC82AA0C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FC776C99-FA47-484A-AE7A-9FDC82AA0C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FC776C99-FA47-484A-AE7A-9FDC82AA0C06}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4EAFE226-1BDB-48AA-8AE2-7B83C1C1059B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4EAFE226-1BDB-48AA-8AE2-7B83C1C1059B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4EAFE226-1BDB-48AA-8AE2-7B83C1C1059B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4EAFE226-1BDB-48AA-8AE2-7B83C1C1059B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{65A74B7D-2509-4BDD-B020-1F1BC0DDC3A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{65A74B7D-2509-4BDD-B020-1F1BC0DDC3A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65A74B7D-2509-4BDD-B020-1F1BC0DDC3A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65A74B7D-2509-4BDD-B020-1F1BC0DDC3A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5D611C66-E15B-46E1-AF08-500690CFCD57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5D611C66-E15B-46E1-AF08-500690CFCD57}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5D611C66-E15B-46E1-AF08-500690CFCD57}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5D611C66-E15B-46E1-AF08-500690CFCD57}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0C2EAA55-935B-4D68-87B0-F69EB5A1133F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C2EAA55-935B-4D68-87B0-F69EB5A1133F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0C2EAA55-935B-4D68-87B0-F69EB5A1133F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0C2EAA55-935B-4D68-87B0-F69EB5A1133F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
