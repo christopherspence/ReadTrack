@@ -5,9 +5,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using ReadTrack.Shared;
+using ReadTrack.Shared.Models;
 using ReadTrack.API.Services;
 using Swashbuckle.AspNetCore.Annotations;
+using ReadTrack.Shared.Models.Requests;
 
 namespace ReadTrack.API.Controllers;
 
