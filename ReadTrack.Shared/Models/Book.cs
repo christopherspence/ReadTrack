@@ -11,9 +11,6 @@ public class Book : BaseModel
     public DateTime? Published { get; set; }
     public int NumberOfPages { get; set; }
     public bool Finished { get; set; }
-<<<<<<< HEAD:ReadTrack.Shared/Book.cs
 
-=======
->>>>>>> master:ReadTrack.Shared/Models/Book.cs
     public IEnumerable<Session>? Sessions { get; set; }
 }

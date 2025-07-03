@@ -1,0 +1,38 @@
+@page "/login"
+
+<EditForm Model="loginModel" FormName="Login" OnValidSubmit="HandleLoginAsync">
+    <div class="login-main">
+        <MatCard>
+            <MatHeadline6>Please Login</MatHeadline6>            
+            <MatCardContent>
+                <p>
+                    <MatTextField @bind-Value="@loginModel.Email" Label="Email" />
+                </p>
+                <p> 
+                    <MatTextField @bind-Value="@loginModel.Password" Label="Password" />
+                </p>                
+                <a href="/register">Register</a>
+            </MatCardContent>
+            <MatCardActions align="end">
+                <MatCardActionButtons>                                         
+                    <MatButton Type="submit" Name="action">
+                        Login
+                        @if (loading)
+                        {
+                            <img src="assets/img/spinner.gif" />
+                        }                                                        
+                    </MatButton>                                        
+                </MatCardActionButtons>
+            </MatCardActions>
+        </MatCard>
+    </div>
+</EditForm>
+
+ @if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger mt-3" role="alert">
+        @errorMessage
+    </div>
+}
+
+

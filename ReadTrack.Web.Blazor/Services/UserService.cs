@@ -1,5 +1,6 @@
 using Blazored.LocalStorage;
-using ReadTrack.Shared;
+using ReadTrack.Shared.Models;
+using ReadTrack.Shared.Models.Requests;
 using ReadTrack.Web.Blazor.Api;
 
 namespace ReadTrack.Web.Blazor.Services;
@@ -7,7 +8,7 @@ namespace ReadTrack.Web.Blazor.Services;
 public class UserService : BaseService<UserService>, IUserService
 {    
     private readonly IUserApi userApi;
-    private ILocalStorageService localStorageService;
+    private readonly ILocalStorageService localStorageService;
 
     public UserService(ILogger<UserService> logger, IUserApi userApi, ILocalStorageService localStorageService)
         : base(logger)

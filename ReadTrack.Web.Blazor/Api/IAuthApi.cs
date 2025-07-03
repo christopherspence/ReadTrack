@@ -1,5 +1,5 @@
-using ReadTrack.Shared;
-using ReadTrack.Shared.Requests;
+using ReadTrack.Shared.Models;
+using ReadTrack.Shared.Models.Requests;
 using Refit;
 
 namespace ReadTrack.Web.Blazor.Api;

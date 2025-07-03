@@ -5,7 +5,7 @@ using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
 using ReadTrack.Shared;
-using ReadTrack.Shared.Requests;
+using ReadTrack.Shared.Models.Requests;
 using ReadTrack.Web.Blazor.Api;
 using ReadTrack.Web.Blazor.Services;
 using ReadTrack.Web.Blazor.Tests.Utilities;

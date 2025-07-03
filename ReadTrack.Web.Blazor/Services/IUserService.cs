@@ -1,4 +1,5 @@
-using ReadTrack.Shared;
+using ReadTrack.Shared.Models;
+using ReadTrack.Shared.Models.Requests;
 
 namespace ReadTrack.Web.Blazor.Services;
 

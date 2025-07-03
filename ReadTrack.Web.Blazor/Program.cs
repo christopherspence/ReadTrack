@@ -12,11 +12,11 @@ builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddRefitClient<IAuthApi>()
-    .ConfigureHttpClient(c => c.BaseAddress = new Uri(builder.Configuration.GetValue<string>("BaseApiUrl")!))
-    .AddHttpMessageHandler<AuthHeaderHandler>();
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://api"))
+    /*.AddHttpMessageHandler<AuthHeaderHandler>()*/;
 builder.Services.AddRefitClient<IUserApi>()
-    .ConfigureHttpClient(c => c.BaseAddress = new Uri(builder.Configuration.GetValue<string>("BaseApiUrl")!))
-    .AddHttpMessageHandler<AuthHeaderHandler>();
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://api"))
+    /*.AddHttpMessageHandler<AuthHeaderHandler>()*/;
 builder.Services.AddScoped<AuthHeaderHandler>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.Shared", "ReadTra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.ServiceDefaults", "ReadTrack.ServiceDefaults\ReadTrack.ServiceDefaults.csproj", "{65A74B7D-2509-4BDD-B020-1F1BC0DDC3A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.Web.Blazor", "ReadTrack.Web.Blazor\ReadTrack.Web.Blazor.csproj", "{17F9E094-D39D-44A5-B485-B18C8E02C00C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{65A74B7D-2509-4BDD-B020-1F1BC0DDC3A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65A74B7D-2509-4BDD-B020-1F1BC0DDC3A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65A74B7D-2509-4BDD-B020-1F1BC0DDC3A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17F9E094-D39D-44A5-B485-B18C8E02C00C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17F9E094-D39D-44A5-B485-B18C8E02C00C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17F9E094-D39D-44A5-B485-B18C8E02C00C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17F9E094-D39D-44A5-B485-B18C8E02C00C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

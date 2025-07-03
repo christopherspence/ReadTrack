@@ -19,4 +19,7 @@ builder.AddNpmApp("angular", "../ReadTrack.Web.Angular")
     .WithExternalHttpEndpoints()    
     .PublishAsDockerFile();
 
+builder.AddProject<ReadTrack_Web_Blazor>("blazor")
+    .WithReference(api);
+
 builder.Build().Run();

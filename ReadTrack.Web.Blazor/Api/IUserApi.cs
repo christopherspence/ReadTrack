@@ -1,4 +1,5 @@
-using ReadTrack.Shared;
+using ReadTrack.Shared.Models;
+using ReadTrack.Shared.Models.Requests;
 using Refit;
 
 namespace ReadTrack.Web.Blazor.Api;
@@ -11,6 +12,6 @@ public interface IUserApi
     [Post("/api/user/register")]
     Task<TokenResponse> RegisterAsync(CreateUserRequest request);
 
-    [Put("/api/user/{id}")]
+    [Put("/api/user/{userId}")]
     Task UpdateUserAsync(int userId, User user);
 }
