@@ -11,10 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.API.Tests", "Read
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.Shared", "ReadTrack.Shared\ReadTrack.Shared.csproj", "{FBE28368-D0A2-4517-A15B-7B5F76DE1B53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.Web.Blazor", "ReadTrack.Web.Blazor\ReadTrack.Web.Blazor.csproj", "{D7B7D0D7-F4F2-4381-ACCF-597B7BC006D2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadTrack.Web.Blazor.Tests", "ReadTrack.Web.Blazor\ReadTrack.Web.Blazor.Tests\ReadTrack.Web.Blazor.Tests.csproj", "{F7AA8598-D177-422D-A409-F7A8FFB43723}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
