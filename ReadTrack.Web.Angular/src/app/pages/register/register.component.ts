@@ -18,7 +18,7 @@ export class RegisterComponent {
     get request() {
         const form = this.form?.value;
 
-        return new CreateUserRequest(form.FirstName, form.LastName, form.email, form.password);
+        return new CreateUserRequest(form.firstName, form.lastName, form.email, form.password);
     }
 
     get email() {
