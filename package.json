@@ -1,37 +1,17 @@
 {
-  "name": "readtrack",
-  "version": "1.0.0",
-  "description": "A simple app for tracking books and current reading progress.",
-  "main": "index.js",
-  "scripts": {
-    "start": "tsc-watch --onSuccess \"node src/index.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/christopherspence/ReadTrack.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/christopherspence/ReadTrack/issues"
-  },
-  "homepage": "https://github.com/christopherspence/ReadTrack#readme",
-  "dependencies": {
-    "@tsconfig/node20": "^20.1.6",
-    "dotenv": "^17.2.1",
-    "express": "^5.1.0",
-    "mssql": "^11.0.1",
-    "reflect-metadata": "^0.2.2",
-    "tsc-watch": "^7.1.1",
-    "typeorm": "^0.3.26",
-    "typescript": "^5.9.2"
-  },
-  "devDependencies": {
-    "@types/express": "^5.0.3",
-    "@types/node": "^24.3.0",
-    "nodemon": "^3.1.10"
-  }
+   "dependencies": {
+      "mssql": "^10.0.4",
+      "reflect-metadata": "^0.2.2",
+      "typeorm": "0.3.26",
+      "typeorm-extension": "^3.7.1"
+   },
+   "devDependencies": {
+      "@types/node": "^24.3.0",
+      "ts-node": "^10.9.2",
+      "typescript": "^5.8.2"
+   },
+   "scripts": {
+      "start": "ts-node src/index.ts",
+      "typeorm": "typeorm-ts-node-commonjs"
+   }
 }

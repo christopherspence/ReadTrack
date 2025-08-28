@@ -1,7 +1,14 @@
 {
-    "extends": "@tsconfig/node20/tsconfig.json",
-    "compilerOptions": {
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true
-    }
+   "compilerOptions": {
+      "lib": [
+         "es2021"
+      ],
+      "target": "es2021",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "outDir": "./build",
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "sourceMap": true
+   }
 }

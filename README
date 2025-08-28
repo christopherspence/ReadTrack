@@ -4,7 +4,6 @@ Docker containers for the app are coming soon. For now, to run the project:
 
 Prerequisites:
 * Docker - https://hub.docker.com/search/?type=edition&offering=community
-* .NET Core -  https://dotnet.microsoft.com/en-us/download/dotnet/7.0
 * NPM - https://www.npmjs.com/get-npm
 
 1. Run the docker command to create a container for the database
@@ -22,16 +21,16 @@ $ sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=r3@dtr@ck1" \
 2. Run the backend service
 
 ```
-cd ReadTrack.API
-dotnet ef database update
-dotnet restore
-dotnet run
-```
-
-3. Run the Angular app
+1. Run `npm i` command
+2. Setup database settings inside `data-source.ts` file
+3. Run `npm start` command
 
 ```
-cd ReadTrack.Web
+
+3. Run the frontent app 
+
+```
+cd frontend
 npm install
-ng serve
+npm start
 ```
