@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmValidator, CreateUserRequest, SimpleDialogComponent } from '../../shared';
@@ -12,7 +12,7 @@ import { UserService } from '../../core/services';
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-    form!: FormGroup;
+    form!: UntypedFormGroup;
     loading = false;
 
     get request() {
@@ -34,7 +34,7 @@ export class RegisterComponent {
     }
 
     constructor(
-        private fb: FormBuilder, 
+        private fb: UntypedFormBuilder, 
         private userService: UserService,
         private router: Router,
         public dialog: MatDialog) {

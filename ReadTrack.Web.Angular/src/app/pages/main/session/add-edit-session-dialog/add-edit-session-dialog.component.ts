@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Session, DialogMode } from '../../../../shared';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionService } from '../../../../core/services';
 import { CreateSessionRequest } from '../../../../shared';
@@ -15,7 +15,7 @@ export class AddEditSessionDialogComponent implements OnInit {
     bookId = 0;
     title = '';
     mode: DialogMode;
-    form!: FormGroup;
+    form!: UntypedFormGroup;
     
     padNumber(number: number): string {   
         return `${(number < 10 ? '0' : '')}${number}`;      
@@ -44,7 +44,7 @@ export class AddEditSessionDialogComponent implements OnInit {
         public dialogRef: MatDialogRef<AddEditSessionDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
         private service: SessionService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private snackBar: MatSnackBar) {
         this.mode = data.mode;
 

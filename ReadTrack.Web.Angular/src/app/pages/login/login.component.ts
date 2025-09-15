@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services'
@@ -12,7 +12,7 @@ import { SimpleDialogComponent } from '../../shared';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-    form: FormGroup;
+    form: UntypedFormGroup;
     loading = false;
 
     get email() {
@@ -24,7 +24,7 @@ export class LoginComponent {
     }
 
     constructor(
-        private fb: FormBuilder, 
+        private fb: UntypedFormBuilder, 
         private authService: AuthService,
         private router: Router,
         public dialog: MatDialog) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmValidator, SimpleDialogComponent, StringUtilities, User } from '../../../shared';
 import { UserService } from '../../../core/services';
@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 
 export class ProfileComponent implements OnInit {
-    form!: FormGroup;
+    form!: UntypedFormGroup;
     loading = false;
     imageSource = '';
     imageChanged = false;
@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
 
     constructor(
         public sanitizer: DomSanitizer,
-        private fb: FormBuilder, 
+        private fb: UntypedFormBuilder, 
         private userService: UserService,
         public dialog: MatDialog,
         private snackBar: MatSnackBar) {

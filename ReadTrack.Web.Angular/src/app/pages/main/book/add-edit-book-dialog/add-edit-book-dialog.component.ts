@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Book, CreateBookRequest, DialogMode } from '../../../../shared';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BookService } from 'src/app/core/services';
 import { BookCategory } from 'src/app/shared/models/book-category.model';
@@ -14,7 +14,7 @@ import { BookCategory } from 'src/app/shared/models/book-category.model';
 export class AddEditBookDialogComponent implements OnInit {
     title = '';
     mode: DialogMode;
-    form!: FormGroup;
+    form!: UntypedFormGroup;
     categories: Array<string> = Object.values(BookCategory);
     
     get book(): Book {
@@ -37,7 +37,7 @@ export class AddEditBookDialogComponent implements OnInit {
         public dialogRef: MatDialogRef<AddEditBookDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
         private service: BookService,
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private snackBar: MatSnackBar) {
         this.mode = data.mode;
 
