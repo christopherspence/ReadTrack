@@ -27,6 +27,7 @@ export class AddEditBookDialogComponent implements OnInit {
             form.category,
             form.numberOfPages,
             form.finished,
+            [],
             form.published);
         
         return book;
