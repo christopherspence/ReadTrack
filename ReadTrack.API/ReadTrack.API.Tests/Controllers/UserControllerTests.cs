@@ -24,7 +24,7 @@ public class UserControllerTests : BaseControllerTests
 
         var controller = new UserController(new Mock<ILogger<UserController>>().Object, userServiceMock.Object)
         {
-            ControllerContext = CreateControllerContext(user.Email)
+            ControllerContext = CreateControllerContext(user.Email ?? string.Empty)
         };
 
         // Act
@@ -33,7 +33,7 @@ public class UserControllerTests : BaseControllerTests
         // Assert
         response.Should().BeOfType<OkObjectResult>();
 
-        userServiceMock.Verify(m => m.GetUserByEmailAsync(user.Email), Times.Once);
+        userServiceMock.Verify(m => m.GetUserByEmailAsync(user.Email ?? string.Empty), Times.Once);
     }
 
     [Fact]
@@ -68,7 +68,7 @@ public class UserControllerTests : BaseControllerTests
 
         var controller = new UserController(new Mock<ILogger<UserController>>().Object, userServiceMock.Object)
         {
-            ControllerContext = CreateControllerContext(user.Email)
+            ControllerContext = CreateControllerContext(user.Email ?? string.Empty)
         };
 
         // Act
@@ -77,7 +77,7 @@ public class UserControllerTests : BaseControllerTests
         // Assert
         response.Should().BeOfType<NoContentResult>();
 
-        userServiceMock.Verify(m => m.GetUserByEmailAsync(user.Email), Times.Once);
+        userServiceMock.Verify(m => m.GetUserByEmailAsync(user.Email ?? string.Empty), Times.Once);
         userServiceMock.Verify(m => m.UpdateUserAsync(user.Id, user), Times.Once);   
     }
 }

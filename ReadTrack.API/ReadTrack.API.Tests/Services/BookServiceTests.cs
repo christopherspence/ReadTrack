@@ -23,8 +23,10 @@ public class BookServiceTests : BaseServiceTests
         var user = RandomGenerator.GenerateRandomUser();
 
         var books = RandomGenerator.GenerateOneHundredRandomBooks();
-        await Context.Books.AddRangeAsync(books);
+
+        Context.Books.AddRange(books);
         await Context.SaveChangesAsync();
+
         
         var service = new BookService(new Mock<ILogger<BookService>>().Object, Context, Mapper);
 
@@ -68,11 +70,11 @@ public class BookServiceTests : BaseServiceTests
         var service = new BookService(new Mock<ILogger<BookService>>().Object, Context, Mapper);
 
         // Act
-        var result = await service.GetBooksAsync(user.Id, 0, 100, searchText);
+        var result = await service.GetBooksAsync(user.Id, 0, 100, searchText ?? string.Empty);
 
         // Assert        
         var expected = Mapper.Map<IEnumerable<BookEntity>, IEnumerable<Book>>(books
-            .Where(b => b.Name.Contains(searchText) || b.Author.Contains(searchText)));
+            .Where(b => (b.Name ?? string.Empty).Contains(searchText ?? string.Empty) || (b.Author ?? string.Empty).Contains(searchText ?? string.Empty)));
 
         result.Should().BeEquivalentTo(expected);
     }

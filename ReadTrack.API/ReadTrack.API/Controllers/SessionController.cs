@@ -10,6 +10,7 @@ using ReadTrack.Shared;
 using ReadTrack.Shared.Requests;
 using ReadTrack.API.Services;
 using Swashbuckle.AspNetCore.Annotations;
+using ReadTrack.API.Extensions;
 
 namespace ReadTrack.API.Controllers;
 
@@ -17,10 +18,6 @@ namespace ReadTrack.API.Controllers;
 public class SessionController : BaseController<SessionController, ISessionService>
 {
     private readonly IUserService userService;
-
-    private async Task<User> GetCurrentUserAsync()
-        => await userService.GetUserByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
-
 
     public SessionController(ILogger<SessionController> logger, IUserService userService, ISessionService service) : base(logger, service)
         => this.userService = userService;
@@ -33,7 +30,13 @@ public class SessionController : BaseController<SessionController, ISessionServi
     {
         try
         {
-            var user = await GetCurrentUserAsync();
+            var user = await userService.GetCurrentUserAsync(User);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
 
             return Ok(await Service.GetSessionCountAsync(user.Id, sessionId));
         }
@@ -52,7 +55,12 @@ public class SessionController : BaseController<SessionController, ISessionServi
     {
         try
         {
-            var user = await GetCurrentUserAsync();
+            var user = await userService.GetCurrentUserAsync(User);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             return Ok(await Service.GetSessionsAsync(user.Id, sessionId, offset, count));
         }
@@ -71,7 +79,12 @@ public class SessionController : BaseController<SessionController, ISessionServi
     {
         try
         {
-            var user = await GetCurrentUserAsync();
+            var user = await userService.GetCurrentUserAsync(User);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             return Created(string.Empty, await Service.CreateSessionAsync(user.Id, request));
         }
@@ -95,7 +108,12 @@ public class SessionController : BaseController<SessionController, ISessionServi
                 return BadRequest();
             }
 
-            var user = await GetCurrentUserAsync();
+            var user = await userService.GetCurrentUserAsync(User);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             if (!await Service.UpdateSessionAsync(user.Id, session))
             {
@@ -119,7 +137,12 @@ public class SessionController : BaseController<SessionController, ISessionServi
     {
         try
         {
-            var user = await GetCurrentUserAsync();
+            var user = await userService.GetCurrentUserAsync(User);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             if (!await Service.DeleteSessionAsync(user.Id, id))
             {

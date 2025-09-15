@@ -82,6 +82,11 @@ public class SessionService : BaseService<SessionService>, ISessionService
     {
         var existingEntity = await GetInitialQuery(userId).SingleOrDefaultAsync(b => b.Id == sessionId);
 
+        if (existingEntity == null)
+        {
+            return false;
+        }
+
         existingEntity.IsDeleted = true;
         existingEntity.Modified = DateTime.UtcNow;
 

@@ -25,7 +25,7 @@ public class UserService : BaseService<UserService>, IUserService
         this.hasher = hasher;
     }
     
-    public async Task<User> GetUserByEmailAsync(string email)
+    public async Task<User?> GetUserByEmailAsync(string email)
     {
         var entity = await Context.Users.FirstOrDefaultAsync(u => u.Email == email && !u.IsDeleted);   
 
@@ -37,7 +37,7 @@ public class UserService : BaseService<UserService>, IUserService
         return Mapper.Map<UserEntity, User>(entity);
     }
 
-    public async Task<User> GetUserAsync(int id, bool includePassword = false)
+    public async Task<User?> GetUserAsync(int id, bool includePassword = false)
     {
         var entity = await Context.Users.FirstOrDefaultAsync(u => u.Id == id && !u.IsDeleted);   
 
@@ -54,7 +54,7 @@ public class UserService : BaseService<UserService>, IUserService
         return Mapper.Map<UserEntity, User>(entity);
     }
 
-    public async Task<TokenResponse> CreateUserAsync(CreateUserRequest request)
+    public async Task<TokenResponse?> CreateUserAsync(CreateUserRequest request)
     {
         if (await Context.Users.AnyAsync(u => u.Email == request.Email && !u.IsDeleted))
         {
@@ -63,10 +63,10 @@ public class UserService : BaseService<UserService>, IUserService
 
         var entity = new UserEntity
         {
-            Email = request.Email,
-            Password = request.Password,
-            FirstName = request.FirstName,
-            LastName = request.LastName,
+            Email = request.Email ?? string.Empty,
+            Password = request.Password ?? string.Empty,
+            FirstName = request.FirstName ?? string.Empty,
+            LastName = request.LastName ?? string.Empty,
             ProfilePicture = string.Empty,
             Created = DateTime.UtcNow,
             Modified = DateTime.UtcNow
@@ -74,7 +74,7 @@ public class UserService : BaseService<UserService>, IUserService
 
         // Hash the user's password
         var user = Mapper.Map<UserEntity, User>(entity);
-        entity.Password = hasher.HashPassword(user, request.Password);
+        entity.Password = hasher.HashPassword(user, request.Password ?? string.Empty);
 
         await Context.Users.AddAsync(entity);
         await Context.SaveChangesAsync();
@@ -98,10 +98,10 @@ public class UserService : BaseService<UserService>, IUserService
             return false;
         }
 
-        existingEntity.FirstName = user.FirstName;
-        existingEntity.LastName = user.LastName;
-        existingEntity.Email = user.Email;        
-        existingEntity.ProfilePicture = user.ProfilePicture;
+        existingEntity.FirstName = user.FirstName ?? string.Empty;
+        existingEntity.LastName = user.LastName ?? string.Empty;
+        existingEntity.Email = user.Email ?? string.Empty;        
+        existingEntity.ProfilePicture = user.ProfilePicture ?? string.Empty;
 
         // only update the password if they specified a new one and it doensn't match the old one
         if (!string.IsNullOrEmpty(user.Password))

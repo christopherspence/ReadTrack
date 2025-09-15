@@ -5,6 +5,6 @@ namespace ReadTrack.API.Services;
 
 public interface ITokenService : IService
 {
-    TokenResponse GenerateToken(User user);
+    TokenResponse? GenerateToken(User user);
     JwtSecurityToken DecodeToken(string token);
 }

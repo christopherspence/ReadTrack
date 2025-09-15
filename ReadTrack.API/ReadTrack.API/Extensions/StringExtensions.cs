@@ -16,11 +16,8 @@ public static class StringExtensions
     
     public static byte[] Decode(this string text)
     {
-        if (text == null)
-        {
-            throw new ArgumentNullException(nameof(text));
-        }
+        ArgumentNullException.ThrowIfNull(text);
 
-        return Convert.FromBase64String((text.Replace('-', '+').Replace('_', '/').Pad()));
+        return Convert.FromBase64String(text.Replace('-', '+').Replace('_', '/').Pad());
     }
 }

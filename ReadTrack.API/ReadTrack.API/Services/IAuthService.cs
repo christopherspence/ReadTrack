@@ -6,5 +6,5 @@ namespace ReadTrack.API.Services;
 
 public interface IAuthService : IService 
 {
-    Task<TokenResponse> LoginAsync(AuthRequest request);
+    Task<TokenResponse?> LoginAsync(AuthRequest request);
 }

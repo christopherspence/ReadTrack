@@ -30,7 +30,7 @@ public class SessionControllerTests : BaseControllerTests
 
         var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionServiceMock.Object)
         {
-            ControllerContext = CreateControllerContext(user.Email)
+            ControllerContext = CreateControllerContext(user.Email ?? string.Empty)
         };
 
         // Act
@@ -60,7 +60,7 @@ public class SessionControllerTests : BaseControllerTests
 
         var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionServiceMock.Object)
         {
-            ControllerContext = CreateControllerContext(user.Email)
+            ControllerContext = CreateControllerContext(user.Email ?? string.Empty)
         };
 
         // Act
@@ -92,7 +92,7 @@ public class SessionControllerTests : BaseControllerTests
 
         var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionServiceMock.Object)
         {
-            ControllerContext = CreateControllerContext(user.Email)
+            ControllerContext = CreateControllerContext(user.Email ?? string.Empty)
         };
 
         // Act
@@ -122,7 +122,7 @@ public class SessionControllerTests : BaseControllerTests
 
         var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionServiceMock.Object)
         {
-            ControllerContext = CreateControllerContext(user.Email)
+            ControllerContext = CreateControllerContext(user.Email ?? string.Empty)
         };
 
         // Act
@@ -152,7 +152,7 @@ public class SessionControllerTests : BaseControllerTests
 
         var controller = new SessionController(new Mock<ILogger<SessionController>>().Object, userServiceMock.Object, sessionServiceMock.Object)
         {
-            ControllerContext = CreateControllerContext(user.Email)
+            ControllerContext = CreateControllerContext(user.Email ?? string.Empty)
         };
 
         // Act

@@ -7,14 +7,14 @@ namespace ReadTrack.API.Tests.Controllers;
 public abstract class BaseControllerTests
 {
     protected static ControllerContext CreateControllerContext(string email)
-      => new()
-      {
-            HttpContext = new DefaultHttpContext
-            {
-                User = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+        => new()
+        {
+                HttpContext = new DefaultHttpContext
                 {
-                    new(ClaimTypes.Email, email)
-                }, "mock"))
-            }
-      };
+                    User = new ClaimsPrincipal(new ClaimsIdentity(
+                    [
+                        new(ClaimTypes.Email, email)
+                    ], "mock"))
+                }
+        };
 }

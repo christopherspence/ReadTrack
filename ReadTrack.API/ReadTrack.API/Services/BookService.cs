@@ -22,7 +22,7 @@ public class BookService : BaseService<BookService>, IBookService
         => Context.Books.Where(b => b.UserId == userId && !b.IsDeleted);
 
     private static IQueryable<BookEntity> AddSearchQuery(IQueryable<BookEntity> query, string searchText)
-        => query.Where(b => b.Name.Contains(searchText) ||b.Author.Contains(searchText));
+        => query.Where(b => (b.Name ?? string.Empty).Contains(searchText) || (b.Author ?? string.Empty).Contains(searchText));
 
     public async Task<int> GetBookCountAsync(int userId, string searchText = "")
     {
@@ -48,19 +48,26 @@ public class BookService : BaseService<BookService>, IBookService
         return Mapper.Map<IEnumerable<BookEntity>, IEnumerable<Book>>(await query.Skip(offset).Take(count).ToListAsync());
     }
 
-    public async Task<Book> GetBookAsync(int userId, int bookId)
+    public async Task<Book?> GetBookAsync(int userId, int bookId)
     {
         var query = GetInitialQuery(userId);
 
-        return Mapper.Map<BookEntity, Book>(await query.SingleOrDefaultAsync(b => b.Id == bookId));
+        var entity = await query.SingleOrDefaultAsync(b => b.Id == bookId);
+
+        if (entity == null)
+        {
+            return null;
+        }
+
+        return Mapper.Map<BookEntity, Book>(entity);
     }
 
     public async Task<Book> CreateBookAsync(int userId, CreateBookRequest request)
     {
         var entity = new BookEntity
         {
-            Name = request.Name,
-            Author = request.Author,
+            Name = request.Name ?? string.Empty,
+            Author = request.Author ?? string.Empty,
             Category = request.Category,
             NumberOfPages = request.NumberOfPages,
             Published = request.Published,
@@ -84,8 +91,8 @@ public class BookService : BaseService<BookService>, IBookService
             return false;
         }
 
-        existingEntity.Name = book.Name;
-        existingEntity.Author = book.Author;
+        existingEntity.Name = book.Name ?? string.Empty;
+        existingEntity.Author = book.Author ?? string.Empty;
         existingEntity.Category = book.Category;
         existingEntity.NumberOfPages = book.NumberOfPages;
         existingEntity.Published = book.Published;

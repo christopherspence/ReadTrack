@@ -27,8 +27,13 @@ public class AuthService : BaseService<AuthService>, IAuthService
         this.userService = userService;
     }
 
-    public async Task<TokenResponse> LoginAsync(AuthRequest request)
+    public async Task<TokenResponse?> LoginAsync(AuthRequest request)
     {
+        if (request.Email == null || request.Password == null)
+        {
+            return null;
+        }
+
         var user = await userService.GetUserByEmailAsync(request.Email);
 
         if (user == null)
@@ -36,7 +41,7 @@ public class AuthService : BaseService<AuthService>, IAuthService
             return null;
         }
 
-        var result = hasher.VerifyHashedPassword(user, user.Password, request.Password);   
+        var result = hasher.VerifyHashedPassword(user, user.Password ?? string.Empty, request.Password);   
 
         if (result == PasswordVerificationResult.Failed)
         {

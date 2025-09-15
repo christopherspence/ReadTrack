@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ReadTrack.API.Extensions;
 using ReadTrack.Shared;
 using ReadTrack.Shared.Requests;
 using ReadTrack.API.Services;
@@ -17,11 +18,8 @@ namespace ReadTrack.API.Controllers;
 public class BookController : BaseController<BookController, IBookService>
 {
     private readonly IUserService userService;
-    public BookController(ILogger<BookController> logger, IUserService userService, IBookService service) : base(logger, service) 
+    public BookController(ILogger<BookController> logger, IUserService userService, IBookService service) : base(logger, service)
         => this.userService = userService;
-
-    private async Task<User> GetCurrentUserAsync()
-        => await userService.GetUserByEmailAsync(User.FindFirstValue(ClaimTypes.Email));
 
     [HttpGet]
     [Route("/api/book/count/{searchText?}")]
@@ -31,7 +29,12 @@ public class BookController : BaseController<BookController, IBookService>
     {
         try
         {
-            var user = await GetCurrentUserAsync();
+            var user = await userService.GetCurrentUserAsync(User);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             return Ok(await Service.GetBookCountAsync(user.Id, searchText));
         }
@@ -50,7 +53,12 @@ public class BookController : BaseController<BookController, IBookService>
     {
         try
         {
-            var user = await GetCurrentUserAsync();
+            var user = await userService.GetCurrentUserAsync(User);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             return Ok(await Service.GetBooksAsync(user.Id, offset, count, searchText));
         }
@@ -69,7 +77,12 @@ public class BookController : BaseController<BookController, IBookService>
     {
         try
         {
-            var user = await GetCurrentUserAsync();
+            var user = await userService.GetCurrentUserAsync(User);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             return Ok(await Service.GetBookAsync(user.Id, id));
         }
@@ -88,7 +101,12 @@ public class BookController : BaseController<BookController, IBookService>
     {
         try
         {
-            var user = await GetCurrentUserAsync();
+            var user = await userService.GetCurrentUserAsync(User);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             return Created(string.Empty, await Service.CreateBookAsync(user.Id, request));
         }
@@ -112,13 +130,19 @@ public class BookController : BaseController<BookController, IBookService>
                 return BadRequest();
             }
 
-            var user = await GetCurrentUserAsync();
+            var user = await userService.GetCurrentUserAsync(User);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
 
             if (!await Service.UpdateBookAsync(user.Id, book))
             {
                 return NotFound();
             }
-            
+
             return NoContent();
         }
         catch (Exception e)
@@ -136,13 +160,18 @@ public class BookController : BaseController<BookController, IBookService>
     {
         try
         {
-            var user = await GetCurrentUserAsync();
+            var user = await userService.GetCurrentUserAsync(User);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
 
             if (!await Service.DeleteBookAsync(user.Id, id))
             {
                 return NotFound();
             }
-            
+
             return NoContent();
         }
         catch (Exception e)

@@ -20,7 +20,7 @@ public static class JwtExtensions
                 //ValidateAudience = false,
                 ValidAudience = settings.Audience,
                 ValidIssuer = settings.Issuer,
-                IssuerSigningKey = new SymmetricSecurityKey(WebEncoders.Base64UrlDecode(settings.SecretKey))
+                IssuerSigningKey = new SymmetricSecurityKey(WebEncoders.Base64UrlDecode(settings.SecretKey ?? string.Empty))
             };
         });
 

@@ -18,7 +18,7 @@ public class TokenService : BaseService<TokenService>, ITokenService
     public TokenService(ILogger<TokenService> logger, ReadTrackContext context, JwtSettings settings, IMapper mapper) : base(logger, context, mapper)
      => this.settings = settings;
 
-    public TokenResponse GenerateToken(User user)
+    public TokenResponse? GenerateToken(User user)
     {
         var handler = new JwtSecurityTokenHandler();
 
@@ -27,18 +27,18 @@ public class TokenService : BaseService<TokenService>, ITokenService
             return null;
         }
 
-        var key = settings.SecretKey.Decode();
+        var key = settings.SecretKey?.Decode();
 
         var descriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new Claim[]
-            {
-                new Claim("userId", user.Id.ToString()),
+            Subject = new ClaimsIdentity(
+            [
+                new("userId", user.Id.ToString()),
                 
-                new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}" ?? string.Empty),
-                new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
-                new Claim(ClaimTypes.Role, "User")
-            }),
+                new(ClaimTypes.Name, $"{user.FirstName} {user.LastName}" ?? string.Empty),
+                new(ClaimTypes.Email, user.Email ?? string.Empty),
+                new(ClaimTypes.Role, "User")
+            ]),
             Expires = DateTime.UtcNow.AddDays(settings.ExpirationDays),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
             Issuer = settings.Issuer,

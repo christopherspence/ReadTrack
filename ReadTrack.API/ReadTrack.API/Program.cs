@@ -68,11 +68,11 @@ app.UseHttpsRedirection();
 
 app.UseExceptionHandler(c => c.Run(async context =>
 {
-    var exception = context.Features
-        .Get<IExceptionHandlerPathFeature>()
+    var exception = context.Features?
+        .Get<IExceptionHandlerPathFeature>()?
         .Error;
 
-    var response = new { error = exception.Message };
+    var response = new { error = exception?.Message };
 
     await context.Response.WriteAsJsonAsync(response);
 }));

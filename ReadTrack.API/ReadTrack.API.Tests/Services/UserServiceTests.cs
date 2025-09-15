@@ -56,7 +56,7 @@ public class UserServiceTests : BaseServiceTests
             new Mock<ITokenService>().Object, Mapper);
 
         // Act
-        var result = await service.GetUserByEmailAsync(user.Email);
+        var result = await service.GetUserByEmailAsync(user.Email ?? string.Empty);
 
         // Assert
         var expected = Mapper.Map<UserEntity, User>(user);
@@ -117,7 +117,7 @@ public class UserServiceTests : BaseServiceTests
                  n.Path.EndsWith("Created") ||
                  n.Path.EndsWith("Modified")));
 
-        hasherMock.Verify(m => m.HashPassword(It.IsAny<User>(), user.Password), Times.Once);
+        hasherMock.Verify(m => m.HashPassword(It.IsAny<User>(), user.Password ?? string.Empty), Times.Once);
         tokenServiceMock.Verify(m => m.GenerateToken(It.IsAny<User>()), Times.Once);
     }
 

@@ -65,8 +65,8 @@ public class AuthServiceTests : BaseServiceTests
             n.Path.EndsWith("Expires") ||
             n.Path.EndsWith("User.Password")));
 
-        hasherMock.Verify(m => m.VerifyHashedPassword(It.IsAny<User>(), user.Password, user.Password), Times.Once);
+        hasherMock.Verify(m => m.VerifyHashedPassword(It.IsAny<User>(), user.Password ?? string.Empty, user.Password ?? string.Empty), Times.Once);
         tokenServiceMock.Verify(m => m.GenerateToken(user), Times.Once);
-        userServiceMock.Verify(m => m.GetUserByEmailAsync(user.Email), Times.Once);
+        userServiceMock.Verify(m => m.GetUserByEmailAsync(user.Email ?? string.Empty), Times.Once);
     }
 }

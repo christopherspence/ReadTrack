@@ -31,7 +31,7 @@ public class BookControllerTests : BaseControllerTests
         
         var controller = new BookController(new Mock<ILogger<BookController>>().Object, userServiceMock.Object, bookServiceMock.Object)
         {
-            ControllerContext = CreateControllerContext(user.Email)
+            ControllerContext = CreateControllerContext(user.Email ?? string.Empty)
         };
 
         // Act
@@ -42,7 +42,7 @@ public class BookControllerTests : BaseControllerTests
         response.Should().BeOfType<OkObjectResult>();
 
         bookServiceMock.Verify(m => m.GetBookCountAsync(user.Id, searchText), Times.Once);
-        userServiceMock.Verify(m => m.GetUserByEmailAsync(user.Email), Times.Once);        
+        userServiceMock.Verify(m => m.GetUserByEmailAsync(user.Email ?? string.Empty), Times.Once);        
     }
 
     [Fact]
@@ -61,7 +61,7 @@ public class BookControllerTests : BaseControllerTests
 
         var controller = new BookController(new Mock<ILogger<BookController>>().Object, userServiceMock.Object, bookServiceMock.Object)
         {
-            ControllerContext = CreateControllerContext(user.Email)
+            ControllerContext = CreateControllerContext(user.Email ?? string.Empty)
         };
 
         // Act
@@ -74,7 +74,7 @@ public class BookControllerTests : BaseControllerTests
         response.Should().BeOfType<OkObjectResult>();
 
         bookServiceMock.Verify(m => m.GetBooksAsync(user.Id, offset, count, searchText));
-        userServiceMock.Verify(m => m.GetUserByEmailAsync(user.Email), Times.Once);
+        userServiceMock.Verify(m => m.GetUserByEmailAsync(user.Email ?? string.Empty), Times.Once);
     }
 
     [Fact]
@@ -92,7 +92,7 @@ public class BookControllerTests : BaseControllerTests
 
         var controller = new BookController(new Mock<ILogger<BookController>>().Object, userServiceMock.Object, bookServiceMock.Object)
         {
-            ControllerContext = CreateControllerContext(user.Email)
+            ControllerContext = CreateControllerContext(user.Email ?? string.Empty)
         };
 
         // Act
@@ -103,7 +103,7 @@ public class BookControllerTests : BaseControllerTests
         response.Should().BeOfType<OkObjectResult>();
 
         bookServiceMock.Verify(m => m.GetBookAsync(user.Id, bookId), Times.Once);
-        userServiceMock.Verify(m => m.GetUserByEmailAsync(user.Email), Times.Once);
+        userServiceMock.Verify(m => m.GetUserByEmailAsync(user.Email ?? string.Empty), Times.Once);
     }
 
     [Fact]
@@ -121,7 +121,7 @@ public class BookControllerTests : BaseControllerTests
 
         var controller = new BookController(new Mock<ILogger<BookController>>().Object, userServiceMock.Object, bookServiceMock.Object)
         {
-            ControllerContext = CreateControllerContext(user.Email)
+            ControllerContext = CreateControllerContext(user.Email ?? string.Empty)
         };
 
         // Act
@@ -132,7 +132,7 @@ public class BookControllerTests : BaseControllerTests
         response.Should().BeOfType<CreatedResult>();
 
         bookServiceMock.Verify(m => m.CreateBookAsync(user.Id, request), Times.Once);
-        userServiceMock.Verify(m => m.GetUserByEmailAsync(user.Email), Times.Once);    
+        userServiceMock.Verify(m => m.GetUserByEmailAsync(user.Email ?? string.Empty), Times.Once);    
     }
 
     [Fact]
@@ -150,7 +150,7 @@ public class BookControllerTests : BaseControllerTests
 
         var controller = new BookController(new Mock<ILogger<BookController>>().Object, userServiceMock.Object, bookServiceMock.Object)
         {
-            ControllerContext = CreateControllerContext(user.Email)
+            ControllerContext = CreateControllerContext(user.Email ?? string.Empty)
         };
 
         // Act
@@ -185,7 +185,7 @@ public class BookControllerTests : BaseControllerTests
 
         var controller = new BookController(new Mock<ILogger<BookController>>().Object, userServiceMock.Object, bookServiceMock.Object)
         {
-            ControllerContext = CreateControllerContext(user.Email)
+            ControllerContext = CreateControllerContext(user.Email ?? string.Empty)
         };
 
         // Act

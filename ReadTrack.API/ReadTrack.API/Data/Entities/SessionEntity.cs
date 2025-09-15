@@ -13,5 +13,5 @@ public class SessionEntity : BaseEntity
 
     // FKs
     public int BookId { get; set; }
-    public BookEntity Book { get; set; }
+    public BookEntity? Book { get; set; }
 }
