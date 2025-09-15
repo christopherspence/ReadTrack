@@ -1,22 +1,60 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Book, CreateBookRequest, DialogMode } from '../../../../shared';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BookService } from 'src/app/core/services';
 import { BookCategory } from 'src/app/shared/models/book-category.model';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { NgIf, NgFor } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
     selector: 'app-add-edit-book-dialog',
     templateUrl: './add-edit-book-dialog.component.html',
-    styleUrls: ['./add-edit-book-dialog.component.css']
+    styleUrls: ['./add-edit-book-dialog.component.css'],
+    standalone: true,
+    imports: [
+        FormsModule, 
+        MatButtonModule, 
+        MatCheckboxModule, 
+        MatDatepickerModule,
+        MatDialogModule, 
+        MatFormFieldModule, 
+        MatSelectModule,
+        MatInputModule, 
+        MatOptionModule, 
+        NgFor,
+        NgIf,  
+        ReactiveFormsModule
+    ]
 })
 export class AddEditBookDialogComponent implements OnInit {
     title = '';
     mode: DialogMode;
-    form!: UntypedFormGroup;
+    form?: UntypedFormGroup;
     categories: Array<string> = Object.values(BookCategory);
     
+    constructor(
+        public dialogRef: MatDialogRef<AddEditBookDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private service: BookService,
+        private fb: UntypedFormBuilder,
+        private snackBar: MatSnackBar) {
+        this.mode = data.mode;
+
+        this.setupForm();
+
+        if (this.mode == DialogMode.edit) {
+            this.fillData(data.book);
+        }
+    }
+
     get book(): Book {
         const form = this.form?.value;
 
@@ -31,21 +69,6 @@ export class AddEditBookDialogComponent implements OnInit {
             form.published);
         
         return book;
-    }
-
-    constructor(
-        public dialogRef: MatDialogRef<AddEditBookDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: any,
-        private service: BookService,
-        private fb: UntypedFormBuilder,
-        private snackBar: MatSnackBar) {
-        this.mode = data.mode;
-
-        this.setupForm();
-
-        if (this.mode == DialogMode.edit) {
-            this.fillData(data.book);
-        }
     }
 
     ngOnInit(): void {
@@ -132,7 +155,7 @@ export class AddEditBookDialogComponent implements OnInit {
     }
 
     async submit(): Promise<void> {
-        if (this.form.valid) {
+        if (this.form?.valid) {
             if (this.mode === DialogMode.add) {
                 await this.addBook();
             } else if (this.mode === DialogMode.edit) {

@@ -1,4 +1,4 @@
-<form [formGroup]="form" (submit)="register()">
+<form *ngIf="form" [formGroup]="form" (submit)="register()">
     <div class="register-main">
         <mat-card>
             <mat-card-header>

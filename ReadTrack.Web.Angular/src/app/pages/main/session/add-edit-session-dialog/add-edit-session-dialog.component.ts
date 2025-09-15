@@ -1,43 +1,40 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Session, DialogMode } from '../../../../shared';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SessionService } from '../../../../core/services';
 import { CreateSessionRequest } from '../../../../shared';
+import { MatButtonModule } from '@angular/material/button';
+import { NgIf } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
     selector: 'app-add-edit-session-dialog',
     templateUrl: './add-edit-session-dialog.component.html',
-    styleUrls: ['./add-edit-session-dialog.component.css']
+    styleUrls: ['./add-edit-session-dialog.component.css'],
+    standalone: true,
+    imports: [
+        FormsModule, 
+        MatButtonModule,
+        MatDatepickerModule, 
+        MatDialogModule, 
+        MatFormFieldModule, 
+        MatInputModule, 
+        NgIf, 
+        ReactiveFormsModule
+    ]
 })
 export class AddEditSessionDialogComponent implements OnInit {
     bookId = 0;
     title = '';
     mode: DialogMode;
-    form!: UntypedFormGroup;
+    form?: UntypedFormGroup;
     
     padNumber(number: number): string {   
         return `${(number < 10 ? '0' : '')}${number}`;      
-   }
-
-   get duration(): string {
-       const form = this.form?.value;
-       return `${this.padNumber(Number(form.hours))}:${this.padNumber(Number(form.minutes))}:${this.padNumber(Number(form.seconds))}`;
-   }
-
-    get session(): Session {
-        const form = this.form?.value;
-
-        const session = new Session(
-            form.id,
-            form.date,
-            this.duration,
-            form.numberOfPages,
-            form.startPage,
-            form.endPage);
-        
-        return session;
     }
 
     constructor(
@@ -57,6 +54,25 @@ export class AddEditSessionDialogComponent implements OnInit {
         if (this.mode == DialogMode.edit) {
             this.fillData(data.session);
         }
+    }
+
+     get duration(): string {
+        const form = this.form?.value;
+        return `${this.padNumber(Number(form.hours))}:${this.padNumber(Number(form.minutes))}:${this.padNumber(Number(form.seconds))}`;
+    }
+
+    get session(): Session {
+        const form = this.form?.value;
+
+        const session = new Session(
+            form.id,
+            form.date,
+            this.duration,
+            form.numberOfPages,
+            form.startPage,
+            form.endPage);
+        
+        return session;
     }
 
     ngOnInit(): void {
@@ -106,11 +122,11 @@ export class AddEditSessionDialogComponent implements OnInit {
     }
     
     calculateNumberOfPages(): void {
-        const form = this.form.value
+        const form = this.form?.value;
         const numberOfPages = Number(form.endPage) - Number(form.startPage);
 
         if (numberOfPages > 0) {
-            this.form.patchValue({ numberOfPages });        
+            this.form?.patchValue({ numberOfPages });        
         }
     }
 
@@ -123,7 +139,7 @@ export class AddEditSessionDialogComponent implements OnInit {
     }
 
     async addSession(): Promise<void> {
-        const form = this.form.value;
+        const form = this.form?.value;
 
         const request = new CreateSessionRequest(
             this.bookId, 
@@ -162,7 +178,7 @@ export class AddEditSessionDialogComponent implements OnInit {
     }
 
     async submit(): Promise<void> {
-        if (this.form.valid) {
+        if (this.form?.valid) {
             if (this.mode === DialogMode.add) {
                 await this.addSession();
             } else if (this.mode === DialogMode.edit) {

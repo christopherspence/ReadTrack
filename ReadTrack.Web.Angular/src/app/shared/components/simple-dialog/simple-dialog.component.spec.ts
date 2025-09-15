@@ -7,8 +7,8 @@ describe('ValidationDialogComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [SimpleDialogComponent]
-        }).compileComponents();
+    imports: [SimpleDialogComponent]
+}).compileComponents();
     }));
 
     beforeEach(() => {

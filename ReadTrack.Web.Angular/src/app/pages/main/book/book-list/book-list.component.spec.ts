@@ -8,8 +8,8 @@ describe('BookListComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [BookListComponent]
-        })
+    imports: [BookListComponent]
+})
             .compileComponents();
     });
 

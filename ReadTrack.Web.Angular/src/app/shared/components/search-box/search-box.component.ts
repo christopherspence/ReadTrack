@@ -4,7 +4,8 @@ import { Subject, debounceTime } from 'rxjs';
 @Component({
     selector: 'app-search-box',
     templateUrl: './search-box.component.html',
-    styleUrls: ['./search-box.component.css']
+    styleUrls: ['./search-box.component.css'],
+    standalone: true
 })
 export class SearchBoxComponent implements OnInit {
     private subject = new Subject<string>();

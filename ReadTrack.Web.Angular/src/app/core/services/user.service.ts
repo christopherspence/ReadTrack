@@ -20,8 +20,6 @@ export class UserService extends BaseHttpService {
         http: HttpClient,
         @Inject(LOCAL_STORAGE) private storage: StorageService) { super(http); }
 
-    
-
     getUser(): Observable<User> {
         return this.http.get<User>(`${USER_URL}`);
     }

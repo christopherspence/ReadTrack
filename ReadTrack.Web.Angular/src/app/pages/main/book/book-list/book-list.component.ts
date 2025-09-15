@@ -1,16 +1,31 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { DatatableComponent, NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Book, ConfirmDialogComponent, DialogMode, SimpleDialogComponent } from '../../../../shared';
 import { BookService } from '../../../../core/services';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
 import { AddEditBookDialogComponent } from '../add-edit-book-dialog';
+import { DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { SearchBoxComponent } from '../../../../shared/components/search-box/search-box.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'app-book-list',
     templateUrl: './book-list.component.html',
-    styleUrls: ['./book-list.component.css']
+    styleUrls: ['./book-list.component.css'],
+    standalone: true,
+    imports: [
+        DatePipe,
+        MatButtonModule, 
+        MatCheckboxModule,
+        MatDialogModule, 
+        MatSnackBarModule, 
+        NgxDatatableModule, 
+        RouterLink, 
+        SearchBoxComponent
+    ]
 })
 export class BookListComponent implements OnInit {
     @ViewChild(DatatableComponent) myTable?: DatatableComponent;

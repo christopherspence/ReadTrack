@@ -1,4 +1,4 @@
-<form [formGroup]="form" (submit)="submit()">
+<form *ngIf="form" [formGroup]="form" (submit)="submit()">
     <div class="profile-main">
         <mat-card *ngIf="this.user">
             <mat-card-header>

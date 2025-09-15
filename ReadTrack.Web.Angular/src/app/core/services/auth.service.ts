@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { LoginRequest, TokenResponse } from 'src/app/shared';
 import { UserService } from './user.service';
-import { Token } from '@angular/compiler';
 
 @Injectable({
     providedIn: 'root'

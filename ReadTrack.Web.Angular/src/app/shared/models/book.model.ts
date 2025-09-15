@@ -12,6 +12,6 @@ export class Book extends BaseModel {
         public finished: boolean,
         public sessions: Array<Session>,
         public published?: Date) {
-            super(id);
-        }
+        super(id);
+    }
 }

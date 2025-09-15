@@ -1,30 +1,39 @@
 import { Component } from '@angular/core';
-import { UntypedFormBuilder, Validators, UntypedFormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { UntypedFormBuilder, Validators, UntypedFormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services'
 import { SimpleDialogComponent } from '../../shared';
+import { MatButtonModule } from '@angular/material/button';
+import { NgIf } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+    styleUrls: ['./login.component.css'],
+    standalone: true,
+    imports: [
+        FormsModule, 
+        MatButtonModule,
+        MatCardModule, 
+        MatDialogModule, 
+        MatFormFieldModule, 
+        MatInputModule, 
+        NgIf, 
+        ReactiveFormsModule, 
+        RouterLink
+    ]
 })
 export class LoginComponent {
-    form: UntypedFormGroup;
+    form?: UntypedFormGroup;
     loading = false;
 
-    get email() {
-        return this.form.get('email');
-    }
-
-    get password() {
-        return this.form.get('password');
-    }
-
     constructor(
-        private fb: UntypedFormBuilder, 
+        fb: UntypedFormBuilder, 
         private authService: AuthService,
         private router: Router,
         public dialog: MatDialog) {
@@ -34,8 +43,16 @@ export class LoginComponent {
         });
     }
 
+    get email() {
+        return this.form?.get('email');
+    }
+
+    get password() {
+        return this.form?.get('password');
+    }
+
     public hasError = (controlName: string, errorName: string) => {
-        return this.form.controls[controlName].hasError(errorName);
+        return this.form?.controls[controlName].hasError(errorName);
     }
 
     public async login() {

@@ -1,16 +1,28 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { DatatableComponent, NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ConfirmDialogComponent, DialogMode, Session, SimpleDialogComponent } from '../../../../shared';
 import { ActivatedRoute } from '@angular/router';
 import { SessionService } from 'src/app/core/services/session.service';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddEditSessionDialogComponent } from '../add-edit-session-dialog';
+import { DatePipe } from '@angular/common';
+import { SearchBoxComponent } from '../../../../shared/components/search-box/search-box.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'app-session-list',
     templateUrl: './session-list.component.html',
-    styleUrls: ['./session-list.component.css']
+    styleUrls: ['./session-list.component.css'],
+    standalone: true,
+    imports: [
+        DatePipe, 
+        MatButtonModule, 
+        MatDialogModule, 
+        MatSnackBarModule, 
+        NgxDatatableModule, 
+        SearchBoxComponent
+    ]
 })
 export class SessionListComponent implements OnInit {
     @ViewChild(DatatableComponent) myTable?: DatatableComponent;

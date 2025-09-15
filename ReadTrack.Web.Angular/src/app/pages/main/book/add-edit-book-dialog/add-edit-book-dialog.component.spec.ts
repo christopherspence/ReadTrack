@@ -8,8 +8,8 @@ describe('AddEditBookDialogComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [AddEditBookDialogComponent]
-        }).compileComponents();
+    imports: [AddEditBookDialogComponent]
+}).compileComponents();
     });
 
     beforeEach(() => {

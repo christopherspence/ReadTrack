@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>{{ title }}</h2>
 <mat-dialog-content class="mat-typography">
-    <form [formGroup]="form" (ngSubmit)="submit()" autocomplete="off" novalidate>
+    <form *ngIf="form" [formGroup]="form" (ngSubmit)="submit()" autocomplete="off" novalidate>
         <div class="row justify-content-center align-items-center">            
             <div class="card">
                 <div class="card-body pl-5 pr-5">
@@ -73,7 +73,7 @@
         </div>
     </form>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions *ngIf="form" align="end">
     <button mat-raised-button color="accent" type="submit" [disabled]="!form.valid" (click)="submit()">Save</button>
     <button mat-button mat-dialog-close>Close</button>
 </mat-dialog-actions>

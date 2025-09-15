@@ -1,19 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ConfirmValidator, SimpleDialogComponent, StringUtilities, User } from '../../../shared';
 import { UserService } from '../../../core/services';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.css']
+    styleUrls: ['./profile.component.css'],
+    standalone: true,
+    imports: [
+        FormsModule, 
+        MatButtonModule, 
+        MatCardModule, 
+        MatDialogModule, 
+        MatFormFieldModule, 
+        MatInputModule, 
+        MatSnackBarModule, 
+        NgIf, 
+        ReactiveFormsModule
+    ]
 })
 
 export class ProfileComponent implements OnInit {
-    form!: UntypedFormGroup;
+    form?: UntypedFormGroup;
     loading = false;
     imageSource = '';
     imageChanged = false;
@@ -39,7 +56,7 @@ export class ProfileComponent implements OnInit {
         this.user = await this.userService.getUser().toPromise();
 
         if (this.user) {
-            this.form.patchValue({
+            this.form?.patchValue({
                 firstName: this.user.firstName,
                 lastName: this.user.lastName,
                 email: this.user.email
@@ -66,7 +83,7 @@ export class ProfileComponent implements OnInit {
     }
 
     public hasError = (controlName: string, errorName: string) => {
-        return this.form.controls[controlName].hasError(errorName);
+        return this.form?.controls[controlName].hasError(errorName);
     }
 
     onFileChange(event: Event): void {
@@ -87,18 +104,18 @@ export class ProfileComponent implements OnInit {
         if (this.user) {
             this.loading = true;
 
-            const form = this.form.value;
+            const form = this.form?.value;
             
-            this.user.firstName = form.firstName;
-            this.user.lastName = form.lastName;
+            this.user.firstName = form?.firstName;
+            this.user.lastName = form?.lastName;
             // TODO: disabling this for now until I can figure out the token issue after changing email
-            // this.user.email = form.email;
+            // this.user.email = form?.email;
             
             if (this.imageChanged) {
                 this.user.profilePicture = StringUtilities.removeBase64Prefix(this.imageSource);
             }
             if (this.passowrdChanged) {
-                this.user.password = form.password;
+                this.user.password = form?.password;
             }
 
             try {
