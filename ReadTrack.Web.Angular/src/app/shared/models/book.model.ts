@@ -1,4 +1,4 @@
-import { Session } from 'inspector';
+import { Session } from './session.model';
 import { BaseModel } from './base.model';
 import { BookCategory } from './book-category.model';
 
