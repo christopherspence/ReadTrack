@@ -1,5 +1,4 @@
 using System.Security.Claims;
-using System.Threading.Tasks;
 using ReadTrack.API.Services;
 using ReadTrack.Shared;
 

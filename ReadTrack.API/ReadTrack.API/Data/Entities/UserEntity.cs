@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace ReadTrack.API.Data.Entities;
 
 public class UserEntity : BaseEntity

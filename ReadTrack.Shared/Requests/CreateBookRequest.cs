@@ -1,5 +1,3 @@
-using System;
-
 namespace ReadTrack.Shared.Requests;
 
 public class CreateBookRequest

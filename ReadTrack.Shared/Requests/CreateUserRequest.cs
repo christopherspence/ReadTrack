@@ -1,4 +1,4 @@
-namespace ReadTrack.Shared;
+namespace ReadTrack.Shared.Requests;
 
 public class CreateUserRequest
 {

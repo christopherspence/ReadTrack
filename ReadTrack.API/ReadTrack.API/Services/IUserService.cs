@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using ReadTrack.Shared;
+using ReadTrack.Shared.Requests;
 
 namespace ReadTrack.API.Services;
 

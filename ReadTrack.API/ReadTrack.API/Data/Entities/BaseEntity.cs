@@ -1,6 +1,4 @@
-using System;
-
-namespace ReadTrack.API.Data;
+namespace ReadTrack.API.Data.Entities;
 
 public abstract class BaseEntity
 {

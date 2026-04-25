@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using ReadTrack.API.Extensions;
 using ReadTrack.Shared;
 using ReadTrack.Shared.Requests;
 using ReadTrack.API.Services;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Security.Claims;
 
 namespace ReadTrack.API.Controllers;
 

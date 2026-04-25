@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace ReadTrack.Shared;
 
 public class User : BaseModel

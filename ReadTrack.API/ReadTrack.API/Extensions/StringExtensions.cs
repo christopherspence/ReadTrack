@@ -1,5 +1,3 @@
-using System;
-
 namespace ReadTrack.API.Extensions;
 
 public static class StringExtensions

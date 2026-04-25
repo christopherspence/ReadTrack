@@ -1,4 +1,3 @@
-using System;
 using FluentAssertions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -8,7 +7,6 @@ using ReadTrack.Shared.Requests;
 using ReadTrack.API.Services;
 using ReadTrack.API.Tests.Utilities;
 using Xunit;
-using System.Threading.Tasks;
 
 namespace ReadTrack.API.Tests.Services;
 

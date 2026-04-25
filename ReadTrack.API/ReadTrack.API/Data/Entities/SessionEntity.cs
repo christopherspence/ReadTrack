@@ -1,5 +1,3 @@
-using System;
-
 namespace ReadTrack.API.Data.Entities;
 
 public class SessionEntity : BaseEntity

@@ -1,14 +1,13 @@
-using System;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Moq;
 using ReadTrack.API.Data.Entities;
-using ReadTrack.Shared;
 using ReadTrack.API.Services;
 using ReadTrack.API.Tests.Utilities;
+using ReadTrack.Shared;
+using ReadTrack.Shared.Requests;
 using Xunit;
 
 namespace ReadTrack.API.Tests.Services;

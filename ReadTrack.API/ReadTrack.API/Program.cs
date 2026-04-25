@@ -1,17 +1,12 @@
 using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using ReadTrack.API.Data;
 using ReadTrack.API.Extensions;
-using ReadTrack.Shared;
-using ReadTrack.API.Services;
 using ReadTrack.API.Models;
+using ReadTrack.API.Services;
+using ReadTrack.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
