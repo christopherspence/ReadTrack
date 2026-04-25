@@ -6,7 +6,7 @@ using ReadTrack.API.Data;
 using ReadTrack.API.Extensions;
 using ReadTrack.API.Models;
 using ReadTrack.API.Services;
-using ReadTrack.Shared;
+using ReadTrack.Shared.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +28,7 @@ builder.Services.AddJwt(builder.Configuration, jwtSettings);
 
 builder.Services.AddTransient<IPasswordHasher<User>, PasswordHasher<User>>();
 
-builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfile>());
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<ISessionService, SessionService>();

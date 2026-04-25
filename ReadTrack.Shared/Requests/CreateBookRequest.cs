@@ -1,4 +1,6 @@
-namespace ReadTrack.Shared.Requests;
+using ReadTrack.Shared.Models;
+
+namespace ReadTrack.Shared.Models.Requests;
 
 public class CreateBookRequest
 {

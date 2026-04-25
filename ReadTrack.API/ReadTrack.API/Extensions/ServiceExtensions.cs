@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using ReadTrack.API.Services;
-using ReadTrack.Shared;
+using ReadTrack.Shared.Models;
 
 namespace ReadTrack.API.Extensions;
 

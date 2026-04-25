@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging.Abstractions;
 using ReadTrack.API.Data;
 using ReadTrack.API.Models;
 using Xunit;
@@ -54,7 +55,8 @@ public abstract class BaseServiceTests : IAsyncLifetime
 
     private void SetupMapper()
     {
-        var configuration = new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()));
+        var loggerFactory = new NullLoggerFactory();
+        var configuration = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>(), loggerFactory);
         mapper = new Mapper(configuration);
     }
 

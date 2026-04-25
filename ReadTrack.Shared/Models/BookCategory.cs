@@ -1,4 +1,4 @@
-namespace ReadTrack.Shared;
+namespace ReadTrack.Shared.Models;
 
 public enum BookCategory
 {

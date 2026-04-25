@@ -1,6 +1,6 @@
 using AutoMapper;
 using ReadTrack.API.Data.Entities;
-using ReadTrack.Shared;
+using ReadTrack.Shared.Models;
 
 namespace ReadTrack.API.Models;
 

@@ -6,8 +6,8 @@ using Moq;
 using ReadTrack.API.Data.Entities;
 using ReadTrack.API.Services;
 using ReadTrack.API.Tests.Utilities;
-using ReadTrack.Shared;
-using ReadTrack.Shared.Requests;
+using ReadTrack.Shared.Models;
+using ReadTrack.Shared.Models.Requests;
 using Xunit;
 
 namespace ReadTrack.API.Tests.Services;

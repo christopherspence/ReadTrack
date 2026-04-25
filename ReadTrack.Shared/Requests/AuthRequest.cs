@@ -1,4 +1,4 @@
-namespace ReadTrack.Shared.Requests;
+namespace ReadTrack.Shared.Models.Requests;
 
 public class AuthRequest
 {
