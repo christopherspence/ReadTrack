@@ -11,8 +11,8 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="16.1.1" />
     <PackageReference Include="FluentAssertions" Version="7.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.5" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageReference Include="moq" Version="4.20.72" />
     <PackageReference Include="RandomNameGeneratorLibrary" Version="1.2.2" />
@@ -29,7 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ReadTrack.API\ReadTrack.API.csproj" />
-    <ProjectReference Include="..\..\ReadTrack.Shared\ReadTrack.Shared.csproj" />
+    <ProjectReference Include="..\ReadTrack.Shared\ReadTrack.Shared.csproj" />
   </ItemGroup>
 
 </Project>

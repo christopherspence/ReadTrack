@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
         builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
     });
 });
-builder.Services.AddDbContext<ReadTrackContext>(options => options.UseSqlServer(builder.Configuration["ConnectionStrings:Default"]));
+builder.AddSqlServerDbContext<ReadTrackContext>("db");
 
 var jwtSettings = new JwtSettings();
 var section = builder.Configuration.GetSection("JwtSettings");
@@ -34,6 +34,8 @@ builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<ISessionService, SessionService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 builder.Services.AddTransient<IUserService, UserService>();
+
+builder.AddServiceDefaults();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -75,5 +77,14 @@ app.UseExceptionHandler(c => c.Run(async context =>
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope
+        .ServiceProvider
+        .GetRequiredService<ReadTrackContext>();
+
+    await context.Database.MigrateAsync();
+}
 
 app.Run();
