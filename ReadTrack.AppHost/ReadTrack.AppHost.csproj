@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ReadTrack.API\ReadTrack.API.csproj" />
+    <ProjectReference Include="..\ReadTrack.Web.Blazor\ReadTrack.Web.Blazor.csproj" />
   </ItemGroup>
 
   <ItemGroup>

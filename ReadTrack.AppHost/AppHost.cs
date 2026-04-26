@@ -13,10 +13,14 @@ var api = builder
     .WaitFor(db)
     .WithReference(db);
 
-var angular = builder.AddJavaScriptApp("angular", "../ReadTrack.Web.Angular")
+builder.AddJavaScriptApp("angular", "../ReadTrack.Web.Angular")
     .WithRunScript("start")
     .WithReference(api)
     .WithHttpEndpoint(env: "PORT")
     .WithExternalHttpEndpoints();
+
+builder.AddProject<ReadTrack_Web_Blazor>("blazor")
+    .WaitFor(api)
+    .WithReference(api);
 
 builder.Build().Run();
