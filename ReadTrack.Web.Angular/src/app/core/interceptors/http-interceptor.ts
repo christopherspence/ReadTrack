@@ -3,6 +3,7 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, of, throwError } from 'rxjs';
 import { UserService } from '../services';
+import { environment } from 'src/environments/environment';
 
 enum HTTP_STATUS {
     SUCCESS = 200,
@@ -13,9 +14,8 @@ enum HTTP_STATUS {
 
 export const readTrackHttpInterceptor: HttpInterceptorFn = (req, next) => {
     const userService = inject(UserService);
-    const baseUrl = import.meta.env['SERVICES__API__HTTP__0']
     req = req.clone({
-        url: `${baseUrl}/${req.url}`
+        url: `${environment.baseUrl}/${req.url}`
     });
 
     const token = userService.getToken();
