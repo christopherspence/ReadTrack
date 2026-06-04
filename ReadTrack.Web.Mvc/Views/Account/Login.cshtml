@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "Login";
+}
+
+@model LoginViewModel
+
+<form id="login-form" asp-action="Login" asp-controller="account" method="post">
+    <div class="login-main">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Please Login</span>
+                <div class="input-field">
+                    <input asp-for="Email" id="email" type="email" class="validate"  />
+                    <label asp-for="Email">Email</label>                    
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                
+                <div class="input-field">
+                    <input asp-for="Password" id="password" type="password" class="validate" />
+                    <label asp-for="Password">Password</label>
+                    <span asp-validation-for="Password" class="text-danger"></span>                    
+                </div>               
+                <br />
+                <a href="/register">Register</a>
+            </div>
+            <div class="card-action" align="end">
+                <button id="submit-button" class="waves-effect waves-light btn" type="submit" disabled>
+                    Login
+                    @*<img *ngIf="loading" src="~/img/spinner.gif" />*@
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('login-form');
+            const submitButton = document.getElementById('submit-button');
+            const requiredFields = document.querySelectorAll('.validate');
+
+            const checkFormValidity = () => {
+                let allFilled = true;
+                requiredFields.forEach(field => {
+                    if (field.value.trim() === '') {
+                        allFilled = false;
+                    }
+                });
+                submitButton.disabled = !allFilled;
+            }
+
+            requiredFields.forEach(field => {
+                field.addEventListener('input', checkFormValidity);
+            });
+        });
+    </script>
+}
