@@ -19,4 +19,8 @@ var angular = builder.AddJavaScriptApp("angular", "../ReadTrack.Web.Angular")
     .WithHttpEndpoint(env: "PORT")
     .WithExternalHttpEndpoints();
 
+var mvc = builder.AddProject<ReadTrack_Web_Mvc>("mvc")
+    .WaitFor(api)
+    .WithReference(api);
+
 builder.Build().Run();

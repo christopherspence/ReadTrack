@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Materialize Test Page";
+}
+
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        <br><br>
+        <h1 class="header center orange-text">Materialize Test</h1>
+        
+        <!-- 1. Test Card Component (CSS Test) -->
+        <div class="row center">
+            <div class="col s12 m6 offset-m3">
+                <div class="card blue-grey darken-1 z-depth-3">
+                    <div class="card-content white-text">
+                        <span class="card-title">Is it working?</span>
+                        <p>If this text is inside a dark blue-grey card with rounded corners and a shadow, your Materialize CSS is successfully linked!</p>
+                    </div>
+                    <div class="card-action">
+                        <!-- 2. Test Button Component (JS Wave Effect Test) -->
+                        <button id="test-btn" class="btn waves-effect waves-light orange">
+                            Click Me
+                            <i class="material-icons right">check_circle</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 3. Test Interactive Component (JavaScript Toast Test)
+            var button = document.getElementById('test-btn');
+            button.addEventListener('click', function() {
+                M.toast({
+                    html: 'Success! Materialize JavaScript is working!',
+                    classes: 'rounded green'
+                });
+            });
+        });
+    </script>
+}
