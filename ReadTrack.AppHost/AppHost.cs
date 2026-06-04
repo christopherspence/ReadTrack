@@ -6,7 +6,7 @@ var password = builder.AddParameter("password", secret: true);
 
 var sql = builder.AddSqlServer("sql", password).WithLifetime(ContainerLifetime.Persistent);
 
-var db = sql.AddDatabase("db");
+var db = sql.AddDatabase("ReadTrack");
 
 var api = builder
     .AddProject<ReadTrack_API>("api")

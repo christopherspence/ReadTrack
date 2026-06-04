@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
         builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
     });
 });
-builder.AddSqlServerDbContext<ReadTrackContext>("db");
+builder.AddSqlServerDbContext<ReadTrackContext>("ReadTrack");
 
 var jwtSettings = new JwtSettings();
 var section = builder.Configuration.GetSection("JwtSettings");
