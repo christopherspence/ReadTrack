@@ -1,7 +1,17 @@
+using ReadTrack.Shared.Api;
+using Refit;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRefitClient<IAuthApi>().ConfigureHttpClient(client =>
+{    
+    client.BaseAddress = new("http+https://api");     
+});
 
 var app = builder.Build();
 
