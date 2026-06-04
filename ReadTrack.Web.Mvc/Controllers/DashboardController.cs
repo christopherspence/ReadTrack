@@ -4,14 +4,9 @@ using ReadTrack.Web.Mvc.Models;
 
 namespace ReadTrack.Web.Mvc.Controllers;
 
-public class HomeController : Controller
+public class DashboardController : Controller
 {    
     public async Task<IActionResult> Index()
-    {
-        return View();
-    }
-
-    public IActionResult Privacy()
     {
         return View();
     }

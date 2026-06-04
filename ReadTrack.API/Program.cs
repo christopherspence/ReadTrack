@@ -10,9 +10,6 @@ using ReadTrack.Shared.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// TODO: figure out error
-//builder.AddServiceDefaults();
-
 // Add services to the container.
 builder.Services.AddCors(options => 
 {

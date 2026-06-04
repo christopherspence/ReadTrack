@@ -1,31 +1,80 @@
-html {
-  font-size: 14px;
+/* ==========================================================================
+   ANGULAR MATERIAL DEEPPURPLE-AMBER THEME OVERRIDES FOR MATERIALIZE
+   ========================================================================== */
+:root {
+    /* Theme Color Definitions */
+    --am-primary: #673AB7;       /* Deep Purple 500 */
+    --am-primary-dark: #512DA8;  /* Deep Purple 700 */
+    --am-accent: #FFD740;       /* Amber A200 */
+    --am-accent-dark: #FFC400;  /* Amber A400 */
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+/* --- Global Background Setup --- */
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background: #eee;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+a {
+    color: rgba(0, 0, 0, 0.7);
+    text-decoration: none;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+
+/* --- Primary Theme Overrides (Deep Purple) --- */
+nav, 
+.btn, .btn-large, .btn-small, 
+.btn-floating {
+    background-color: var(--am-primary) !important;
 }
 
-body {
-  margin-bottom: 60px;
+/* Button Hovers & Focus States */
+.btn:hover, .btn-large:hover, .btn-small:hover, .btn-floating:hover,
+.btn:focus, .btn-large:focus, .btn-small:focus, .btn-floating:focus {
+    background-color: var(--am-primary-dark) !important;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* Flat Button Text */
+.btn-flat {
+    color: var(--am-primary) !important;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+/* Typography Headings and Card Action Links */
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-floating) {
+    color: var(--am-primary) !important;
+}
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-floating):hover {
+    color: var(--am-primary-dark) !important;
+}
+
+/* Form Inputs & Floating Labels (Focus highlights) */
+input[type=text]:focus:not([readonly]) + label,
+input[type=email]:focus:not([readonly]) + label,
+input[type=password]:focus:not([readonly]) + label,
+textarea.materialize-textarea:focus:not([readonly]) + label {
+    color: var(--am-primary) !important;
+}
+
+input[type=text]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid var(--am-primary) !important;
+    box-shadow: 0 1px 0 0 var(--am-primary) !important;
+}
+
+/* --- Accent Theme Overrides (Amber) --- */
+.btn-floating.accent-fab {
+    background-color: var(--am-accent) !important;
+}
+.btn-floating.accent-fab:hover,
+.btn-floating.accent-fab:focus {
+    background-color: var(--am-accent-dark) !important;
+}
+
+/* Force dark text/icons on the light amber background */
+.btn-floating.accent-fab i {
+    color: #212121 !important; 
 }
