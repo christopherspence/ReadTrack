@@ -15,7 +15,7 @@ if (builder.Environment.IsDevelopment())
 
 builder.Services.AddRefitClient<IAuthApi>().ConfigureHttpClient(client =>
 {    
-    client.BaseAddress = new("http+https://api");     
+    client.BaseAddress = new("https+http://api");     
 });
 
 var app = builder.Build();
