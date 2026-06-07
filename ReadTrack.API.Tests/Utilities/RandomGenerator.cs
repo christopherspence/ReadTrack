@@ -1,6 +1,7 @@
 using RandomNameGeneratorLibrary;
 using ReadTrack.API.Data.Entities;
 using ReadTrack.Shared.Models;
+using ReadTrack.Shared.Models.Analytics;
 using ReadTrack.Shared.Models.Requests;
 
 namespace ReadTrack.API.Tests.Utilities;
@@ -153,4 +154,27 @@ public static class RandomGenerator
 
         return sessions;
     } 
+
+    public static List<TimeSegment<int>> GenerateRandomIntAnalytics()
+        =>
+        [
+            new()
+            {
+                Date = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 1),
+                Type = SegmentType.Day,
+                Value = CreateNumber(1, 10)
+            },
+            new()
+            {
+                Date = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 2),
+                Type = SegmentType.Day,
+                Value = CreateNumber(10, 20)
+            },
+            new()
+            {
+                Date = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, 3),
+                Type = SegmentType.Day,
+                Value = CreateNumber(20, 30)
+            }
+        ];
 }

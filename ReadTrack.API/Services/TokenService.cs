@@ -1,8 +1,6 @@
-using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using AutoMapper;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using ReadTrack.API.Data;
 using ReadTrack.API.Extensions;

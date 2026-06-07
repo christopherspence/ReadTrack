@@ -20,7 +20,7 @@ public class SessionServiceTests : BaseServiceTests
         var book = Mapper.Map<BookEntity, Book>(RandomGenerator.GenerateRandomBook());
 
         var sessions = RandomGenerator.GenerateOneHundredRandomSessions();
-        await Context.Sessions.AddRangeAsync(sessions);
+        Context.Sessions.AddRange(sessions);
         await Context.SaveChangesAsync();
     
         var service = new SessionService(new Mock<ILogger<SessionService>>().Object, Context, Mapper);
@@ -40,7 +40,7 @@ public class SessionServiceTests : BaseServiceTests
         var book = Mapper.Map<BookEntity, Book>(RandomGenerator.GenerateRandomBook());
 
         var sessions = RandomGenerator.GenerateOneHundredRandomSessions();
-        await Context.Sessions.AddRangeAsync(sessions);
+        Context.Sessions.AddRange(sessions);
         await Context.SaveChangesAsync();
 
         var service = new SessionService(new Mock<ILogger<SessionService>>().Object, Context, Mapper);
@@ -94,7 +94,7 @@ public class SessionServiceTests : BaseServiceTests
         var book = Mapper.Map<BookEntity, Book>(RandomGenerator.GenerateRandomBook());
 
         var sessions = RandomGenerator.GenerateOneHundredRandomSessions();
-        await Context.Sessions.AddRangeAsync(sessions);
+        Context.Sessions.AddRange(sessions);
         await Context.SaveChangesAsync();
 
         var service = new SessionService(new Mock<ILogger<SessionService>>().Object, Context, Mapper);
@@ -130,7 +130,7 @@ public class SessionServiceTests : BaseServiceTests
         var book = Mapper.Map<BookEntity, Book>(RandomGenerator.GenerateRandomBook());
 
         var sessions = RandomGenerator.GenerateOneHundredRandomSessions();
-        await Context.Sessions.AddRangeAsync(sessions);
+        Context.Sessions.AddRange(sessions);
         await Context.SaveChangesAsync();
 
         var service = new SessionService(new Mock<ILogger<SessionService>>().Object, Context, Mapper);

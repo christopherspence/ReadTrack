@@ -29,6 +29,7 @@ builder.Services.AddJwt(builder.Configuration, jwtSettings);
 builder.Services.AddTransient<IPasswordHasher<User>, PasswordHasher<User>>();
 
 builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfile>());
+builder.Services.AddTransient<IAnalyticsService, AnalyticsService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddTransient<ISessionService, SessionService>();

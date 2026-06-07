@@ -1,5 +1,4 @@
 using AutoMapper;
-using Microsoft.Extensions.Logging;
 using ReadTrack.API.Data;
 
 namespace ReadTrack.API.Services;

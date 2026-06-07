@@ -40,7 +40,7 @@ public class BookServiceTests : BaseServiceTests
         var user = RandomGenerator.GenerateRandomUser();
 
         var books = RandomGenerator.GenerateOneHundredRandomBooks();
-        await Context.Books.AddRangeAsync(books);
+        Context.Books.AddRange(books);
         await Context.SaveChangesAsync();
 
         var service = new BookService(new Mock<ILogger<BookService>>().Object, Context, Mapper);
@@ -59,7 +59,7 @@ public class BookServiceTests : BaseServiceTests
         var user = RandomGenerator.GenerateRandomUser();
 
         var books = RandomGenerator.GenerateOneHundredRandomBooks();
-        await Context.Books.AddRangeAsync(books);
+        Context.Books.AddRange(books);
         await Context.SaveChangesAsync();
         var searchText = books.First().Name;
 
@@ -137,7 +137,7 @@ public class BookServiceTests : BaseServiceTests
         var user = RandomGenerator.GenerateRandomUser();
 
         var books = RandomGenerator.GenerateOneHundredRandomBooks();
-        await Context.Books.AddRangeAsync(books);
+        Context.Books.AddRange(books);
         await Context.SaveChangesAsync();
 
         var service = new BookService(new Mock<ILogger<BookService>>().Object, Context, Mapper);
@@ -171,7 +171,7 @@ public class BookServiceTests : BaseServiceTests
         var user = RandomGenerator.GenerateRandomUser();
 
         var books = RandomGenerator.GenerateOneHundredRandomBooks();
-        await Context.Books.AddRangeAsync(books);
+        Context.Books.AddRange(books);
         await Context.SaveChangesAsync();
         
         var service = new BookService(new Mock<ILogger<BookService>>().Object, Context, Mapper);

@@ -50,6 +50,8 @@ public class UserControllerTests : BaseControllerTests
         var request = RandomGenerator.GenerateRandomCreateUserRequest();
         var response = await controller.RegisterAsync(request);
 
+        response.Should().BeOfType<CreatedResult>();
+
         // Assert
         userServiceMock.Verify(m => m.CreateUserAsync(request), Times.Once);
         

@@ -1,7 +1,5 @@
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
 using ReadTrack.API.Data;
 using ReadTrack.Shared.Models;
 using ReadTrack.Shared.Models.Requests;
