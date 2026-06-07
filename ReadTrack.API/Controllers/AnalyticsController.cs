@@ -40,6 +40,30 @@ public class AnalyticsController : BaseController<AnalyticsController, IAnalytic
     }
 
     [HttpGet]
+    [Route("/api/analytics/pages/{start}/{end}")]
+    [SwaggerOperation(nameof(GetPagesReadAsync))]
+    [SwaggerResponse(statusCode: 200, type: typeof(IEnumerable<TimeSegment<int>>), description: "Success")]
+    public async Task<IActionResult> GetPagesReadAsync(DateTime start, DateTime end)
+    {
+        try
+        {
+            var user = await userService.GetCurrentUserAsync(User);
+
+            if (user == null)
+            {
+                return NotFound();
+            }    
+
+            return Ok(await Service.GetPagesReadAsync(user.Id, start, end));
+        }
+        catch (Exception e)
+        {
+            Logger.LogError(e, e.Message);
+            throw;
+        }
+    }
+
+    [HttpGet]
     [Route("/api/analytics/time/{start}/{end}")]
     [SwaggerOperation(nameof(GetReadingTimeAsync))]
     [SwaggerResponse(statusCode: 200, type: typeof(IEnumerable<TimeSegment<int>>), description: "Success")]

@@ -48,6 +48,35 @@ public class AnalyticsServiceTests : BaseServiceTests
     }  
 
     [Fact]
+    public async Task CanGetPagesRead()
+    {
+        // Arrange
+        var now = DateTime.UtcNow;
+        var start = now.StartOfDay();
+        var end = now.EndOfDay();
+
+        var sessions = RandomGenerator.GenerateOneHundredRandomSessions();
+
+        Context.Sessions.AddRange(sessions);
+        await Context.SaveChangesAsync();
+
+        var service = new AnalyticsService(new Mock<ILogger<AnalyticsService>>().Object, Context, Mapper);
+
+        // Act
+        var result = await service.GetPagesReadAsync(1, start, end);
+
+        result.Should().BeEquivalentTo(new List<TimeSegment<int>>
+        {
+            new() 
+            {
+                Date = now.StartOfDay(),
+                Value = sessions.Sum(s => s.NumberOfPages) ?? 0,
+                Type = SegmentType.Day    
+            }
+        });
+    }  
+
+    [Fact]
     public async Task CanGetReadingTime()
     {
         // Arrange

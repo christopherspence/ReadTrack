@@ -45,22 +45,23 @@ export class ReadingTimeComponent {
 
       this.dataLoaded = true;
     }
-  public lineChartData: ChartData<'line'> = {
-    labels: this.labels,
-    datasets: [
-      {
-        data: this.data,        
-        fill: false,
-        borderColor: '#3f51b5', // Optional: Gives your line a clear theme color
-        tension: 0.1             // Optional: Gives the line a slight smooth curve
-      }
-    ]
-  };
+    public chartData: ChartData<'line'> = {
+      labels: this.labels,
+      datasets: [
+        {
+          data: this.data,        
+          fill: true,
+          borderColor: '#3f51b5', 
+          backgroundColor: 'rgba(63, 81, 181, 0.2)',
+          tension: 0.1            
+        }
+      ]
+    };
 
-  public lineChartOptions = {
-    responsive: true
-  };
-  
-  public lineChartLegend = false;
-  public lineChartType: ChartType = 'line'; 
+    public chartOptions = {
+      responsive: true
+    };
+    
+    public chartLegend = false;
+    public chartType: ChartType = 'line'; 
 }

@@ -21,6 +21,13 @@ export class AnalyticsService {
         return this.http.get<Array<TimeSegment<number>>>(`${ANALYTICS_URL}/books/${startStr}/${endStr}`);
     }
 
+    pagesRead(start: Date, end: Date): Observable<Array<TimeSegment<number>>> {
+        const startStr = this.datePipe.transform(start, 'MM-dd-yyyy');
+        const endStr = this.datePipe.transform(end, 'MM-dd-yyyy');
+
+        return this.http.get<Array<TimeSegment<number>>>(`${ANALYTICS_URL}/pages/${startStr}/${endStr}`);
+    }
+
     readingTime(start: Date, end: Date): Observable<Array<TimeSegment<number>>> {
         const startStr = this.datePipe.transform(start, 'MM-dd-yyyy');
         const endStr = this.datePipe.transform(end, 'MM-dd-yyyy');

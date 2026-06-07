@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { ChartData, ChartType } from 'chart.js';
 import { BooksReadComponent } from './books-read/books-read.component';
 import { ReadingTimeComponent } from './reading-time/reading-time.component';
+import { PagesReadComponent } from "./pages-read/pages-read.component";
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],    
     standalone: true,
-    imports: [BooksReadComponent, ReadingTimeComponent]
+    imports: [BooksReadComponent, PagesReadComponent, ReadingTimeComponent, PagesReadComponent]
 })
 export class DashboardComponent {
   public lineChartData: ChartData<'line'> = {

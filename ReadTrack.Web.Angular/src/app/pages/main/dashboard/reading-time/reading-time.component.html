@@ -11,10 +11,10 @@
             </div>    
             <div *ngIf="dataLoaded">    
                 <canvas baseChart
-                    [data]="lineChartData"
-                    [options]="lineChartOptions"
-                    [legend]="lineChartLegend"
-                    [type]="'line'">
+                    [data]="chartData"
+                    [options]="chartOptions"
+                    [legend]="chartLegend"
+                    [type]="chartType">
                 </canvas>            
             </div>
         </mat-card-content>
