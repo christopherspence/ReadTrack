@@ -1,3 +1,4 @@
+export * from './analytics';
 export * from './book.model';
 export * from './dialog-mode.model';
 export * from './login-request.model';

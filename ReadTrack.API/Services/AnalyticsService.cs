@@ -16,7 +16,7 @@ public class AnalyticsService : BaseService<AnalyticsService>, IAnalyticsService
     {
         var booksRead = new List<TimeSegment<int>>();
 
-        var sessions = await Context.Sessions.Where(s => s.Date >= start && s.Date <= end && !s.IsDeleted).ToListAsync();
+        var sessions = await Context.Sessions.Where(s => s.UserId == userId && s.Date >= start.StartOfDay() && s.Date <= end.EndOfDay() && !s.IsDeleted).ToListAsync();
 
         for (var i = 0; i <= DateExtensions.TotalDays(start, end); i++)
         {
@@ -39,13 +39,13 @@ public class AnalyticsService : BaseService<AnalyticsService>, IAnalyticsService
     {
         var readingTime = new List<TimeSegment<int>>();
 
-        var sessions = await Context.Sessions.Where(s => s.Date >= start && s.Date <= end && !s.IsDeleted).ToListAsync();
+        var sessions = await Context.Sessions.Where(s => s.UserId == userId && s.Date >= start.StartOfDay() && s.Date <= end.EndOfDay() && !s.IsDeleted).ToListAsync();
 
         for (var i = 0; i <= DateExtensions.TotalDays(start, end); i++)
         {
             var date = start.AddDays(i);
             
-            var time = sessions.Where(s => s.Date >= date.StartOfDay() && s.Date <= date.EndOfDay()).Sum(s => s.Duration.Minutes);
+            var time = sessions.Where(s => s.Date >= date.StartOfDay() && s.Date <= date.EndOfDay()).Sum(s => (int)s.Duration.TotalMinutes);
 
             readingTime.Add(new TimeSegment<int>
             {

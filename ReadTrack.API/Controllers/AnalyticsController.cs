@@ -30,7 +30,7 @@ public class AnalyticsController : BaseController<AnalyticsController, IAnalytic
                 return NotFound();
             }    
 
-            return Ok(Service.GetBooksReadAsync(user.Id, start, end));
+            return Ok(await Service.GetBooksReadAsync(user.Id, start, end));
         }
         catch (Exception e)
         {
@@ -54,7 +54,7 @@ public class AnalyticsController : BaseController<AnalyticsController, IAnalytic
                 return NotFound();
             }    
 
-            return Ok(Service.GetReadingTimeAsync(user.Id, start, end));
+            return Ok(await Service.GetReadingTimeAsync(user.Id, start, end));
         }
         catch (Exception e)
         {

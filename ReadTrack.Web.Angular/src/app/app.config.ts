@@ -5,6 +5,8 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { readTrackHttpInterceptor } from './core/interceptors';
 import { MatNativeDateModule } from '@angular/material/core';
+import { DatePipe } from '@angular/common';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,6 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptors([readTrackHttpInterceptor])),
-    importProvidersFrom([BrowserAnimationsModule, MatNativeDateModule])
+    importProvidersFrom([BrowserAnimationsModule, MatNativeDateModule]),
+    DatePipe    
   ]
 };

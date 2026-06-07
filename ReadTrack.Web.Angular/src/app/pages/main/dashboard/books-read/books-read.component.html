@@ -5,13 +5,18 @@
                 Books Read
             </mat-card-title>
         </mat-card-header>
-        <mat-card-content>        
-            <canvas baseChart
-                [data]="barChartData"
-                [options]="barChartOptions"
-                [legend]="barChartLegend"
-                [type]="'bar'">
-            </canvas>            
+        <mat-card-content>    
+            <div *ngIf="!dataLoaded">
+                Loading data...
+            </div>    
+            <div *ngIf="dataLoaded">
+                <canvas baseChart
+                    [data]="barChartData"
+                    [options]="barChartOptions"
+                    [legend]="barChartLegend"
+                    [type]="'bar'">
+                </canvas>            
+            </div>
         </mat-card-content>
     </mat-card>
 </div>
