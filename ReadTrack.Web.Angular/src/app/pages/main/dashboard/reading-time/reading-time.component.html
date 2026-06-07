@@ -1,0 +1,17 @@
+<div class="col-md-6 d-flex justify-content-center pt-4">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                Reading Time
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>        
+            <canvas baseChart
+                [data]="lineChartData"
+                [options]="lineChartOptions"
+                [legend]="lineChartLegend"
+                [type]="'line'">
+            </canvas>            
+        </mat-card-content>
+    </mat-card>
+</div>

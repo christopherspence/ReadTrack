@@ -1,0 +1,17 @@
+<div class="col-md-6 d-flex justify-content-center pt-4">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                Books Read
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>        
+            <canvas baseChart
+                [data]="barChartData"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [type]="'bar'">
+            </canvas>            
+        </mat-card-content>
+    </mat-card>
+</div>
